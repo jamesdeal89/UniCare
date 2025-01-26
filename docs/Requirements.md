@@ -20,6 +20,10 @@ _Highlighting key:_
 
 Unfortunately, we were unable to continue working with BAC-IN due to unforeseen budget issues within the charity which led to their project director no longer being able to work with us.
 
-In response, we have pivoted the product to be less BAC-IN specific and more broadly mental health focused (rather than narrowly targetted for addiction recovery.) In addition, this provides an opporunitiy to widen the reach of our product; as we can target it beyond BAME specific audiences - while certainly still keeping inclusion and cultural sensitivity as a vital factor to consider.
+In response, we have pivoted the product to be less BAC-IN specific and more broadly mental health focused (rather than narrowly targetted for addiction recovery.) In addition, this provides an opporunitiy to widen the reach of our product; as we can target it beyond BAME specific audiences - while certainly still keeping it, as well as inclusion and cultural sensitivity, as a vital factor to consider.
 
+Our project supervisor kindly provided us with an updated brief which takes these changes into account:
+
+![textual analysis updated page 1](../reqs_specs_assets/updatedTextAnalysis.png)
+![textual analysis updated summary](../reqs_specs_assets/TextAnalysisTableUpdated.png)
 
