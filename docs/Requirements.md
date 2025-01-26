@@ -1,4 +1,4 @@
-# Requirements
+# Software Requirements Specification Document
 
 These requirements are based on the brief provided by BAC-IN and the further discssions we had with them during the pitch. 
 
@@ -26,4 +26,22 @@ Our project supervisor kindly provided us with an updated brief which takes thes
 
 ![textual analysis updated page 1](../reqs_specs_assets/updatedTextAnalysis.png)
 ![textual analysis updated summary](../reqs_specs_assets/TextAnalysisTableUpdated.png)
+
+## Purpose
+
+## Intended Audience 
+
+## Product Scope
+
+## Definitions and Acronyms
+
+## Assumptions and Dependencies
+
+## Functional Requirements
+
+## External Interface Requirements
+
+## System Features
+
+## Non-Functional Requirements
 
