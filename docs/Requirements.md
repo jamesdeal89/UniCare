@@ -29,6 +29,13 @@ Our project supervisor kindly provided us with an updated brief which takes thes
 
 ## Purpose
 
+Following the Textual Analysis, combined with further discussion with our academic supervisor, and team deliberation, we formally define the broad purpose of the project to be:
+
+- To develop a mobile application.
+- With the core theme of 'mental health support and information'.
+- Central feature is the natural language chat interface.
+- With elements of 'gamification'.
+
 ## Intended Audience 
 
 ## Product Scope
