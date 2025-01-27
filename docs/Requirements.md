@@ -87,11 +87,35 @@ Tertiary:
 
 ## Functional Requirements
 
+- Chatbot should provide/enable:
 
+    - Tailored mental health support.
+    - Signposting to services and external resources.
+    - Service navigation.
+    - Crisis reporting.
+    - Access to information.
+    - Emotional detection and response.
+ 
+- Mentoring system.
+- Wellbeing games.
+- User profiles:
+    - Logging in.
+    - Signing out.
+    - Updating personal information.
 
 ## External Interface Requirements
 
-## System Features
+- Compatible with smartphones. 
+- Android or IOS (either or both ideally.)
+- Must have text input method (to talk to chatbot.)
+- Should support persistent storage for apps (to enable accounts for personalisation.)
 
 ## Non-Functional Requirements
 
+- Follows data protection and confidentiality principles for all user data - especially chats.
+- Must be available 24/7.
+- Must be culturally sensitive.
+- Should have (some) multi-lingual support.
+- Must be accessible - font size settings, contrast theme, etc.
+- Information provided must be accurate and safe.
+- Should have a back-end to manage user data, store relevant information, etc.
