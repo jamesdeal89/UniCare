@@ -50,6 +50,15 @@ This is reflected in the updated brief which focuses more on the ___gamification
 
 ## Definitions and Acronyms
 
+|Concept/Acronym|Explanation|
+|---------------|-----------|
+|NLP|Natural Language Processing|
+|LLM|Large Language Model|
+|AI|Artificial Intelligence|
+|BAME|Black Asian and Minority Ethnic|
+|DialogueFlow|Google's Natural Language Processing platform for conversational user interfaces|
+|Flutter|Google's UI Development kit for cross-platform applications (mobile included)|
+
 ## Assumptions and Dependencies
 
 ## Functional Requirements
