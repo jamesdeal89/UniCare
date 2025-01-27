@@ -50,6 +50,9 @@ This is reflected in the updated brief which focuses more on the ___gamification
 
 ## Definitions and Acronyms
 
+The following table provides definitions for commonly used acronyms or technical terms which are relevant to the product.
+This helps to disambiguate the requirements among teammates and future developers. 
+
 |Concept/Acronym|Explanation|
 |---------------|-----------|
 |NLP|Natural Language Processing|
@@ -87,21 +90,27 @@ Tertiary:
 
 ## Functional Requirements
 
-- Chatbot should provide/enable:
+Requirements are prioritised based on the number on the left of each requirement.
 
-    - Tailored mental health support.
-    - Signposting to services and external resources.
-    - Service navigation.
-    - Crisis reporting.
-    - Access to information.
-    - Emotional detection and response.
+A lower number means a higher priority category.
+
+Several requirements can share a priority value.
+
+- (1) Text-based conversational Chatbot - which should provide/enable:
+
+    - (1) Tailored mental health support.
+    - (1) Signposting to services and external resources.
+    - (1) Access to information.
+    - (1) Emotional detection and response.
+    - (2) Service navigation.
+    - (2) Crisis reporting.
  
-- Mentoring system.
-- Wellbeing games.
-- User profiles:
+- (2) User profiles - which is composed of:
     - Logging in.
     - Signing out.
     - Updating personal information.
+- (3) Mentoring system.
+- (3) Wellbeing games.
 
 ## External Interface Requirements
 
@@ -112,10 +121,16 @@ Tertiary:
 
 ## Non-Functional Requirements
 
-- Follows data protection and confidentiality principles for all user data - especially chats.
-- Must be available 24/7.
-- Must be culturally sensitive.
-- Should have (some) multi-lingual support.
-- Must be accessible - font size settings, contrast theme, etc.
-- Information provided must be accurate and safe.
-- Should have a back-end to manage user data, store relevant information, etc.
+Requirements are prioritised based on the number on the left of each requirement.
+
+A lower number means a higher priority category.
+
+Several requirements can share a priority value.
+
+- (1) Follows data protection and confidentiality principles for all user data - especially chats.
+- (1) Must be available 24/7.
+- (1) Information provided must be accurate and safe.
+- (2) Must be culturally sensitive.
+- (2) Must be accessible - font size settings, contrast theme, etc.
+- (3) Should have (some) multi-lingual support.
+- (3) Should have a back-end to manage user data, store relevant information, etc.
