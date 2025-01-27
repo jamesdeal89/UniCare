@@ -119,8 +119,12 @@ Several requirements can share a priority value.
     - Logging in.
     - Signing out.
     - Updating personal information.
+    - (+) Friend system. 
 - (3) Mentoring system.
-- (3) Wellbeing games.
+- (3) Wellbeing games - potentially including one or more of:
+    - (+) Murdle - mental health themed 5 letter word guessing game.
+    - (+) Exercise tracker with achievements - integrated into step tracker inside mobile device or manually reported.
+    - (+) Habit trackers - user records daily tasks to build a 'streak' - like watering plants daily or going outside.
 
 ## External Interface Requirements/Specifications
 
