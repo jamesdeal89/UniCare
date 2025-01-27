@@ -58,10 +58,36 @@ This is reflected in the updated brief which focuses more on the ___gamification
 |BAME|Black Asian and Minority Ethnic|
 |DialogueFlow|Google's Natural Language Processing platform for conversational user interfaces|
 |Flutter|Google's UI Development kit for cross-platform applications (mobile included)|
+|UoN/UON|University of Nottingham|
+|Hallucination|In regards to LLM: when a model states information or refers to a situation which does not exist in reality or is factually incorrect|
+|Sentiment Analysis|Taking text and using NLP and other text analysis methods to extract meaning or emotion in a quantifiable or computable way|
 
 ## Assumptions and Dependencies
 
+#TODO
+
+## Stakeholders
+
+Primary:
+
+- ___Aislinn Bergin___ - Academic Project Supervisor - New 'client' as project has been taken over by UoN.
+- ___University of Nottingham___ - will be published and released under the UoN name; we are exploring partnerships with the medicial or psychology departments.
+- ___Individuals recovering from addiction___ - the target direct users of the app.
+- ___Individuals who want to support their mental health___ more broadly - also desired direct users of the app.
+
+Secondary:
+
+- ___Mental health professionals___ - don't use the app directly, but their input should heavily influence how the product is developed to support the users.
+- ___Researchers___ - potentially, the app could be studied to understand it's effects on user's mental health.
+
+Tertiary:
+
+- ___BAC-IN___ - Charity - Original client - still has some influence as they proposed the original concept and core idea which the evolved brief draws from.
+
+
 ## Functional Requirements
+
+
 
 ## External Interface Requirements
 
