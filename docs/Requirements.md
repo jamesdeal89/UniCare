@@ -67,7 +67,17 @@ This helps to disambiguate the requirements among teammates and future developer
 
 ## Assumptions and Dependencies
 
-#TODO
+These are factors which, if changed unexpectedly, would require redo-ing or adding to the requirements/specifications.
+
+These requirements were defined prior to the completion of any audience surveys or in-depth collaboration with medical professionals. 
+
+Therefore it is an assumption that the gamification and chat interface are appropriate ways to provide mental health support.
+If we complete consultation with professionals/experts in the field and realize this is not the case, we would adjust our requirements to add their suggestions or amend our interfaces.
+
+Furthermore, if the audience surveys find that our text-based conversational interaction method is not intuitive (for example the surveys might reveal that pre-defined interaction buttons are prefered) 
+we would pivot our requirements to reflect this.
+
+Platform is also an assumption we made as we assume that IOS or Android would be most widely used, if this is not true, we would need to redesign the software to work well on web or on desktop instead.
 
 ## Stakeholders
 
@@ -112,19 +122,23 @@ Several requirements can share a priority value.
 - (3) Mentoring system.
 - (3) Wellbeing games.
 
-## External Interface Requirements
+## External Interface Requirements/Specifications
 
-- Compatible with smartphones. 
-- Android or IOS (either or both ideally.)
-- Must have text input method (to talk to chatbot.)
-- Should support persistent storage for apps (to enable accounts for personalisation.)
+These are requirements/specifications for the compatibility of the software, this includes the hardware it should be able to run on. 
+These are also appropriately ranked by how essential they are to the final product.
+(+) means they are stretch requirements which can be considered when all other requirements are satisfied.
+
+- (1) Compatible with smartphones. 
+- (1) Android or IOS (either or both ideally.)
+- (1) Must have text input method (to talk to chatbot.)
+- (2) Should support persistent storage for apps (to enable accounts for personalisation.)
+- (+) Web interface.
+- (+) Desktop application.
 
 ## Non-Functional Requirements
 
 Requirements are prioritised based on the number on the left of each requirement.
-
 A lower number means a higher priority category.
-
 Several requirements can share a priority value.
 
 - (1) Follows data protection and confidentiality principles for all user data - especially chats.
