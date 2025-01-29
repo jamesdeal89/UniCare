@@ -1,0 +1,26 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - ask_question
+  - affirm
+  - deny
+
+entities: []
+
+slots: {}
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I help you today?"
+  utter_goodbye:
+    - text: "Goodbye! Have a nice day."
+  utter_ask_question:
+    - text: "Feel free to ask your question."
+  utter_default:
+    - text: "I'm sorry, I didn't quite understand. Could you rephrase?"
+
+session_config:
+  session_expiration_time: 60  # in minutes
+  carry_over_slots_to_new_session: true

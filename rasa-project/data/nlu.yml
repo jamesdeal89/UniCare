@@ -1,0 +1,39 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - good morning
+    - good evening
+    - howdy
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+    - catch you later
+    - I'm done
+
+- intent: ask_question
+  examples: |
+    - can I ask you something?
+    - I have a question
+    - could you help me with something?
+    - I have a problem
+    - I need some advice
+
+- intent: affirm
+  examples: |
+    - yes
+    - yep
+    - sure
+    - absolutely
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - I don't think so
