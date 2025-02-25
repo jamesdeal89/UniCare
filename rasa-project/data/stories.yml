@@ -1,16 +1,39 @@
 version: "3.1"
 stories:
-- story: greet story
+- story: happy path
   steps:
-    - intent: greet
-    - action: utter_greet
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: utter_disclosure
 
-- story: goodbye story
+- story: seek advice without emotion
   steps:
-    - intent: goodbye
-    - action: utter_goodbye
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+  - intent: seek_advice
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: utter_disclosure
 
-- story: ask question story
+- story: direct request help
   steps:
-    - intent: ask_question
-    - action: utter_ask_question
+  - intent: request_help
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: utter_disclosure
+
+- story: goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: default
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default

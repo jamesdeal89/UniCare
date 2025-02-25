@@ -2,38 +2,52 @@ version: "3.1"
 nlu:
 - intent: greet
   examples: |
-    - hi
-    - hello
-    - hey
-    - good morning
-    - good evening
-    - howdy
+    - Hi
+    - Hello
+    - Hey there
+    - Good morning
+    - Good afternoon
+
+- intent: express_emotion
+  examples: |
+    - I'm feeling [happy](emotion)
+    - I'm [glad](emotion:happy)
+    - I'm [joyful](emotion:happy)
+    - I'm [good](emotion:happy)
+    - I'm [excited](emotion:happy)
+    - I'm feeling [sad](emotion)
+    - I'm [unhappy](emotion:sad)
+    - I'm [down](emotion:sad)
+    - I'm [depressed](emotion:sad)
+    - I'm [distraught](emotion:sad)
+    - I'm feeling [anxious](emotion)
+    - I'm [nervous](emotion:anxious)
+    - I'm [worried](emotion:anxious)
+    - I'm [angry](emotion)
+    - I'm [furious](emotion:angry)
+    - I'm [enraged](emotion:angry)
+
+- intent: seek_advice
+  examples: |
+    - Can you give me some advice?
+    - What should I do?
+    - How can I handle this?
+    - What do you think?
+    - How should I fix this?
+    - How can I do better?
+    - What can I do?
+
+- intent: request_help
+  examples: |
+    - I need help
+    - Can you help me?
+    - I'm stuck
+    - I don't know what to do
+    - Is there anything I can do?
 
 - intent: goodbye
   examples: |
-    - bye
-    - goodbye
-    - see you later
-    - catch you later
-    - I'm done
-
-- intent: ask_question
-  examples: |
-    - can I ask you something?
-    - I have a question
-    - could you help me with something?
-    - I have a problem
-    - I need some advice
-
-- intent: affirm
-  examples: |
-    - yes
-    - yep
-    - sure
-    - absolutely
-
-- intent: deny
-  examples: |
-    - no
-    - nope
-    - I don't think so
+    - Bye
+    - See you later
+    - Goodbye
+    - Take care

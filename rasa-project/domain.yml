@@ -1,25 +1,45 @@
-version: "3.1"
-
+version: '3.1'
 intents:
   - greet
+  - express_emotion
+  - seek_advice
+  - request_help
   - goodbye
-  - ask_question
-  - affirm
-  - deny
 
-entities: []
+entities:
+  - emotion
 
-slots: {}
+slots:
+  emotion:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: emotion
+        intent: express_emotion
+
+actions:
+  - utter_greet
+  - utter_ask_how_feeling
+  - action_advice
+  - utter_goodbye
+  - utter_disclosure
+  - utter_default
 
 responses:
   utter_greet:
-    - text: "Hello! How can I help you today?"
+  - text: "Hello! How can I help?"
+
+  utter_ask_how_feeling:
+  - text: "How are you feeling today?"
+
   utter_goodbye:
-    - text: "Goodbye! Have a nice day."
-  utter_ask_question:
-    - text: "Feel free to ask your question."
+  - text: "Goodbye! Take care."
+
+  utter_disclosure:
+  - text: "Remember, I'm not a substitute for professional help. If you need immediate assistance, please contact a mental health professional or hotline."
+
   utter_default:
-    - text: "I'm sorry, I didn't quite understand. Could you rephrase?"
+  - text: "I'm not sure I understand. Can you please rephrase that?"
 
 session_config:
   session_expiration_time: 60  # in minutes
