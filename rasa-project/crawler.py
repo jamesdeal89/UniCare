@@ -1,9 +1,11 @@
 
 # web crawler from an old project - could be integrated to search for help links 
 
+import sys
+import urllib.request 
+import urllib
+
 def get_url(url):
-	import urllib.request 
-	import urllib
 	source = urllib.request.urlopen(url).read().decode('utf-8')
 	return source
 
@@ -25,4 +27,7 @@ def findAllLinks(page):
 		else:
 			break
 
-findAllLinks(get_url("https://notts-talk.co.uk/"))
+if sys.argv[1] == "nott":
+    findAllLinks(get_url("https://notts-talk.co.uk/"))
+else:
+    findAllLinks(get_url(sys.argv[1]))
