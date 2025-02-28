@@ -23,7 +23,6 @@ actions:
   - action_advice
   - utter_goodbye
   - utter_disclosure
-  - utter_default
 
 responses:
   utter_greet:
