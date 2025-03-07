@@ -6,6 +6,7 @@ stories:
   steps:
   - intent: express_emotion
   - action: action_advice
+  - action: action_resources
   - action: utter_disclosure
    
 - story: happy path step
@@ -21,6 +22,7 @@ stories:
   - action: utter_ask_how_feeling
   - intent: express_emotion
   - action: action_advice
+  - action: action_resources
   - action: utter_disclosure
 
 - story: seek advice without emotion
@@ -32,6 +34,7 @@ stories:
   - action: utter_ask_how_feeling
   - intent: express_emotion
   - action: action_advice
+  - action: action_resources
   - action: utter_disclosure
 
 - story: direct request help
@@ -40,6 +43,7 @@ stories:
   - action: utter_ask_how_feeling
   - intent: express_emotion
   - action: action_advice
+  - action: action_resources
   - action: utter_disclosure
 
 - story: goodbye

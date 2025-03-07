@@ -21,6 +21,7 @@ actions:
   - utter_greet
   - utter_ask_how_feeling
   - action_advice
+  - action_resources
   - utter_goodbye
   - utter_disclosure
 

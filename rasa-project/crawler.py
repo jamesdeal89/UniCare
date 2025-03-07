@@ -1,7 +1,6 @@
 
 # web crawler from an old project - could be integrated to search for help links 
 
-import sys
 import urllib.request 
 import urllib
 
@@ -19,15 +18,13 @@ def getNextTarget(page):
 	return url, endQuote
 
 def findAllLinks(page):
+	urls = []
 	while True:
 		url, endpos = getNextTarget(page)
 		if url:
-			print(url)
+			urls.append(url)
 			page = page[endpos:]
 		else:
 			break
+	return urls
 
-if sys.argv[1] == "nott":
-    findAllLinks(get_url("https://notts-talk.co.uk/"))
-else:
-    findAllLinks(get_url(sys.argv[1]))

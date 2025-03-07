@@ -17,14 +17,16 @@ nlu:
     - I'm [angry](emotion)
     - I'm [excited](emotion)
     - I'm [frustrated](emotion)
-    - I'm feeling [overwhelmed](emotion)
     - I'm feeling [great](emotion)
     - I'm feeling [blue](emotion)
     - I'm [nervous](emotion)
     - I'm [content](emotion)
     - I'm feeling [hopeless](emotion)
     - I'm [ecstatic](emotion)
-    - I'm [stressed out](emotion)
+    - I'm feeling [overwhelmed](emotion)
+    - I'm feeling overwhelmed with everything going on (emotion)
+    - I feel so overwhelmed right now (emotion)
+    - Lately, I've been feeling overwhelmed (emotion)
 
 - intent: seek_advice
   examples: |
@@ -50,3 +52,4 @@ nlu:
     - See you later
     - Goodbye
     - Take care
+
