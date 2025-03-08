@@ -8,7 +8,7 @@ Recently, we faced issues in communications with BAC-IN and later learned our pr
 ## Project Contributors
 
 - Leo Jang - Team Leader
-- Ryan Chen - Group Admin
+- Ryan Chan - Group Admin
 - Sammy Sahnine - Git Admin
 - Athikash Jeyaganthan​
 - Chinonso Oti
