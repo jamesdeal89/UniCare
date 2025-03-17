@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'views/login/loginView.dart';
 
 void main() {
   runApp(const MyApp());
@@ -6,6 +7,19 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  static const ColorScheme colorScheme = ColorScheme(
+    brightness: Brightness.dark, 
+    primary: Color.fromRGBO(16, 38, 59, 1),
+    onPrimary: Colors.white, 
+    // secondary: Colors.white,
+    secondary: Color.fromRGBO(35, 52, 69, 1), 
+    onSecondary: Colors.white, 
+    error: Color.fromRGBO(213, 0, 0, 1), 
+    onError: Colors.redAccent, 
+    surface: Color.fromRGBO(13, 30, 47, 1), 
+    onSurface: Colors.white
+    // onSurface: Color.fromRGBO(39, 58, 77, 1)
+  );
 
   // This widget is the root of your application.
   @override
@@ -28,10 +42,11 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: colorScheme,
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginView(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
