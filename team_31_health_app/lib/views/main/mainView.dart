@@ -16,8 +16,9 @@ class _MainView extends State<MainView> {
     return Scaffold(
       body: ChatView(),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        unselectedItemColor: Color.fromARGB(255, 142, 142, 147),
+        selectedItemColor: Color.fromARGB(255, 10, 132, 255),
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
