@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatView extends StatefulWidget {
-  const ChatView({Key? key}) : super(key: key);
+  const ChatView({super.key});
 
   @override
   State<ChatView> createState() => _ChatView();
@@ -38,7 +38,7 @@ class _ChatView extends State<ChatView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
-                            Icons.add,
+                            Icons.refresh,
                             color: Colors.white,
                           ),
                         ),
@@ -56,16 +56,19 @@ class _ChatView extends State<ChatView> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color.fromARGB(255, 8, 54, 97),
-                        hintText: 'How are you today?',
-                        hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 142, 142, 147),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
+                    child: SizedBox(
+                      height: 50,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          fillColor: const Color.fromARGB(255, 8, 54, 97),
+                          hintText: 'How are you today?',
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
                         ),
                       ),
                     ),

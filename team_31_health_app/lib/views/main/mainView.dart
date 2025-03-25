@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/subviews/chatView.dart';
+import 'package:team_31_health_app/views/main/subviews/journalView.dart';
+import 'package:team_31_health_app/views/main/subviews/helpView.dart';
+import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
+import 'package:team_31_health_app/views/main/subviews/profileView.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -8,19 +12,33 @@ class MainView extends StatefulWidget {
   State<MainView> createState() => _MainView();
 }
 
-//TODO: Add functionality with switching views with the bottom navigation bar
-
 class _MainView extends State<MainView> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    JournalView(),
+    HelpView(),
+    ChatView(),
+    GamesView(),
+    ProfileView(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChatView(),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         unselectedItemColor: Color.fromARGB(255, 142, 142, 147),
         selectedItemColor: Color.fromARGB(255, 10, 132, 255),
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
             label: "Journal",
@@ -40,8 +58,10 @@ class _MainView extends State<MainView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
-          )
+          ),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
