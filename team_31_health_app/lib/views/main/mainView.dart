@@ -13,7 +13,7 @@ class MainView extends StatefulWidget {
 }
 
 class _MainView extends State<MainView> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   static const List<Widget> _widgetOptions = <Widget>[
     JournalView(),
