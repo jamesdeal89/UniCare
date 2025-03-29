@@ -19,7 +19,7 @@ class _MordleViewState extends State<MordleView> {
         title: const Text(
           "MORDLE",
           style: TextStyle(
-            fontSize: 24, // Looks bold like the Wordle title
+            fontSize: 24, 
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -27,10 +27,28 @@ class _MordleViewState extends State<MordleView> {
         elevation: 2, 
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          _buildGrid(),
+          const SizedBox(height: 20),
+          _buildKeyboard(),
         ],
       ),
+    );
+  }
+
+  Widget _buildGrid() {
+    return Column(
       
+      children: <Widget>[],
+    );
+
+  }
+
+  Widget _buildKeyboard() {
+    return Column(
+      
+      children: <Widget>[],
     );
   }
 }
