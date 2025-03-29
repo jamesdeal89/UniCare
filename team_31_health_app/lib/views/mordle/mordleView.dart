@@ -9,6 +9,11 @@ class MordleView extends StatefulWidget {
 
 class _MordleViewState extends State<MordleView> {
 
+  final List<String> keyboardRows = [
+    "QWERTYUIOP",
+    "ASDFGHJKL",
+    "ZXCVBNM"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +65,27 @@ class _MordleViewState extends State<MordleView> {
 
   Widget _buildKeyboard() {
     return Column(
-      
-      children: <Widget>[],
+      children: keyboardRows.map((row) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4), 
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: row.split('').map((char) {
+              return Padding(
+                padding: const EdgeInsets.all(2), 
+                child: ElevatedButton(
+                  onPressed: () {}, 
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(25, 40),
+                    backgroundColor: Color.fromARGB(255, 99, 99, 99), 
+                  ),
+                  child: Text(char),
+                ),
+              );
+            }).toList(),
+          ),
+        );
+      }).toList(),
     );
   }
 }
