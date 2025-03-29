@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/login/mordleView.dart';
+import 'views/mordle/mordleView.dart';
 
 void main() {
   runApp(const MyApp());
