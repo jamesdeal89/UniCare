@@ -65,27 +65,59 @@ class _MordleViewState extends State<MordleView> {
 
   Widget _buildKeyboard() {
     return Column(
-      children: keyboardRows.map((row) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4), 
+      children: [
+        
+        for (var row in keyboardRows.sublist(0, 2)) 
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: row.split('').map((char) {
+                return _buildKey(char);
+              }).toList(),
+            ),
+          ),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: row.split('').map((char) {
-              return Padding(
-                padding: const EdgeInsets.all(2), 
-                child: ElevatedButton(
-                  onPressed: () {}, 
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(25, 40),
-                    backgroundColor: Color.fromARGB(255, 99, 99, 99), 
-                  ),
-                  child: Text(char),
-                ),
-              );
-            }).toList(),
+            children: [
+              _buildSpecialKey("ENTER"), 
+              for (var char in keyboardRows[2].split('')) _buildKey(char), 
+              _buildSpecialKey("<-----"), 
+            ],
           ),
-        );
-      }).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildKey(String char) {
+    return Padding(
+      padding: const EdgeInsets.all(2),
+      child: ElevatedButton(
+        onPressed: () {}, // No functionality yet
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(40, 50),
+          backgroundColor: Color.fromARGB(255, 199, 199, 199),
+        ),
+        child: Text(char),
+      ),
+    );
+  }
+
+   Widget _buildSpecialKey(String label) {
+    return Padding(
+      padding: const EdgeInsets.all(2),
+      child: ElevatedButton(
+        onPressed: () {}, // No functionality yet
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(90, 50), 
+          backgroundColor: Color.fromARGB(255, 199, 199, 199), 
+        ),
+        child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      ),
     );
   }
 }
