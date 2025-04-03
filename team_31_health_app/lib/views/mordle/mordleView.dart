@@ -19,7 +19,7 @@ class _MordleViewState extends State<MordleView> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Colors.white, 
+      backgroundColor: Color.fromRGBO(16, 38, 59, 1), 
       appBar: AppBar(
         title: const Text(
           "MORDLE",
@@ -53,7 +53,7 @@ class _MordleViewState extends State<MordleView> {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                border: Border.all(color: Color.fromARGB(255, 99, 99, 99), width: 2),
+                border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 2),
               ),
             );
           }),
