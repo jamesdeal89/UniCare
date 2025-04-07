@@ -92,9 +92,19 @@ class Action_Resources(Action):
             dispatcher.utter_message("I was unable to find any relevant resources online, but I tried my best!")
 
 
+class Action_Save_Trigger(Action):
+    def name(self):
+        return "action_save_trigger"
+    
+    def run(self, dispatcher, tracker, domain):
+        print("To be implemented...")
+
+
+
 # Used to help the user check websites for triggering words which they provide.
 #class Action_Resources(Action):
 #    def name(self):
 #        return "action_resources"
 #    
 #    def run(self, dispatcher, tracker, domain):
+

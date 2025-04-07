@@ -1,6 +1,38 @@
 version: "3.1"
 nlu:
 
+- intent: report_trigger
+  examples: |
+    - I am sensitive to the triggering word [pineapple](trigger)
+    - I am sensitive to the triggering word [dog](trigger)
+    - I am triggered by [abuse](trigger)
+    - I am triggered by [cats](trigger)
+    - I am triggered by [dogs](trigger)
+    - I am triggered by [elephants](trigger)
+    - I react badly when [school](trigger) is mentioned
+    - I react badly when [work](trigger) is mentioned 
+    - I react badly when [parents](trigger) are mentioned 
+    - I feel uncomfortable when [suicide](trigger) is mentioned
+    - I am sensitive to the triggering word [abuse](trigger)
+    - I get anxious when [failure](trigger) is brought up
+    - I react badly when [death](trigger) is mentioned
+    - I feel uneasy when [violence](trigger) is discussed
+    - I am triggered by [stressful situations](trigger)
+    - I feel uncomfortable when [mental health](trigger) is mentioned
+    - I have a hard time when [loss](trigger) is talked about
+    - I feel sensitive about [bullying](trigger)
+    - I don't like it when [arguments](trigger) are brought up
+    - I feel triggered by [conflict](trigger)
+    - I feel uneasy when [rejection](trigger) is mentioned
+    - I feel uncomfortable when [trauma](trigger) is discussed
+    - I am sensitive to the word [cancer](trigger)
+    - I feel anxious when [divorce](trigger) is mentioned
+    - I react negatively to [failure](trigger)
+    - I feel triggered by [panic attacks](trigger)
+    - I feel uncomfortable when [addiction](trigger) is discussed
+    - I am sensitive to the topic of [self-harm](trigger)
+    - I feel uneasy when [mental illness](trigger) is mentioned
+
 - intent: affirm
   examples: |
     - yes

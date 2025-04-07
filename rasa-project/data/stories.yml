@@ -2,6 +2,25 @@ version: "3.1"
 
 stories:
 
+- story: mention and save trigger
+  steps: 
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: affirm
+  - action: action_save_trigger
+  - action: utter_confirm_trigger
+  - slot_was_set:
+            - trigger: "apple"  
+            # this is an example of how the bot should behave, so we give a trigger of 'apple' as an example,
+            # during training, the bot should learn that any example trigger word could be set here.
+
+- story: mention and save trigger
+  steps: 
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: deny
+  - action: utter_deny_trigger
+
 - story: immediate emotion
   steps:
   - intent: express_emotion
