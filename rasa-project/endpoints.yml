@@ -1,7 +1,8 @@
 action_endpoint:
   url: "http://localhost:5055/webhook"
 
-tracker_store:
-  type: SQL
-  dialect: mysql+mysqlconnector
-  url: mysql+mysqlconnector://root:psyaj9@localhost:3306/rasa_db
+
+    #tracker_store:
+    #  type: SQL
+    #  dialect: mysql+mysqlconnector
+    #  url: mysql+mysqlconnector://root:psyaj9@localhost:3306/rasa_db

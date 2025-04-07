@@ -4,11 +4,19 @@ from rasa_sdk import Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 import crawler
+import random
 
+# list of trusted URLs for mental health resources 
+# the bot will use these to scrape/crawl for relevant information
+trustedUrls = ["https://mentalhealth-uk.org/",
+               "https://notts-talk.co.uk/",
+               "https://www.nhs.uk/mental-health/",
+               "https://www.mind.org.uk/get-involved/supported-self-help/"]
 
 happy = ["happy","ecstatic"]
 anxious = ["anxious","overwhelmed","stressed out"]
 sad = ["sad","not too great", "sad", "not good", "upset"]
+triggers = ["worthless", "suicidal", "disapear","suicide"]
 
 # Detect and respond to emotion, providing relevant advice.
 class Action_advice(Action):
@@ -24,11 +32,11 @@ class Action_advice(Action):
         elif emotion in anxious:
             dispatcher.utter_message("Anxiety can be difficult to deal with. Try doing things that usually help you calm down")
         elif emotion == 'depressed':
-            dispatcher.utter_message("Depression is a very serious. Please consider consulting to a professional about this.")
+            dispatcher.utter_message("Depression can be very serious. Understanding and recognising that you feel depressed is a great first step. Please consider consulting to a professional about this.")
         elif emotion == 'angry':
             dispatcher.utter_message("Anger is a normal emotion and everyone experiences it. I would recommend trying to find a way to express this anger in some way like writing or talking to someone.")
         else:
-            dispatcher.utter_message("I'm not sure how to help with that emotion. Maybe you can tell me more?")
+            pass
         return []
 
 # Used to provide relevant, up-to-date resources by crawling mental-health websites which are known to be useful and safe.
@@ -39,17 +47,54 @@ class Action_Resources(Action):
     def findContaining(self, emotion, urls):
         relevant = []
         for url in urls:
-            print(url)
             if emotion in url:
                 relevant.append(url);
         return relevant
     
     def run(self, dispatcher, tracker, domain):
-        urls = crawler.findAllLinks(crawler.get_url("https://notts-talk.co.uk/"))
+        urls = []
+        for url in trustedUrls:
+            for link in crawler.findAllLinks(crawler.get_url(url)):
+                urls.append(link)
         emotion = tracker.get_slot('emotion')
         if emotion in anxious:
-            anxiousUrls = self.findContaining('anxious',urls)
-            dispatcher.utter_message("Here is a website with information on dealing with anxiety: ")
-            dispatcher.utter_message(anxiousUrls[0])
+            for synonym in anxious:
+                urlsE = self.findContaining(synonym,urls)
+            if (len(urlsE) > 0):
+                dispatcher.utter_message("Here is a website with information on dealing with anxiety: ")
+                dispatcher.utter_message(urlsE[random.randint(0,len(urlsE)-1)])
+            else:
+                pass
+        elif emotion in sad:
+            for synonym in sad:
+                urlsE = self.findContaining(synonym,urls)
+            if (len(urlsE) > 0):
+                dispatcher.utter_message("Here is a website with information on dealing with sadness: ")
+                dispatcher.utter_message(urlsE[random.randint(0,len(urlsE)-1)])
+            else:
+                pass
+        elif emotion in happy:
+            pass
+        elif emotion in triggers:
+            for synonym in triggers:
+                urlsE = self.findContaining(synonym,urls)
+            dispatcher.utter_message("You are important and don't have to face these issues alone. There are people who can help. Please consider reaching out to one of the 24/7 hotlines below: ")
+            dispatcher.utter_message("Online: samaritans.org")
+            dispatcher.utter_message("UK phone - Samaritans: 116 123")
+            dispatcher.utter_message("UK phone - National Suicide Prevention Hotline: 0800 587 0800")
+            dispatcher.utter_message("Globally - https://findahelpline.com/ can help you find help no matter where you are.")
+            if (len(urlsE) > 0):
+                dispatcher.utter_message("Here is a website with information on dealing with these feelings: ")
+                dispatcher.utter_message(urlsE[random.randint(0,len(urlsE)-1)])
+            else:
+                pass
         else:
             dispatcher.utter_message("I was unable to find any relevant resources online, but I tried my best!")
+
+
+# Used to help the user check websites for triggering words which they provide.
+#class Action_Resources(Action):
+#    def name(self):
+#        return "action_resources"
+#    
+#    def run(self, dispatcher, tracker, domain):

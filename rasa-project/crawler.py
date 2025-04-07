@@ -5,8 +5,14 @@ import urllib.request
 import urllib
 
 def get_url(url):
-	source = urllib.request.urlopen(url).read().decode('utf-8')
-	return source
+	try:
+		source = urllib.request.urlopen(url).read().decode('utf-8')
+	except:
+		print("LOG: there was an error in accessing ", url, " it will not be crawled this time.")
+		return None
+	else:
+		return source
+	
 
 def getNextTarget(page):
 	startLink = page.find("<a href=")
@@ -19,12 +25,15 @@ def getNextTarget(page):
 
 def findAllLinks(page):
 	urls = []
-	while True:
-		url, endpos = getNextTarget(page)
-		if url:
-			urls.append(url)
-			page = page[endpos:]
-		else:
-			break
+	if page:
+		while True:
+			url, endpos = getNextTarget(page)
+			if url:
+				urls.append(url)
+				page = page[endpos:]
+			else:
+				break
+	else:
+		pass
 	return urls
 
