@@ -5,6 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   static const ColorScheme colorScheme = ColorScheme(
@@ -14,11 +15,19 @@ class MyApp extends StatelessWidget {
     // secondary: Colors.white,
     secondary: Color.fromRGBO(35, 52, 69, 1), 
     onSecondary: Colors.white, 
+    tertiary: Color.fromARGB(255, 173, 228, 255),
+    onTertiary: Color.fromARGB(255, 236, 173, 255),
+    onTertiaryFixed: Color.fromARGB(255, 66, 0, 110),
     error: Color.fromRGBO(213, 0, 0, 1), 
     onError: Colors.redAccent, 
     surface: Color.fromRGBO(13, 30, 47, 1), 
     onSurface: Colors.white
     // onSurface: Color.fromRGBO(39, 58, 77, 1)
+  );
+  static const TextTheme textTheme = TextTheme(
+    titleLarge: TextStyle(fontSize: 40, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+    bodyLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.black, fontFamily: 'CupertinoSystemDisplay'),
+    bodyMedium: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
   );
 
   // This widget is the root of your application.
@@ -42,6 +51,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
+        textTheme: textTheme,
         colorScheme: colorScheme,
         useMaterial3: true,
       ),
