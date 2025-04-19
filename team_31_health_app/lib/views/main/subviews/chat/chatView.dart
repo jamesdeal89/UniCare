@@ -150,29 +150,7 @@ class _ChatView extends State<ChatView> {
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
                     return 
-                      messages[index].user ? 
-                      // This is a message bubble for a message from the User
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: EdgeInsets.all(10), 
-                          child: ChatBubble(
-                              message: messages[index].msg, 
-                              user: messages[index].user
-                            )
-                        )
-                      ) :
-                      // This is a message bubble for a message from the Bot
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          padding: EdgeInsets.all(10), 
-                          child: ChatBubble(
-                              message: messages[index].msg, 
-                              user: messages[index].user
-                            ) 
-                        )
-                      );
+                      ChatBubble(message: messages[index].msg, user: messages[index].user);
                   } 
                 )
               )
