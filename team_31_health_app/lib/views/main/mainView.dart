@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:team_31_health_app/views/main/subviews/chatView.dart';
+import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
 import 'package:team_31_health_app/views/main/subviews/journalView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
 import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
