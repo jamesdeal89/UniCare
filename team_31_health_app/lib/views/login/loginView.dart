@@ -25,15 +25,39 @@ class _LoginViewState extends State<LoginView> {
         Padding(
             padding: EdgeInsets.all(20),
             child: TextField(
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: userNameTextEditingController,
-              decoration: InputDecoration(border: OutlineInputBorder(), labelText: "Username", fillColor: Theme.of(context).colorScheme.primary, filled: true),
+              decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  labelText: "Email",
+                  fillColor: Theme.of(context).colorScheme.primary,
+                  filled: true),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             )),
         Padding(
             padding: EdgeInsets.all(20),
             child: TextField(
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: passWordTextEditingController,
               obscureText: true,
-              decoration: InputDecoration(border: OutlineInputBorder(), labelText: "Password", fillColor: Theme.of(context).colorScheme.primary, filled: true),
+              decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  labelText: "Password",
+                  fillColor: Theme.of(context).colorScheme.primary,
+                  filled: true),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             )),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
@@ -43,13 +67,6 @@ class _LoginViewState extends State<LoginView> {
                 foregroundColor: Theme.of(context).colorScheme.secondary,
                 backgroundColor: Theme.of(context).colorScheme.onSecondary,
               ),
-<<<<<<< team_31_health_app/lib/views/login/loginView.dart
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainView()),
-                );
-=======
               onPressed: () async {
                 try {
                   // Show loading indicator
@@ -68,23 +85,23 @@ class _LoginViewState extends State<LoginView> {
                   // Close loading
                   Navigator.of(context).pop();
 
-                  // Navigate to home
-                  Navigator.of(context).pushReplacementNamed('/home');
-                } on FirebaseAuthException catch (e) {
-                  // Close loading
-                  Navigator.of(context).pop();
+                  // Navigate to mainView on login success
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainView()),
+                  );
 
-                  // Show error
+                  // In case of error...
+                } on FirebaseAuthException catch (e) {
+                  // Close loading + show error
+                  Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(
-                        e.message ?? 'Authentication failed. Please try again.',
-                      ),
+                      content: Text("Incorrect login credentials. Please check your email and password."),
                       backgroundColor: Colors.red,
                     ),
                   );
                 }
->>>>>>> team_31_health_app/lib/views/login/loginView.dart
               },
               child: Text("Login"),
             )))
