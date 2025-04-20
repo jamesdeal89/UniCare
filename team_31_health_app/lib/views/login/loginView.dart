@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:team_31_health_app/views/main/mainView.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginView extends StatefulWidget {
@@ -42,6 +43,13 @@ class _LoginViewState extends State<LoginView> {
                 foregroundColor: Theme.of(context).colorScheme.secondary,
                 backgroundColor: Theme.of(context).colorScheme.onSecondary,
               ),
+<<<<<<< team_31_health_app/lib/views/login/loginView.dart
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainView()),
+                );
+=======
               onPressed: () async {
                 try {
                   // Show loading indicator
@@ -76,6 +84,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   );
                 }
+>>>>>>> team_31_health_app/lib/views/login/loginView.dart
               },
               child: Text("Login"),
             )))
