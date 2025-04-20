@@ -43,13 +43,6 @@ class _LoginViewState extends State<LoginView> {
                 foregroundColor: Theme.of(context).colorScheme.secondary,
                 backgroundColor: Theme.of(context).colorScheme.onSecondary,
               ),
-<<<<<<< team_31_health_app/lib/views/login/loginView.dart
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainView()),
-                );
-=======
               onPressed: () async {
                 try {
                   // Show loading indicator
@@ -68,8 +61,13 @@ class _LoginViewState extends State<LoginView> {
                   // Close loading
                   Navigator.of(context).pop();
 
-                  // Navigate to home
-                  Navigator.of(context).pushReplacementNamed('/home');
+                  // Navigate to mainView on login success
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainView()),
+                  );
+
+                  // In case of error...
                 } on FirebaseAuthException catch (e) {
                   // Close loading
                   Navigator.of(context).pop();
@@ -84,7 +82,6 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   );
                 }
->>>>>>> team_31_health_app/lib/views/login/loginView.dart
               },
               child: Text("Login"),
             )))
