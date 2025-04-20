@@ -25,15 +25,39 @@ class _LoginViewState extends State<LoginView> {
         Padding(
             padding: EdgeInsets.all(20),
             child: TextField(
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: userNameTextEditingController,
-              decoration: InputDecoration(border: OutlineInputBorder(), labelText: "Username", fillColor: Theme.of(context).colorScheme.primary, filled: true),
+              decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  labelText: "Email",
+                  fillColor: Theme.of(context).colorScheme.primary,
+                  filled: true),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             )),
         Padding(
             padding: EdgeInsets.all(20),
             child: TextField(
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: passWordTextEditingController,
               obscureText: true,
-              decoration: InputDecoration(border: OutlineInputBorder(), labelText: "Password", fillColor: Theme.of(context).colorScheme.primary, filled: true),
+              decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  labelText: "Password",
+                  fillColor: Theme.of(context).colorScheme.primary,
+                  filled: true),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             )),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
