@@ -93,15 +93,11 @@ class _LoginViewState extends State<LoginView> {
 
                   // In case of error...
                 } on FirebaseAuthException catch (e) {
-                  // Close loading
+                  // Close loading + show error
                   Navigator.of(context).pop();
-
-                  // Show error
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(
-                        e.message ?? 'Authentication failed. Please try again.',
-                      ),
+                      content: Text("Incorrect login credentials. Please check your email and password."),
                       backgroundColor: Colors.red,
                     ),
                   );

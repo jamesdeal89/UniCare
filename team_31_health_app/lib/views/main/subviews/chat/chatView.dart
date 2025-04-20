@@ -149,6 +149,7 @@ class _ChatView extends State<ChatView> {
               children: <Widget>[
                 Expanded(
                   child: TextField(
+                    cursorColor: Theme.of(context).colorScheme.onPrimary,
                     style: Theme.of(context).textTheme.bodyMedium,
                     controller: msgTextEditingController,
                     minLines: 1,
