@@ -1,13 +1,46 @@
 import 'package:flutter/material.dart';
+
 import 'views/login/loginView.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  
+
+  // Future<void> insertMessage(ChatMsg message) async {
+  //   final db = await database;
+  //   await db.insert('chat', message.toMap());
+  // }
+  // Future<List<ChatMsg>> getMessages(ChatMsg message) async {
+  //   final db = await database;
+  //   final List<Map<String,Object?>> messages = await db.query('chat');
+  //   return [
+  //     for (final {'id': id as int, 'message': msg as String, 'user': user as int}
+  //      in messages)
+  //      ChatMsg(user.isOdd, msg)
+  //     ];
+  // }
+  // late DatabaseService databaseService;
+  // if(kIsWeb){
+  //   throw UnsupportedError("Platform unsupported");
+  // } else if (kMac)
+  // late DatabaseService databaseService;
+  // databaseService = DatabaseService(databaseFactory: databaseFactory);
+  // late ChatRepository chatRepository;
+  // chatRepository = ChatRepository(databaseFactory: databaseFactory);
+
+  runApp(MyApp());
 }
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  // final DatabaseService databaseService;
+  // final ChatRepository chatRepository;
+  const MyApp({super.key
+  // , required this.chatRepository
+  });
+  
   static const ColorScheme colorScheme = ColorScheme(
     brightness: Brightness.dark, 
     primary: Color.fromRGBO(16, 38, 59, 1),
@@ -29,7 +62,7 @@ class MyApp extends StatelessWidget {
     bodyLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.black, fontFamily: 'CupertinoSystemDisplay'),
     bodyMedium: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
   );
-
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:team_31_health_app/data/chatRepo.dart';
+import 'package:team_31_health_app/views/main/subviews/chat/components/chatMsg.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatbubble.dart';
 
-class ChatMsg {
-  bool user;
-  String msg;
-  ChatMsg(this.user,this.msg);
-}
 
 class ChatView extends StatefulWidget {
-  const ChatView({super.key});
+
+  const ChatView({super.key, required this.chatRepo});
+
+  final ChatRepo chatRepo;
 
   @override
   State<ChatView> createState() => _ChatView();
@@ -17,37 +17,7 @@ class ChatView extends StatefulWidget {
 class _ChatView extends State<ChatView> {
   final TextEditingController msgTextEditingController = TextEditingController();
   final ScrollController chatScrollController = ScrollController();
-  
-  // Arrange from most recent to least recent
-  List<ChatMsg> messages = <ChatMsg>[
-    ChatMsg(true, "Newest"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Yeah"),
-    ChatMsg(true, "Hello"),
-    ChatMsg(false, "World"),
-    ChatMsg(true, "Oldest"),
-    ];
+
   bool shouldShowScrollButton = false;
   ScrollNotificationObserverState? notificationObserverState;
   @override
@@ -58,9 +28,18 @@ class _ChatView extends State<ChatView> {
     notificationObserverState = ScrollNotificationObserver.maybeOf(context);
     notificationObserverState?.addListener(_listener);
   }
+  // late ChatRepository chatRepo;
+  
   @override
   void initState() {
     super.initState();
+    // chatRepo = ChatRepository(databaseFactory: databaseFactory);
+  }
+  Future<List<ChatMsg>> getMessages() async {
+      return (await widget.chatRepo.get());
+  }
+  Future<ChatMsg> sendMessage(ChatMsg message) async {
+      return (await widget.chatRepo.insert(message));
   }
 
   void _listener(ScrollNotification scrollNotification) {
@@ -91,115 +70,138 @@ class _ChatView extends State<ChatView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        
-      body: Column(
-        children: <Widget>[
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child:
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20, right: 32, top: 32),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Chat",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.refresh,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-          ),
-          
-          Expanded(
-            child: Scaffold(
-              floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-              floatingActionButton: shouldShowScrollButton ? 
-              FloatingActionButton(
-                backgroundColor: Color.fromARGB(255, 10, 132, 255),
-                child: Icon(Icons.arrow_downward_rounded),
-                onPressed: () {                  
-                  chatScrollController.animateTo(
-                    chatScrollController.position.minScrollExtent, 
-                    duration: Duration(milliseconds: 100), 
-                    curve: Curves.bounceInOut
-                  );
-                }
-              ) : null,
-
-              body: Container(
-                padding: EdgeInsets.all(10),
-                child: ListView.builder(
-                  reverse: true,
-                  controller: chatScrollController,
-                  itemCount: messages.length,
-                  itemBuilder: (context, index) {
-                    return 
-                      ChatBubble(message: messages[index].msg, user: messages[index].user);
-                  } 
-                )
-              )
-            )
-          ),
-          
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Row(
+    return FutureBuilder(builder: (context, snapshot) {
+      if (snapshot.hasData){
+        List<ChatMsg> messages = snapshot.data!;
+          return Scaffold( 
+            body: Column(
               children: <Widget>[
-                Expanded(
-                  
-                    child: TextField(
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      controller: msgTextEditingController,
-                      minLines: 1,
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        fillColor: const Color.fromARGB(255, 8, 54, 97),
-                        hintText: 'How are you today?',
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child:
+                      SafeArea(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20, right: 32, top: 32),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "Chat",
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Icon(
+                                  Icons.refresh,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    
+                ),
+                
+                Expanded(
+                  child: Scaffold(
+                    floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
+                    floatingActionButton: shouldShowScrollButton ? 
+                    FloatingActionButton(
+                      backgroundColor: Color.fromARGB(255, 10, 132, 255),
+                      child: Icon(Icons.arrow_downward_rounded),
+                      onPressed: () {                  
+                        chatScrollController.animateTo(
+                          chatScrollController.position.minScrollExtent, 
+                          duration: Duration(milliseconds: 100), 
+                          curve: Curves.bounceInOut
+                        );
+                      }
+                    ) : null,
+
+                    body: Container(
+                      padding: EdgeInsets.all(10),
+                      child: ListView.builder(
+                        reverse: true,
+                        controller: chatScrollController,
+                        itemCount: messages.length,
+                        itemBuilder: (context, index) {
+                          return 
+                            ChatBubble(message: messages[index].msg, user: messages[index].user);
+                        } 
+                      )
+                    )
+                  )
+                ),
+                
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        
+                          child: TextField(
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            controller: msgTextEditingController,
+                            minLines: 1,
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                              fillColor: const Color.fromARGB(255, 8, 54, 97),
+                              hintText: 'How are you today?',
+                              contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.send),
+                        onPressed: () {
+                          // TODO: Implement send functionality
+                          // This should send the text in the text field to the chat
+                          setState(() {
+                            // messages.add();
+                            sendMessage(ChatMsg(true, msgTextEditingController.text));
+                            msgTextEditingController.clear();
+                            
+
+                            // messages.add(ChatMsg(false, "..."));
+                          });
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () {
-                    // TODO: Implement send functionality
-                    // This should send the text in the text field to the chat
-                    setState(() {
-                      messages.add(ChatMsg(true, msgTextEditingController.text));
-                      msgTextEditingController.clear();
-                      messages.add(ChatMsg(false, "..."));
-                    });
-                  },
-                ),
+                
               ],
             ),
-          ),
-          
-        ],
-      ),
-    );
+          );
+      } else if(snapshot.hasError) {
+        return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Container(
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+            
+                });
+              }, child: Text("Retry"),
+            ),
+            
+          )]);
+      }
+      else {
+        return Container();
+      }
+    }, future: getMessages());
+  
   }
 }

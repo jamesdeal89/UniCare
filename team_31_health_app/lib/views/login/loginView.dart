@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/mainView.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
-
+  const LoginView({super.key
+  // , required this.chatRepository
+  });
+  // final ChatRepository chatRepository;
   @override
   State<LoginView> createState() => _LoginViewState();
 }
