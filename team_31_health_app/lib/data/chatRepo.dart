@@ -16,7 +16,7 @@ class ChatRepo extends DatabaseService<ChatMsg> {
       final List<Map<String,Object?>> messages = await database.query('chat');
       running = false;
       return [
-        for (final {'id': id as int, 'message': msg as String, 'user': user as int}
+        for (final {'id': _ as int, 'message': msg as String, 'user': user as int}
         in messages) 
         ChatMsg(user.isOdd, msg)
         ];
