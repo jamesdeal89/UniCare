@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:team_31_health_app/data/databaseService.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatMsg.dart';
+import 'package:http/http.dart' as http;
 
 class ChatRepo extends DatabaseService<ChatMsg> {
   ChatRepo({required super.database});
@@ -26,16 +29,36 @@ class ChatRepo extends DatabaseService<ChatMsg> {
 
   @override
   Future<ChatMsg> insert(ChatMsg message) async {
-    // TODO: implement insertMessage
-    
-    running = true;
     try {
       await database.insert('chat', message.toMap());
-      running = false;
-      return message;
     } on Exception catch (_) {
       running = false;
       rethrow;
     }
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:5005/webhooks/rest/webhook'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'sender': 'user', 'message': message.msg}),
+    );
+
+    if (response.statusCode == 200) {
+      print("SUCCESSFULLY RECEIVED FROM RASA");
+      final List<dynamic> responseData = json.decode(response.body);
+      for (var msg in responseData) {
+          try {
+            ChatMsg botMsg = ChatMsg(false,msg['text'].toString());
+            print(msg.toString());
+            await database.insert('chat', botMsg.toMap());
+            running = false;
+          } on Exception catch (_) {
+            running = false;
+            rethrow;
+          }
+      }
+    } else {
+      throw Exception('Failed to send message');
+    }
+    running = true;
+    return message;
   }
 }

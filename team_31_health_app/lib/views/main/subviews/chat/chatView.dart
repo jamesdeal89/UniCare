@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/chatRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatMsg.dart';
@@ -43,7 +45,7 @@ class _ChatView extends State<ChatView> {
   }
 
   void _listener(ScrollNotification scrollNotification) {
-    if(scrollNotification.metrics.extentBefore > (0.33 * MediaQuery.sizeOf(context).height)){
+    if(scrollNotification.metrics.extentAfter > (0.9 * MediaQuery.sizeOf(context).height)){
       // only call setState if the value has changed
       if(!shouldShowScrollButton){
         setState(() {
@@ -116,8 +118,8 @@ class _ChatView extends State<ChatView> {
                       child: Icon(Icons.arrow_downward_rounded),
                       onPressed: () {                  
                         chatScrollController.animateTo(
-                          chatScrollController.position.minScrollExtent, 
-                          duration: Duration(milliseconds: 100), 
+                          chatScrollController.position.maxScrollExtent,
+                          duration: Duration(milliseconds: 100),
                           curve: Curves.bounceInOut
                         );
                       }
@@ -126,57 +128,56 @@ class _ChatView extends State<ChatView> {
                     body: Container(
                       padding: EdgeInsets.all(10),
                       child: ListView.builder(
-                        reverse: true,
+                        reverse: false,
                         controller: chatScrollController,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
-                          return 
+                          return
                             ChatBubble(message: messages[index].msg, user: messages[index].user);
-                        } 
+                        }
+                        )
                       )
                     )
-                  )
-                ),
-                
-                Container(
-                  padding: EdgeInsets.all(20),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        
-                          child: TextField(
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            controller: msgTextEditingController,
-                            minLines: 1,
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                              fillColor: const Color.fromARGB(255, 8, 54, 97),
-                              hintText: 'How are you today?',
-                              contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.send),
-                        onPressed: () {
-                          // TODO: Implement send functionality
-                          // This should send the text in the text field to the chat
-                          setState(() {
-                            // messages.add();
-                            sendMessage(ChatMsg(true, msgTextEditingController.text));
-                            msgTextEditingController.clear();
-                            
+                  ),
 
-                            // messages.add(ChatMsg(false, "..."));
-                          });
-                        },
+
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+
+                            child: TextField(
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              controller: msgTextEditingController,
+                              minLines: 1,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                fillColor: const Color.fromARGB(255, 8, 54, 97),
+                                hintText: 'How are you today?',
+                                contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.send),
+                          onPressed: () async {
+                            // This should send the text in the text field to the chat
+                              // messages.add();
+                              String text = msgTextEditingController.text;
+                              msgTextEditingController.clear();
+                              await sendMessage(ChatMsg(true, text));
+                              setState(() {
+
+                              });
+                          },
                       ),
                     ],
                   ),
@@ -202,6 +203,6 @@ class _ChatView extends State<ChatView> {
         return Container();
       }
     }, future: getMessages());
-  
+
   }
 }
