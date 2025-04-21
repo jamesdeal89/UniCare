@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/chatRepo.dart';
@@ -45,7 +44,7 @@ class _ChatView extends State<ChatView> {
   }
 
   void _listener(ScrollNotification scrollNotification) {
-    if(scrollNotification.metrics.extentAfter > (0.9 * MediaQuery.sizeOf(context).height)){
+    if(scrollNotification.metrics.extentBefore > (0.33 * MediaQuery.sizeOf(context).height)){
       // only call setState if the value has changed
       if(!shouldShowScrollButton){
         setState(() {
@@ -118,7 +117,7 @@ class _ChatView extends State<ChatView> {
                       child: Icon(Icons.arrow_downward_rounded),
                       onPressed: () {                  
                         chatScrollController.animateTo(
-                          chatScrollController.position.maxScrollExtent,
+                          chatScrollController.position.minScrollExtent,
                           duration: Duration(milliseconds: 100),
                           curve: Curves.bounceInOut
                         );
@@ -128,7 +127,7 @@ class _ChatView extends State<ChatView> {
                     body: Container(
                       padding: EdgeInsets.all(10),
                       child: ListView.builder(
-                        reverse: false,
+                        reverse: true,
                         controller: chatScrollController,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
