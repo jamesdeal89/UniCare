@@ -12,7 +12,7 @@ class ChatView extends StatefulWidget {
   State<ChatView> createState() => _ChatView();
 }
 
-class _ChatView extends State<ChatView> {
+class _ChatView extends State<ChatView> with SingleTickerProviderStateMixin{
   final TextEditingController msgTextEditingController = TextEditingController();
   final ScrollController chatScrollController = ScrollController();
 
@@ -27,19 +27,40 @@ class _ChatView extends State<ChatView> {
     notificationObserverState?.addListener(_listener);
   }
   // late ChatRepository chatRepo;
+  late AnimationController animationController;
+  late Animation<double> animation;
 
   @override
   void initState() {
     super.initState();
+    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 2))..forward()..repeat();
+    animation = Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
     // chatRepo = ChatRepository(databaseFactory: databaseFactory);
   }
 
   Future<List<ChatMsg>> getMessages() async {
-    return (await widget.chatRepo.get()).reversed.toList();
+    try {
+      return (await widget.chatRepo.get()).reversed.toList();
+    } catch (_) {
+      rethrow;
+    }
+    
   }
 
   Future<ChatMsg> sendMessage(ChatMsg message) async {
-    return (await widget.chatRepo.insert(message));
+    try {
+      return(await widget.chatRepo.insert(message));
+    } catch (_) {
+      rethrow;
+    }
+    
+  }
+  Future<ChatMsg> reply() async {
+    try {
+      return (await widget.chatRepo.reply());
+    } catch (_) {
+      rethrow;
+    }
   }
 
   void _listener(ScrollNotification scrollNotification) {
@@ -133,9 +154,29 @@ class _ChatView extends State<ChatView> {
                               child: ListView.builder(
                                   reverse: true,
                                   controller: chatScrollController,
-                                  itemCount: messages.length,
+                                  itemCount: messages.length+1,
                                   itemBuilder: (context, index) {
-                                    return ChatBubble(message: messages[index].msg, user: messages[index].user);
+                                    if (index < messages.length){
+                                      return ChatBubble(message: messages[index].msg, user: messages[index].user);
+                                    } else { 
+                                      return FutureBuilder(future: reply(), builder: (context, snapshot) {
+                                        if(snapshot.hasData){
+                                          setState(() {
+                                            
+                                          });
+                                          return Text("");
+                                          // return ChatBubble(message: snapshot.data!.msg, user: false);
+                                        } else if (snapshot.hasError){
+                                          IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {
+                                            
+                                          });
+                                          });
+                                        }
+                                        print("WAITING");
+                                          return AnimatedIcon(icon: AnimatedIcons.ellipsis_search, progress: animation);
+                                                                             
+                                        });
+                                    }
                                   })))),
                   // ],),),
 
@@ -184,8 +225,17 @@ class _ChatView extends State<ChatView> {
                                                           // messages.add();
                                                           String text = msgTextEditingController.text;
                                                           msgTextEditingController.clear();
-                                                          await sendMessage(ChatMsg(true, text));
-                                                          setState(() {});
+                                                          try {
+                                                            await sendMessage(ChatMsg(true, text)); 
+                                                          } catch (_) {
+                                                            return;
+                                                          }
+                                                          
+
+                                                          //TODO: Typing bubble while bot responds.
+                                                          setState(() {
+
+                                                          });
                                                         } else {
                                                           return;
                                                         }
