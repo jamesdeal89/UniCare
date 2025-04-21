@@ -26,7 +26,7 @@ class _JournalView extends State<JournalView> {
                       children: <Widget>[
                         Text(
                           "Journal",
-                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ],
                     ),

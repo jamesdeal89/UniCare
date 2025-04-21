@@ -26,7 +26,7 @@ class _ProfileView extends State<ProfileView> {
                       children: <Widget>[
                         Text(
                           "Profile",
-                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ],
                     ),

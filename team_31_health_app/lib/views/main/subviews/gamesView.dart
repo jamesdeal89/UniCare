@@ -26,7 +26,7 @@ class _GamesView extends State<GamesView> {
                       children: <Widget>[
                         Text(
                           "Games",
-                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ],
                     ),

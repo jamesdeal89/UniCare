@@ -26,7 +26,7 @@ class _HelpView extends State<HelpView> {
                       children: <Widget>[
                         Text(
                           "Help",
-                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ],
                     ),
