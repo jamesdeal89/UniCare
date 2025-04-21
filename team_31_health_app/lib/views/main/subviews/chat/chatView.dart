@@ -98,7 +98,7 @@ class _ChatView extends State<ChatView> {
                           children: <Widget>[
                             Text(
                               "Chat",
-                              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                             Container(
                               padding: EdgeInsets.all(10),
