@@ -104,6 +104,22 @@ class _LoginViewState extends State<LoginView> {
                 }
               },
               child: Text("Login"),
+            ))),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
+            child: Center(
+                child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.onError,
+              ),
+              onPressed: () async {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainView()),
+                );
+              },
+              child: Text("Demo Mode"),
             )))
       ])),
     );
