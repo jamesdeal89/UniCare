@@ -31,12 +31,10 @@ class ChatRepo extends DatabaseService<ChatMsg> {
   Future<ChatMsg> insert(ChatMsg message) async {
     try {
       await database.insert('chat', message.toMap());
-      running = false;
     } on Exception catch (_) {
       running = false;
       rethrow;
     }
-    // TODO: implement insertMessage
     final response = await http.post(
       Uri.parse('http://10.0.2.2:5005/webhooks/rest/webhook'),
       headers: {'Content-Type': 'application/json'},
