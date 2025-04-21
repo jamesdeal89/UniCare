@@ -150,20 +150,14 @@ class _ChatView extends State<ChatView>{
                                   controller: chatScrollController,
                                   itemCount: messages.length+1,
                                   itemBuilder: (context, idx) {
-                                    print(idx);
-                                    print(messages.length);
 
                                     if(idx == 0){
                                       return FutureBuilder(future: reply(), builder: (context, snapshot) {
-                                        print("Message reply");
                                         if(snapshot.hasData){
-                                          print("RECIEVED");
                                           return ChatBubble(message: snapshot.data!.msg, user: false);
                                         } else if (snapshot.hasError){
-                                          print("NOT WAITING");
                                           return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {});});
                                         } else {
-                                          print("WAITING");
                                           return TypingBubble();
 
                                           // return ChatBubble(message: "...", user: false);
