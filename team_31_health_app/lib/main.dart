@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/login/loginView.dart';
+import 'package:team_31_health_app/views/profile/profileView.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         colorScheme: colorScheme,
         useMaterial3: true,
       ),
-      home: LoginView(),
+      home: ProfileView(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
