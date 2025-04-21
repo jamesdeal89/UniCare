@@ -251,7 +251,7 @@ class _MordleViewState extends State<MordleView> {
 
     setState(() {
       tileColors[currentRow] = rowColors;
-      // Correct guess dialog
+
       if (guess == target) {
         showDialog(
           context: context,
@@ -269,26 +269,28 @@ class _MordleViewState extends State<MordleView> {
             ],
           ),
         );
-      } // Game over dialog
-        else if (currentRow == maxRows - 1) {
-          showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: const Text("Game Over"),
-              content: Text("The word was: $target"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _resetGame();
-                  },
-                  child: const Text("OK"),
-                )
-              ],
-            ),
-          );
-        }
+      } else if (currentRow == maxRows - 1) {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text("Game Over"),
+            content: Text("The word was: $target"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _resetGame();
+                },
+                child: const Text("OK"),
+              )
+            ],
+          ),
+        );
+      } else {
+        currentRow++;
+        currentCol = 0;
       }
-    );
+    });
   }
+
 }
