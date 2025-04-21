@@ -38,8 +38,7 @@ class ChatRepo extends DatabaseService<ChatMsg> {
     return message;
   }
   Future<ChatMsg> reply() async {
-    Future.delayed(Duration(seconds: 10));
-    return ChatMsg(false, "test");
+    
     final List<Map<String,Object?>> lastMessages = await database.query('chat', limit: 1, orderBy: 'id');
     List<ChatMsg> messages = [for (final {'id': _ as int, 'message': msg as String, 'user': user as int}
         in lastMessages) 

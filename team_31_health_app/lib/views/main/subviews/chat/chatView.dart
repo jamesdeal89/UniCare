@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/chatRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatMsg.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatbubble.dart';
+import 'package:team_31_health_app/views/main/subviews/chat/components/typingbubble.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({super.key, required this.chatRepo});
@@ -12,7 +13,7 @@ class ChatView extends StatefulWidget {
   State<ChatView> createState() => _ChatView();
 }
 
-class _ChatView extends State<ChatView> with SingleTickerProviderStateMixin{
+class _ChatView extends State<ChatView>{
   final TextEditingController msgTextEditingController = TextEditingController();
   final ScrollController chatScrollController = ScrollController();
 
@@ -26,16 +27,10 @@ class _ChatView extends State<ChatView> with SingleTickerProviderStateMixin{
     notificationObserverState = ScrollNotificationObserver.maybeOf(context);
     notificationObserverState?.addListener(_listener);
   }
-  // late ChatRepository chatRepo;
-  late AnimationController animationController;
-  late Animation<double> animation;
 
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 2))..forward()..repeat();
-    animation = Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
-    // chatRepo = ChatRepository(databaseFactory: databaseFactory);
   }
 
   Future<List<ChatMsg>> getMessages() async {
@@ -57,6 +52,10 @@ class _ChatView extends State<ChatView> with SingleTickerProviderStateMixin{
   }
   Future<ChatMsg> reply() async {
     try {
+      // return await Future.delayed(Duration(seconds: 10), () {
+      //         return ChatMsg(false, "test");
+      //       });
+      // PROD: enable for BOT USE.
       return (await widget.chatRepo.reply());
     } catch (_) {
       rethrow;
@@ -101,12 +100,7 @@ class _ChatView extends State<ChatView> with SingleTickerProviderStateMixin{
             return Scaffold(
               body: Column(
                 children: <Widget>[
-                  //   GestureDetector(
-                  //     onTap: () {
-                  //       FocusScope.of(context).unfocus();
-                  //     },
-                  //     child: Column(
-                  //       children: [
+                  
                   SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: SafeArea(
@@ -155,30 +149,35 @@ class _ChatView extends State<ChatView> with SingleTickerProviderStateMixin{
                                   reverse: true,
                                   controller: chatScrollController,
                                   itemCount: messages.length+1,
-                                  itemBuilder: (context, index) {
+                                  itemBuilder: (context, idx) {
+                                    print(idx);
+                                    print(messages.length);
+
+                                    if(idx == 0){
+                                      return FutureBuilder(future: reply(), builder: (context, snapshot) {
+                                        print("Message reply");
+                                        if(snapshot.hasData){
+                                          print("RECIEVED");
+                                          return ChatBubble(message: snapshot.data!.msg, user: false);
+                                        } else if (snapshot.hasError){
+                                          print("NOT WAITING");
+                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {});});
+                                        } else {
+                                          print("WAITING");
+                                          return TypingBubble();
+
+                                          // return ChatBubble(message: "...", user: false);
+                                        }
+                                        // return AnimatedIcon(icon: AnimatedIcons.ellipsis_search, progress: animation);              
+                                        }); 
+                                    }
+                                    int index = idx - 1;
+
                                     if (index < messages.length){
                                       return ChatBubble(message: messages[index].msg, user: messages[index].user);
-                                    } else { 
-                                      return FutureBuilder(future: reply(), builder: (context, snapshot) {
-                                        if(snapshot.hasData){
-                                          setState(() {
-                                            
-                                          });
-                                          return Text("");
-                                          // return ChatBubble(message: snapshot.data!.msg, user: false);
-                                        } else if (snapshot.hasError){
-                                          IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {
-                                            
-                                          });
-                                          });
-                                        }
-                                        print("WAITING");
-                                          return AnimatedIcon(icon: AnimatedIcons.ellipsis_search, progress: animation);
-                                                                             
-                                        });
                                     }
                                   })))),
-                  // ],),),
+                  
 
                   TapRegion(
                       onTapOutside: (event) {
