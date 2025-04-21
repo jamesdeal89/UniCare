@@ -41,8 +41,8 @@ class _LoginViewState extends State<LoginView> {
             child: Center(
                 child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.secondary,
-                backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
               onPressed: () {
                 Navigator.pushReplacement(

@@ -48,7 +48,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Color.fromRGBO(0, 0, 0, 1),
         unselectedItemColor: Color.fromARGB(255, 142, 142, 147),
         selectedItemColor: Color.fromARGB(255, 10, 132, 255),
         type: BottomNavigationBarType.fixed,
