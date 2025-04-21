@@ -44,15 +44,15 @@ class _ChatView extends State<ChatView> {
   }
 
   void _listener(ScrollNotification scrollNotification) {
-    if(scrollNotification.metrics.extentBefore > (0.33 * MediaQuery.sizeOf(context).height)){
+    if (scrollNotification.metrics.extentBefore > (0.33 * MediaQuery.sizeOf(context).height)) {
       // only call setState if the value has changed
-      if(!shouldShowScrollButton){
+      if (!shouldShowScrollButton) {
         setState(() {
           shouldShowScrollButton = true;
         });
       }
     } else {
-      if(shouldShowScrollButton){
+      if (shouldShowScrollButton) {
         // only call setState if the value has changed
         setState(() {
           shouldShowScrollButton = false;
@@ -60,13 +60,13 @@ class _ChatView extends State<ChatView> {
       }
     }
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     chatScrollController.dispose();
     super.dispose();
     notificationObserverState?.removeListener(_listener);
-
   }
   final ScrollController _chatMsgScrollController = ScrollController();
   final formKey = GlobalKey<FormState>();

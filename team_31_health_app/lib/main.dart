@@ -2,36 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'views/login/loginView.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  
-
-  // Future<void> insertMessage(ChatMsg message) async {
-  //   final db = await database;
-  //   await db.insert('chat', message.toMap());
-  // }
-  // Future<List<ChatMsg>> getMessages(ChatMsg message) async {
-  //   final db = await database;
-  //   final List<Map<String,Object?>> messages = await db.query('chat');
-  //   return [
-  //     for (final {'id': id as int, 'message': msg as String, 'user': user as int}
-  //      in messages)
-  //      ChatMsg(user.isOdd, msg)
-  //     ];
-  // }
-  // late DatabaseService databaseService;
-  // if(kIsWeb){
-  //   throw UnsupportedError("Platform unsupported");
-  // } else if (kMac)
-  // late DatabaseService databaseService;
-  // databaseService = DatabaseService(databaseFactory: databaseFactory);
-  // late ChatRepository chatRepository;
-  // chatRepository = ChatRepository(databaseFactory: databaseFactory);
-
-  runApp(MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
 
