@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "739015719802",
+    "project_id": "grp-health-app",
+    "storage_bucket": "grp-health-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739015719802:android:953e92974e0f6dd5ce74c3",
+        "android_client_info": {
+          "package_name": "com.example.team_31_health_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCklpetClzdgl9JonFg1JwTH-dp2WiMpjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
