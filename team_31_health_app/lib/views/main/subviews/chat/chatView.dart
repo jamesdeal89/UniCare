@@ -43,7 +43,7 @@ class _ChatView extends State<ChatView> {
   }
 
   void _listener(ScrollNotification scrollNotification) {
-    if(scrollNotification.metrics.extentBefore > (0.33 * MediaQuery.sizeOf(context).height)){
+    if(scrollNotification.metrics.extentBefore < (0.33 * MediaQuery.sizeOf(context).height)){
       // only call setState if the value has changed
       if(!shouldShowScrollButton){
         setState(() {
@@ -116,7 +116,7 @@ class _ChatView extends State<ChatView> {
                       child: Icon(Icons.arrow_downward_rounded),
                       onPressed: () {                  
                         chatScrollController.animateTo(
-                          chatScrollController.position.minScrollExtent, 
+                          chatScrollController.position.maxScrollExtent,
                           duration: Duration(milliseconds: 100), 
                           curve: Curves.bounceInOut
                         );
@@ -126,7 +126,7 @@ class _ChatView extends State<ChatView> {
                     body: Container(
                       padding: EdgeInsets.all(10),
                       child: ListView.builder(
-                        reverse: true,
+                        reverse: false,
                         controller: chatScrollController,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
@@ -166,7 +166,6 @@ class _ChatView extends State<ChatView> {
                       IconButton(
                         icon: Icon(Icons.send),
                         onPressed: () {
-                          // TODO: Implement send functionality
                           // This should send the text in the text field to the chat
                           setState(() {
                             // messages.add();
