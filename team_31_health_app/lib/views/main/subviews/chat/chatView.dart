@@ -36,7 +36,7 @@ class _ChatView extends State<ChatView> {
     // chatRepo = ChatRepository(databaseFactory: databaseFactory);
   }
   Future<List<ChatMsg>> getMessages() async {
-      return (await widget.chatRepo.get());
+      return (await widget.chatRepo.get()).reversed.toList();
   }
   Future<ChatMsg> sendMessage(ChatMsg message) async {
       return (await widget.chatRepo.insert(message));

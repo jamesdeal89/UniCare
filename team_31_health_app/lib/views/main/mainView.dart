@@ -51,7 +51,7 @@ class _MainView extends State<MainView> {
             ChatMsg(true, "Newest"),
             ];
           for (var i = 0; i < messages.length; i++) {
-            db.insert('chat', messages[messages.length-1-i].toMap());
+            db.insert('chat', messages[i].toMap());
           }
       },
       version: 1,
