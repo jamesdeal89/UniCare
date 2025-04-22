@@ -9,23 +9,26 @@ class MordleView extends StatefulWidget {
 }
 
 class _MordleViewState extends State<MordleView> {
-  final List<String> keyboardRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+  final List<String> keyboardRows = [
+    "QWERTYUIOP",
+    "ASDFGHJKL",
+    "ZXCVBNM"
+  ];
   final int maxRows = 6;
   final int wordLength = 5;
 
   final Map<String, String> wordHints = {
-  "Peace": "When everything feels still, like a quiet lake at dawn.",
-  "Faith": "Believing in something, even when you can't see it.",
-  "Smile": "A simple curve that can brighten someone’s day.",
-  "Bloom": "A moment when nature quietly shows off its colors.",
-  "Relax": "What you do when there’s nothing left to worry about.",
-  "Shine": "It lights up the world, without making a sound.",
-  "Heart": "Not just an organ — often linked with love and courage.",
-  "Sweet": "Not sour, not bitter — something softer and kind.",
-  "Grace": "It moves with ease, like a dancer or falling leaf.",
-  "Happy": "You feel it when laughter comes easily."
-};
-
+    "Peace": "When everything feels still, like a quiet lake at dawn.",
+    "Faith": "Believing in something, even when you can't see it.",
+    "Smile": "A simple curve that can brighten someone’s day.",
+    "Bloom": "A moment when nature quietly shows off its colors.",
+    "Relax": "What you do when there’s nothing left to worry about.",
+    "Shine": "It lights up the world, without making a sound.",
+    "Heart": "Not just an organ — often linked with love and courage.",
+    "Sweet": "Not sour, not bitter — something softer and kind.",
+    "Grace": "It moves with ease, like a dancer or falling leaf.",
+    "Happy": "You feel it when laughter comes easily."
+  };
 
   late String targetWord;
 
@@ -60,23 +63,23 @@ class _MordleViewState extends State<MordleView> {
           )
         ],
       ),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            double screenHeight = constraints.maxHeight;
-      double gridHeight = screenHeight * 0.45;
-      double keyboardHeight = screenHeight * 0.3;
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double screenHeight = constraints.maxHeight;
+          double gridHeight = screenHeight * 0.45;
+          double keyboardHeight = screenHeight * 0.3;
 
-      return Column(
-        children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-          SizedBox(
-            height: gridHeight,
-            child: Center(child: _buildGrid()),
-          ),
-          const Spacer(), 
-          SizedBox(
-            height: keyboardHeight,
-            child: _buildKeyboard(),
+          return Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              SizedBox(
+                height: gridHeight,
+                child: Center(child: _buildGrid()),
+              ),
+              const Spacer(),
+              SizedBox(
+                height: keyboardHeight,
+                child: _buildKeyboard(),
               ),
             ],
           );
@@ -133,40 +136,58 @@ class _MordleViewState extends State<MordleView> {
   }
 
   Widget _buildKeyboard() {
-    return Column(
-      children: [
-        for (var row in keyboardRows.sublist(0, 2))
+    return LayoutBuilder(builder: (context, constraints) {
+      final keyWidth = (constraints.maxWidth - 24) / 10;
+
+      return Column(
+        children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: row.split('').map((char) {
-                return _buildKey(char);
+              children: keyboardRows[0].split('').map((char) {
+                return _buildKey(char, keyWidth);
               }).toList(),
             ),
           ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildSpecialKey("ENTER"),
-              for (var char in keyboardRows[2].split('')) _buildKey(char),
-              _buildSpecialKey("<----"),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: keyboardRows[1].split('').map((char) {
+                return _buildKey(char, keyWidth);
+              }).toList(),
+            ),
           ),
-        ),
-      ],
-    );
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: (() {
+                List<Widget> rowButtons = [];
+                rowButtons.add(_buildSpecialKey("ENTER", keyWidth * 1.5));
+                final letterKeys = keyboardRows[2].split('').map((char) {
+                  return _buildKey(char, keyWidth);
+                }).toList();
+                rowButtons.addAll(letterKeys);
+                rowButtons.add(_buildSpecialKey("<----", keyWidth * 1.5));
+                return rowButtons;
+              })(),
+            ),
+          ),
+        ],
+      );
+    });
   }
 
-  Widget _buildKey(String char) {
-    return Padding(
+  Widget _buildKey(String char, double width) {
+    return Container(
+      width: width,
       padding: const EdgeInsets.all(2),
       child: ElevatedButton(
         onPressed: () => _onKeyTap(char),
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(40, 50),
+          padding: const EdgeInsets.all(0),
           backgroundColor: const Color.fromARGB(255, 199, 199, 199),
         ),
         child: Text(char),
@@ -174,8 +195,9 @@ class _MordleViewState extends State<MordleView> {
     );
   }
 
-  Widget _buildSpecialKey(String label) {
-    return Padding(
+  Widget _buildSpecialKey(String label, double width) {
+    return Container(
+      width: width,
       padding: const EdgeInsets.all(2),
       child: ElevatedButton(
         onPressed: () {
@@ -186,7 +208,7 @@ class _MordleViewState extends State<MordleView> {
           }
         },
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(90, 50),
+          padding: const EdgeInsets.all(0),
           backgroundColor: const Color.fromARGB(255, 199, 199, 199),
         ),
         child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
@@ -194,7 +216,7 @@ class _MordleViewState extends State<MordleView> {
     );
   }
 
-    void _resetGame() {
+  void _resetGame() {
     setState(() {
       targetWord = wordHints.keys.elementAt(Random().nextInt(wordHints.length)).toUpperCase();
       guesses = List.generate(maxRows, (_) => List.filled(wordLength, ""));
@@ -203,7 +225,6 @@ class _MordleViewState extends State<MordleView> {
       currentCol = 0;
     });
   }
-
 
   void _onKeyTap(String char) {
     if (currentCol < wordLength && currentRow < maxRows) {
@@ -292,5 +313,4 @@ class _MordleViewState extends State<MordleView> {
       }
     });
   }
-
 }
