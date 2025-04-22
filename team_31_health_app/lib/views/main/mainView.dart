@@ -12,48 +12,44 @@ class MainView extends StatefulWidget {
 }
 
 class _MainView extends State<MainView> {
-  
-  /// This command 
+  /// This command
   Future<Database> initDB() async {
-
     final database = openDatabase(
       join(await getDatabasesPath(), "care_app.db"),
       onCreate: (db, version) {
-        db.execute(
-          'CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)'
-        );
+        db.execute('CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)');
         List<ChatMsg> messages = <ChatMsg>[
-            ChatMsg(true, "Oldest"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Yeah"),
-            ChatMsg(true, "Hello"),
-            ChatMsg(false, "World"),
-            ChatMsg(true, "Newest"),
-            ];
-          for (var i = 0; i < messages.length; i++) {
-            db.insert('chat', messages[i].toMap());
-          }
+          ChatMsg(true, "Oldest"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Yeah"),
+          ChatMsg(true, "Hello"),
+          ChatMsg(false, "World"),
+          ChatMsg(true, "Newest"),
+        ];
+        for (var i = 0; i < messages.length; i++) {
+          db.insert('chat', messages[i].toMap());
+        }
       },
       version: 1,
     );
@@ -61,36 +57,31 @@ class _MainView extends State<MainView> {
     return database;
   }
 
-  
-  
   @override
   void initState() {
     super.initState();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(future: initDB(), 
-      builder: (context, AsyncSnapshot<Database> snapshot) {
-        if(snapshot.hasData){
-          ChatRepo(database: snapshot.data!);
-          return MainPage(database: snapshot.data!);
-        } else if(snapshot.hasError) {
-          return IconButton(onPressed: () {
-            setState(() {
-              initDB();
-            });
-          }, icon: Icon(Icons.error));
-        } else {
-          return Text("Loading");
-        }
-      }
-      )
-
-    );
-    
+        body: FutureBuilder(
+            future: initDB(),
+            builder: (context, AsyncSnapshot<Database> snapshot) {
+              if (snapshot.hasData) {
+                ChatRepo(database: snapshot.data!);
+                return MainPage(database: snapshot.data!);
+              } else if (snapshot.hasError) {
+                return IconButton(
+                    onPressed: () {
+                      setState(() {
+                        initDB();
+                      });
+                    },
+                    icon: Icon(Icons.error));
+              } else {
+                return Text("Loading");
+              }
+            }));
   }
 }
