@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:team_31_health_app/data/chatRepo.dart';
-import 'package:team_31_health_app/views/main/subviews/chat/components/chatMsg.dart';
+import 'package:team_31_health_app/data/database/chatRepo.dart';
+import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatbubble.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/typingbubble.dart';
 
@@ -159,17 +159,13 @@ class _ChatView extends State<ChatView>{
                                           return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {});});
                                         } else {
                                           return TypingBubble();
-
-                                          // return ChatBubble(message: "...", user: false);
                                         }
-                                        // return AnimatedIcon(icon: AnimatedIcons.ellipsis_search, progress: animation);              
                                         }); 
                                     }
                                     int index = idx - 1;
 
-                                    if (index < messages.length){
-                                      return ChatBubble(message: messages[index].msg, user: messages[index].user);
-                                    }
+                                    return ChatBubble(message: messages[index].msg, user: messages[index].user);
+
                                   })))),
                   
 
