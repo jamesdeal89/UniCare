@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/mainView.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key
@@ -94,7 +94,7 @@ class _LoginViewState extends State<LoginView> {
                   );
 
                   // In case of error...
-                } on FirebaseAuthException catch (e) {
+                } on FirebaseAuthException catch (_) {
                   // Close loading + show error
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
