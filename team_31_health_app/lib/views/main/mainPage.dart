@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqlite_api.dart';
-import 'package:team_31_health_app/data/chatRepo.dart';
+import 'package:team_31_health_app/data/database/chatRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
 import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
@@ -15,11 +15,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  
   int _selectedIndex = 2;
   late Database database;
-  
-  
+
   late List<Widget> _widgetOptions;
   @override
   void initState() {
@@ -36,15 +34,13 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _onItemTapped(int index) {
-    
     setState(() {
       _selectedIndex = index;
-      
     });
   }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
