@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:team_31_health_app/data/database/database_attributes/data_model.dart';
+import 'package:team_31_health_app/data/database_fields/data_model.dart';
 
 abstract class DatabaseService<T extends DataModel> {
   DatabaseService({required this.database});

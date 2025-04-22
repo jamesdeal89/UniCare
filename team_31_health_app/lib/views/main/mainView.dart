@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:team_31_health_app/data/chatRepo.dart';
+import 'package:team_31_health_app/data/database/chatRepo.dart';
+import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
 import 'package:team_31_health_app/views/main/mainPage.dart';
-import 'package:team_31_health_app/views/main/subviews/chat/components/chatMsg.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -13,8 +13,9 @@ class MainView extends StatefulWidget {
 
 class _MainView extends State<MainView> {
   
-  
+  /// This command 
   Future<Database> initDB() async {
+
     final database = openDatabase(
       join(await getDatabasesPath(), "care_app.db"),
       onCreate: (db, version) {
@@ -56,6 +57,7 @@ class _MainView extends State<MainView> {
       },
       version: 1,
     );
+
     return database;
   }
 
