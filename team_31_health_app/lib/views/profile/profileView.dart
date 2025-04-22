@@ -5,16 +5,11 @@ class ProfileView extends StatelessWidget {
   //final String username;
   //final String profileImageUrl;
 
-  const ProfileView(/*{super.key, required this.username, required this.profileImageUrl}*/);
+  const ProfileView({super.key}/*{super.key, required this.username, required this.profileImageUrl}*/);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profile"),
-        centerTitle: true,
-        backgroundColor: Color(0xFF002147),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -42,10 +37,11 @@ class ProfileView extends StatelessWidget {
           ],
         ),
       ),
+
     );
   }
 
-  // Button press animation
+  // Button with press animation  
   Widget _buildActionButton(BuildContext context, String label, IconData icon, VoidCallback onPressed, {Color? color}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
