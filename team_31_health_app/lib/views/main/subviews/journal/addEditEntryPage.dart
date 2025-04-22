@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'journal_entry.dart';
+import 'journalEntry.dart';
 
 class AddEditEntryPage extends StatefulWidget {
   final JournalEntry? entryToEdit;
@@ -9,9 +9,9 @@ class AddEditEntryPage extends StatefulWidget {
   @override
   State<AddEditEntryPage> createState() => _AddEditEntryPageState();
 }
-  
+
 class _AddEditEntryPageState extends State<AddEditEntryPage> {
-  final _formKey = GlobalKey<FormState>(); 
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late DateTime _selectedDate;
@@ -28,10 +28,8 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
     super.initState();
     _isEditing = widget.entryToEdit != null;
 
-    _titleController =
-        TextEditingController(text: _isEditing ? widget.entryToEdit!.title : '');
-    _descriptionController = TextEditingController(
-        text: _isEditing ? widget.entryToEdit!.description : '');
+    _titleController = TextEditingController(text: _isEditing ? widget.entryToEdit!.title : '');
+    _descriptionController = TextEditingController(text: _isEditing ? widget.entryToEdit!.description : '');
     _selectedDate = _isEditing ? widget.entryToEdit!.date : DateTime.now();
 
     if (_isEditing) {
@@ -54,8 +52,8 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
-      firstDate: DateTime(2000), 
-      lastDate: DateTime(2101), 
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
     );
     if (picked != null && picked != _selectedDate) {
       setState(() {
@@ -108,12 +106,11 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                 },
               ),
               const SizedBox(height: 16.0),
-
               Row(
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      'Date: ${_selectedDate.toLocal().toString().split(' ')[0]}', 
+                      'Date: ${_selectedDate.toLocal().toString().split(' ')[0]}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
@@ -124,7 +121,6 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                 ],
               ),
               const SizedBox(height: 16.0),
-
               Text('Select Options', style: Theme.of(context).textTheme.titleLarge),
               CheckboxListTile(
                 title: const Text('Give'),
@@ -172,16 +168,15 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                 },
               ),
               const SizedBox(height: 16.0),
-
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Description',
                   border: OutlineInputBorder(),
-                  alignLabelWithHint: true, 
+                  alignLabelWithHint: true,
                 ),
-                maxLines: 8, 
-                validator: (value) { 
+                maxLines: 8,
+                validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
                   }
@@ -189,7 +184,6 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                 },
               ),
               const SizedBox(height: 20),
-
               ElevatedButton(
                 onPressed: _saveEntry,
                 child: const Text('Save Entry'),
@@ -206,4 +200,4 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
       ),
     );
   }
-} 
+}

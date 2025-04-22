@@ -1,37 +1,15 @@
 import 'package:flutter/material.dart';
-import 'journal_entry.dart';
-import 'add_edit_entry_page.dart'; 
+import 'journalEntry.dart';
+import 'addEditEntryPage.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class JournalView extends StatefulWidget {
+  const JournalView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Journaling Page',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'My Journal'), 
-    );
-  }
+  State<JournalView> createState() => _JournalViewState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
+class _JournalViewState extends State<JournalView> {
   final List<JournalEntry> _entries = [];
 
   void _navigateToAddEntry() async {
@@ -113,14 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text("PLASCEHOLDER"),
       ),
       body: _entries.isEmpty
-          ? const Center( 
+          ? const Center(
               child: Text('No journal entries yet. Press + to add one!'),
             )
           : ListView.builder(
@@ -130,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 return ListTile(
                   title: Text(entry.title),
                   subtitle: Text(entry.date.toLocal().toString().split(' ')[0]),
-                  onTap: () => _showEntryDetails(entry), 
+                  onTap: () => _showEntryDetails(entry),
                   trailing: IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () => _navigateToEditEntry(entry, index),
@@ -139,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToAddEntry,  
+        onPressed: _navigateToAddEntry,
         tooltip: 'Add Entry',
         child: const Icon(Icons.add),
       ),
