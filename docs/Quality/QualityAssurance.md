@@ -1,14 +1,20 @@
-1. Introduction
-Our project at its base is a mental health app with a chatbot and mental health themed games.
+# Team 31 Project Quality Assurance
 
-2. Test Plans
-We used mostly manual tests but we have also implemented some unit tests. We used unit tests for features
+#### Introduction
+
+Our project, at its base, is a mental health support app with an interactive chatbot and mental health themed games. The objective of the app is to provide users with access to mental health services and information through a chatbot whilst also providing entertainment through games which encourage the users to learn and understand positive vocabulary.
+
+#### Test Plans
+
+We predominantly used manual testing, but have also implemented some unit tests. We used unit tests for features within the application.
 
 #### Function: Login 
 
 |Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|
 |Login with correct details||Taken to Chatbot homepage||||
+|Login with incorrect details||Unknown details error message is thrown||||
+|Login with malicious unsanitised input, i.e. SQL injection||Input is sanitised, error message is thrown||||
 
 
 #### Function: Journaling 
@@ -65,5 +71,4 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 |Press Profile icon in navigation from Games|Press Profile Icon|Taken to Profile screen||||
 |Press Profile icon in navigation from Profile|Press Profile Icon|Remain on Profile screen||||
 |Update password|Put in valid password and press confirm|Confirmation of updated password||||
-
 
