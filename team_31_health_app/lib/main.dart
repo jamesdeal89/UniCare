@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       tertiary: Color.fromRGBO(173, 228, 255, 1),
       onTertiary: Color.fromRGBO(236, 173, 255, 1),
       onTertiaryFixed: Color.fromRGBO(66, 0, 110, 1),
+      onTertiaryFixedVariant: Color.fromARGB(255, 181, 181, 181),
       error: Color.fromRGBO(213, 0, 0, 1),
       onError: Colors.redAccent,
       surface: Color.fromRGBO(13, 30, 47, 1),

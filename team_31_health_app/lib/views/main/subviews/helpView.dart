@@ -155,7 +155,7 @@ class _HelpView extends State<HelpView> {
                         "These organisations provide free mental health support and resources. Please note that some data, such as contact details or opening hours, may be incorrect or outdated.",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey[600],
+                          color: Theme.of(context).colorScheme.onTertiaryFixedVariant,
                         ),
                       ),
                     ),
@@ -253,7 +253,7 @@ class _HelpView extends State<HelpView> {
                     Text(
                       charity.description,
                       style: TextStyle(
-                        color: Colors.grey[600],
+                        color: Theme.of(context).colorScheme.onTertiaryFixedVariant,
                         fontSize: 14,
                       ),
                     ),
@@ -321,67 +321,25 @@ class _HelpView extends State<HelpView> {
                       ),
                       Text(
                         charity.description,
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onTertiaryFixedVariant,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.access_time,
-                    color: Colors.grey.shade700,
-                    size: 20,
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Phone Line Opening Hours',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            color: Colors.grey.shade900,
-                          ),
-                        ),
-                        Text(
-                          charity.opening,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
             SizedBox(height: 24),
-            _contactButton(
-              icon: Icons.call,
-              text: 'Call',
-              subtitle: charity.phoneNumber,
-              colour: Colors.green,
+            CallContactButton(
+              phoneNumber: charity.phoneNumber,
+              availability: charity.opening,
               onTap: () => _launchUrl('tel:${charity.phoneNumber}'),
             ),
             SizedBox(height: 16),
-            _contactButton(
-              icon: Icons.language,
-              text: 'Visit Website',
-              subtitle: charity.website,
-              colour: Colors.blue,
+            WebsiteContactButton(
+              website: charity.website,
               onTap: () => _launchUrl(charity.website),
             ),
             SizedBox(height: 16),
@@ -390,41 +348,57 @@ class _HelpView extends State<HelpView> {
       ),
     );
   }
+}
 
-  Widget _contactButton({
-    required IconData icon,
-    required String text,
-    required String subtitle,
-    required Color colour,
-    required VoidCallback onTap,
-  }) {
+class CallContactButton extends StatelessWidget {
+  final String phoneNumber;
+  final String availability;
+  final VoidCallback onTap;
+
+  const CallContactButton({
+    required this.phoneNumber,
+    required this.availability,
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
-          color: colour.withOpacity(0.1),
+          color: Colors.green.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
           children: [
-            Icon(icon, color: colour),
+            Icon(Icons.call, color: Colors.green),
             SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  text,
+                  'Call',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  subtitle,
+                  availability,
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: Theme.of(context).colorScheme.onTertiaryFixedVariant.withOpacity(0.7),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Text(
+                  phoneNumber,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onTertiaryFixedVariant,
                   ),
                 ),
               ],
@@ -434,12 +408,66 @@ class _HelpView extends State<HelpView> {
       ),
     );
   }
+}
+
+class WebsiteContactButton extends StatelessWidget {
+  final String website;
+  final VoidCallback onTap;
+
+  const WebsiteContactButton({
+    required this.website,
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        decoration: BoxDecoration(
+          color: Colors.blue.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.language, color: Colors.blue),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Visit Website',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    website,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onTertiaryFixedVariant,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 //TODO: make more formal?
-  Future<void> _launchUrl(String urlString) async {
-    final Uri url = Uri.parse(urlString);
-    if (!await launchUrl(url)) {
-      throw Exception('couldnt open $url');
-    }
+Future<void> _launchUrl(String urlString) async {
+  final Uri url = Uri.parse(urlString);
+  if (!await launchUrl(url)) {
+    throw Exception('couldnt open $url');
   }
 }
