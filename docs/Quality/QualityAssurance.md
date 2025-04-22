@@ -1,21 +1,17 @@
-# Team 31 Project Quality Assurance
+1. Introduction
+Our project at its base is a mental health app with a chatbot and mental health themed games.
 
-#### Introduction
-
-Our project, at its base, is a mental health support app with an interactive chatbot and mental health themed games. The objective of the app is to provide users with access to mental health services and information through a chatbot whilst also providing entertainment through games which encourage the users to learn and understand positive vocabulary.
-
-#### Test Plans
-
-We predominantly used manual testing, but have also implemented some unit tests. We used unit tests for features within the application.
+2. Test Plans
+We used mostly manual tests but we have also implemented some unit tests. We used unit tests for features
 
 #### Function: Login 
 
 |Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|
-|Login with correct details||Taken to Chatbot homepage||||
-|Login with incorrect details||Unknown details error message is thrown||||
-|Login with malicious unsanitised input, i.e. SQL injection||Input is sanitised, error message is thrown||||
-
+|Login with correct details|Username: demo@nottingham.ac.uk Password: TEST123|Taken to Chatbot homepage||||
+|Login with correct username and incorrect password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
+|Login with incorrect username and incorrect password|Username: demo1@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
+|Login with no username and a password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
 
 #### Function: Journaling 
 
@@ -37,6 +33,9 @@ We predominantly used manual testing, but have also implemented some unit tests.
 |Press Help icon in navigation from Chatbot|Press Help Icon|Taken to Help screen||||
 |Press Help icon in navigation from Games|Press Help Icon|Taken to Help screen||||
 |Press Help icon in navigation from Profile|Press Help Icon|Taken to Help screen||||
+|NHS Icon leads to NHS website|Press NHS button|Linked to NHS mental health help||||
+|Samaritans Icon leads to Samaritans website|Press Samaritans button|Linked to Samaritans website||||
+|Mind Icon leads to Mind website|Press Mind button|Linked to Mind mental health help||||
 
 
 #### Function: Chatbot 
@@ -71,4 +70,5 @@ We predominantly used manual testing, but have also implemented some unit tests.
 |Press Profile icon in navigation from Games|Press Profile Icon|Taken to Profile screen||||
 |Press Profile icon in navigation from Profile|Press Profile Icon|Remain on Profile screen||||
 |Update password|Put in valid password and press confirm|Confirmation of updated password||||
+
 
