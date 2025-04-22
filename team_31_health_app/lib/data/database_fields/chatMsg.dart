@@ -1,4 +1,4 @@
-import 'package:team_31_health_app/data/database/database_attributes/data_model.dart';
+import 'package:team_31_health_app/data/database_fields/data_model.dart';
 
 class ChatMsg implements DataModel {
   final bool user;
