@@ -1,17 +1,14 @@
-1. Introduction
-Our project at its base is a mental health app with a chatbot and mental health themed games.
+#### Introduction
+Our project at its base is a mental health app with a chatbot and mental health themed games. The objective of the app is to provide users with access to mental health services and information through a chatbot whilst also providing entertainment through games which encourage the users to learn and understand positive vocabulary.
 
-2. Test Plans
+#### The importance of quality asuurance
+Quality assurance is essential for a successful project. We need to be very thorough in ensuring that there are no bugs in the app as new versions come out and that the app runs correctly. We have very done extensive Isolation testing to ensure that the app works as intended as we add new features.
+
+#### Test Plans
 We used mostly manual tests but we have also implemented some unit tests. We used unit tests for features
 
 #### Function: Login 
 
-|Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
-|----|------|----------------|-------------------|---------------|---------------|
-|Login with correct details|Username: demo@nottingham.ac.uk Password: TEST123|Taken to Chatbot homepage||||
-|Login with correct username and incorrect password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
-|Login with incorrect username and incorrect password|Username: demo1@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
-|Login with no username and a password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
 |Test ID|Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|---------------|
 |1.1|Login with correct details||Taken to Chatbot homepage||||
