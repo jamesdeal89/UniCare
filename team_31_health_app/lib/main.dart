@@ -1,13 +1,65 @@
 import 'package:flutter/material.dart';
 import 'views/mordle/mordleView.dart';
 
-void main() {
+import 'views/login/loginView.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
+  // final DatabaseService databaseService;
+  // final ChatRepository chatRepository;
+  const MyApp({super.key
+  // , required this.chatRepository
+  });
+  
+  static const ColorScheme colorScheme = ColorScheme(
+    brightness: Brightness.dark, 
+    primary: Color.fromRGBO(16, 38, 59, 1),
+    onPrimary: Colors.white,
+    onPrimaryContainer: Color.fromRGBO(35, 52, 69, 1), 
+    onPrimaryFixedVariant: Colors.black,
+    // secondary: Colors.white,
+    // secondary: Color.fromRGBO(35, 52, 69, 1), 
+    secondary: Colors.black,
+    onSecondary: Colors.white, 
+    
+    tertiary: Color.fromRGBO(173, 228, 255, 1),
+    onTertiary: Color.fromRGBO(236, 173, 255, 1),
+    onTertiaryFixed: Color.fromRGBO(66, 0, 110, 1),
+    error: Color.fromRGBO(213, 0, 0, 1), 
+    onError: Colors.redAccent, 
+    surface: Color.fromRGBO(13, 30, 47, 1), 
+    onSurface: Colors.white
+    // onSurface: Color.fromRGBO(39, 58, 77, 1)
+  );
+  static const FloatingActionButtonThemeData floatingActionButtonThemeData = FloatingActionButtonThemeData(
+    backgroundColor: Color.fromRGBO(10, 132, 255, 1)
+  );
+  static const IconThemeData iconThemeData = IconThemeData(
+    color: Colors.white,
+  );
+
+  static const TextTheme textTheme = TextTheme(
+    titleLarge: TextStyle(fontSize: 40, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+    bodyLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.black, fontFamily: 'CupertinoSystemDisplay'),
+    bodyMedium: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'CupertinoSystemDisplay'),
+  );
+  static const InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
+    fillColor: Color.fromRGBO(8, 54, 97, 1),
+    hintStyle: TextStyle(color: Colors.grey)
+  );
+  
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,10 +81,15 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        textTheme: textTheme,
+        iconTheme: iconThemeData,
+        colorScheme: colorScheme,
+        inputDecorationTheme: inputDecorationTheme,
         useMaterial3: true,
+        floatingActionButtonTheme: floatingActionButtonThemeData,
       ),
-      home: MordleView(),
+      home: LoginView(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
