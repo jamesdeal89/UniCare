@@ -60,7 +60,7 @@ class _HelpView extends State<HelpView> {
         phoneNumber: '0300 102 1234',
         website: 'https://www.mind.org.uk/',
         icon: Icons.menu_book,
-        colour: const Color.fromARGB(255, 206, 211, 253),
+        colour: const Color.fromARGB(255, 47, 62, 124),
         opening: '9am - 6pm, Monday - Friday (Except Bank Holidays)',
       ),
       Charity(

@@ -47,19 +47,24 @@ class _GamesViewState extends State<GamesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(16, 38, 59, 1),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text(
-          "Games",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          "Mordle",
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
         centerTitle: true,
-        elevation: 2,
+        elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.lightbulb_outline),
             tooltip: "Hint",
             onPressed: _showHint,
+            color: Theme.of(context).colorScheme.tertiary,
           )
         ],
       ),
@@ -117,13 +122,13 @@ class _GamesViewState extends State<GamesView> {
               height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: Theme.of(context).colorScheme.onPrimary, width: 2),
                 color: tileColors[row][col],
               ),
               child: Text(
                 guesses[row][col].toUpperCase(),
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
@@ -188,9 +193,15 @@ class _GamesViewState extends State<GamesView> {
         onPressed: () => _onKeyTap(char),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(0),
-          backgroundColor: const Color.fromARGB(255, 199, 199, 199),
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
         ),
-        child: Text(char),
+        child: Text(
+          char,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -209,9 +220,16 @@ class _GamesViewState extends State<GamesView> {
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(0),
-          backgroundColor: const Color.fromARGB(255, 199, 199, 199),
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
         ),
-        child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
       ),
     );
   }
