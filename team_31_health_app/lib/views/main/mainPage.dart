@@ -5,7 +5,6 @@ import 'package:team_31_health_app/data/database/journalRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
 import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
-import 'package:team_31_health_app/views/main/subviews/journal/journalView.dart';
 import 'package:team_31_health_app/views/main/subviews/profileView.dart';
 
 class MainPage extends StatefulWidget {
@@ -30,7 +29,6 @@ class _MainPageState extends State<MainPage> {
     chatRepo = ChatRepo(database: database);
     journalRepo = JournalRepo(database: database);
     _widgetOptions = <Widget>[
-      JournalView(journalRepo: journalRepo),
       const HelpView(),
       ChatView(chatRepo: chatRepo),
       const GamesView(),
