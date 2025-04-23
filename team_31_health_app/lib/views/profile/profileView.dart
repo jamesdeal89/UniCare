@@ -29,6 +29,16 @@ class ProfileView extends StatelessWidget {
             const SizedBox(height: 24),
             const Text("Activity Breakdown", style: TextStyle(fontSize: 18)),
             const SizedBox(height: 16),
+            SizedBox(
+              height:300,
+              child: PieChart(
+                PieChartData(
+                  sections: pieChartSection(),
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 0,
+                ),
+              ),
+            ),
             
             const SizedBox(height: 32),
             _buildActionButton(context, "Change Nickname", Icons.edit, () {/* TODO */}),
@@ -38,6 +48,31 @@ class ProfileView extends StatelessWidget {
         ),
       ),
 
+    );
+  }
+
+  List<PieChartSectionData> pieChartSection(){
+
+    List<Color> sectionColours = [
+        Colors.orange,
+        Colors.yellow,
+        Colors.blue,
+        Colors.green,
+        Colors.pinkAccent,
+    ];
+
+    return List.generate(
+      5,
+      (index){
+        double value = (index + 1) * 10;
+        final radius = 100.0;
+        return PieChartSectionData(
+          color: sectionColours[index],
+          value: value,
+          title: '$value%',  
+          radius: radius,
+        );
+      } 
     );
   }
 
@@ -57,4 +92,5 @@ class ProfileView extends StatelessWidget {
       ),
     );
   }
+
 }
