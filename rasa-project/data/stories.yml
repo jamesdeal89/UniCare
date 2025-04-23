@@ -8,7 +8,6 @@ stories:
   - action: utter_ask_trigger
   - intent: affirm
   - action: action_save_trigger
-  - action: utter_confirm_trigger
   - slot_was_set:
             - trigger: "apple"  
             # this is an example of how the bot should behave, so we give a trigger of 'apple' as an example,

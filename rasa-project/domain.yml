@@ -21,7 +21,7 @@ slots:
         entity: emotion
         intent: express_emotion
   trigger:
-    type: text
+    type: list
     mappings:
       - type: from_entity
         entity: trigger
@@ -51,9 +51,6 @@ responses:
 
   utter_ask_trigger:
   - text: "Would you like me to remember that the phrase or word you mentioned is sensitive for you?"
-
-  utter_confirm_trigger:
-  - text: "Understood, I'll remember that trigger word, {trigger}. Thank you for informing me so I can support you better."
 
   utter_deny_trigger:
   - text: "Understood, I will not store that trigger word. I apologise."

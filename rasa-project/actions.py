@@ -18,6 +18,8 @@ anxious = ["anxious","overwhelmed","stressed out"]
 sad = ["sad","not too great", "sad", "not good", "upset"]
 triggers = ["worthless", "suicidal", "disapear","suicide"]
 
+trigger_words = []
+
 # Detect and respond to emotion, providing relevant advice.
 class Action_advice(Action):
     def name(self):
@@ -97,7 +99,16 @@ class Action_Save_Trigger(Action):
         return "action_save_trigger"
     
     def run(self, dispatcher, tracker, domain):
-        print("To be implemented...")
+        trigger_words.append(tracker.get_slot('trigger')[len(tracker.get_slot('trigger'))-1])
+        print(trigger_words)
+
+        if trigger_words:
+            response = f"I understand that you find mentions of '{trigger_words[len(trigger_words)-1]}' difficult. I'll refrain from mentioning your triggers. Furthermore, I can scan websites for triggering content on your behalf if you ask."
+        else:
+            response = "I was unable to detect any previously saved triggers, feel free to inform me of any."
+
+        dispatcher.utter_message(text=response)
+        return []
 
 
 
@@ -107,4 +118,19 @@ class Action_Save_Trigger(Action):
 #        return "action_resources"
 #    
 #    def run(self, dispatcher, tracker, domain):
+# TODO implement webiste checking functionality
 
+
+# TODO implement message scanning to filter out previously mentioned trigger words.
+
+
+# TODO bot provides various journalling prompts to help users engage with the journal feature of the app.
+
+
+# TODO reminders - based on server system time, if a time-period has passed, send a relevant reminder - perhaps set by the user earlier.
+# for example, if they havent messaged for a couple days, send a 'welcome back' message before the main response.
+
+
+
+
+# TODO use sender_id to hide private data - individualise the action.py behaviour.
