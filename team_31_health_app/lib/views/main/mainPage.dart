@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:team_31_health_app/data/database/chatRepo.dart';
+import 'package:team_31_health_app/data/database/journalRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
 import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
@@ -17,6 +18,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 2;
   late Database database;
+  late ChatRepo chatRepo;
+  late JournalRepo journalRepo;
 
   late List<Widget> _widgetOptions;
   @override
@@ -24,10 +27,12 @@ class _MainPageState extends State<MainPage> {
     // TODO: implement initState
     super.initState();
     database = widget.database;
+    chatRepo = ChatRepo(database: database);
+    journalRepo = JournalRepo(database: database);
     _widgetOptions = <Widget>[
-      const JournalView(),
+      JournalView(journalRepo: journalRepo),
       const HelpView(),
-      ChatView(chatRepo: ChatRepo(database: database)),
+      ChatView(chatRepo: chatRepo),
       const GamesView(),
       const ProfileView(),
     ];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'journalEntry.dart';
+import 'package:team_31_health_app/data/database_fields/journalEntry.dart';
 
 class AddEditEntryPage extends StatefulWidget {
   final JournalEntry? entryToEdit;
@@ -82,6 +82,7 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Get theme data
     return Scaffold(
       appBar: AppBar(
         title: Text(_isEditing ? 'Edit Entry' : 'Add New Entry'),
@@ -96,7 +97,6 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                 controller: _titleController,
                 decoration: const InputDecoration(
                   labelText: 'Title',
-                  border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -111,7 +111,7 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                   Expanded(
                     child: Text(
                       'Date: ${_selectedDate.toLocal().toString().split(' ')[0]}',
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onSurface),
                     ),
                   ),
                   TextButton(
@@ -121,7 +121,7 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                 ],
               ),
               const SizedBox(height: 16.0),
-              Text('Select Options', style: Theme.of(context).textTheme.titleLarge),
+              Text('Select Options', style: theme.textTheme.titleLarge?.copyWith(color: theme.colorScheme.onSurface)),
               CheckboxListTile(
                 title: const Text('Give'),
                 value: _give,
@@ -130,6 +130,9 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                     _give = value ?? false;
                   });
                 },
+                activeColor: theme.colorScheme.primary,
+                tileColor: theme.colorScheme.surface,
+                checkColor: theme.colorScheme.onPrimary,
               ),
               CheckboxListTile(
                 title: const Text('Take Notice'),
@@ -139,6 +142,9 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                     _takeNotice = value ?? false;
                   });
                 },
+                activeColor: theme.colorScheme.primary,
+                tileColor: theme.colorScheme.surface,
+                checkColor: theme.colorScheme.onPrimary,
               ),
               CheckboxListTile(
                 title: const Text('Keep Learning'),
@@ -148,6 +154,9 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                     _keepLearning = value ?? false;
                   });
                 },
+                activeColor: theme.colorScheme.primary,
+                tileColor: theme.colorScheme.surface,
+                checkColor: theme.colorScheme.onPrimary,
               ),
               CheckboxListTile(
                 title: const Text('Be Active'),
@@ -157,6 +166,9 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                     _beActive = value ?? false;
                   });
                 },
+                activeColor: theme.colorScheme.primary,
+                tileColor: theme.colorScheme.surface,
+                checkColor: theme.colorScheme.onPrimary,
               ),
               CheckboxListTile(
                 title: const Text('Connect'),
@@ -166,13 +178,15 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
                     _connect = value ?? false;
                   });
                 },
+                activeColor: theme.colorScheme.primary,
+                tileColor: theme.colorScheme.surface,
+                checkColor: theme.colorScheme.onPrimary,
               ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Description',
-                  border: OutlineInputBorder(),
                   alignLabelWithHint: true,
                 ),
                 maxLines: 8,
@@ -186,13 +200,13 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveEntry,
-                child: const Text('Save Entry'),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
                 ),
+                child: const Text('Save Entry'),
               ),
             ],
           ),
