@@ -14,7 +14,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   // final DatabaseService databaseService;
   // final ChatRepository chatRepository;
   const MyApp({super.key
