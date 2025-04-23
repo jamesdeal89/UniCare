@@ -467,7 +467,9 @@ class WebsiteContactButton extends StatelessWidget {
 //TODO: make more formal?
 Future<void> _launchUrl(String urlString) async {
   final Uri url = Uri.parse(urlString);
-  if (!await launchUrl(url)) {
+  try {
+    await launchUrl(url);
+  } catch (e) {
     throw Exception('couldnt open $url');
   }
 }
