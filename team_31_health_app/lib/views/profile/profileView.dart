@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart'; // Add fl_chart to your pubspec.yaml
 
-class ProfileView extends StatelessWidget {
-  //final String username;
-  //final String profileImageUrl;
+class ProfileView extends StatefulWidget {
+  const ProfileView({super.key});
 
-  const ProfileView({super.key}/*{super.key, required this.username, required this.profileImageUrl}*/);
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+
+class _ProfileViewState extends State<ProfileView> {
+  List<Map<String, Object>> activityData = [
+    {'label': 'Give', 'value':10.0, 'colour': Colors.orange},
+    {'label': 'Take Notice', 'value':10.0, 'colour': Colors.yellow},
+    {'label': 'Keep Learning', 'value':10.0, 'colour': Colors.blue},
+    {'label': 'Connect', 'value':10.0, 'colour': Colors.purple},
+    {'label': 'Be Active', 'value':10.0, 'colour': Colors.pinkAccent},
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final activityData = _getActivityData();
 
     return Scaffold(
       appBar: AppBar(
@@ -44,22 +54,28 @@ class ProfileView extends StatelessWidget {
             _buildActionButton(context, "Change Nickname", Icons.edit, () {/* TODO */}),
             _buildActionButton(context, "Change Password", Icons.lock, () {/* TODO */}),
             _buildActionButton(context, "Delete Account", Icons.delete_forever, () {/* TODO */}, color: Colors.red),
+
+
+            // Demo buttons
+            const SizedBox(height: 10),
+            Text(
+              "Demo Buttons",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            _buildActionButton(context, "+Give", Icons.handshake, () {_incrementActivity(0);}, color: Colors.orange),
+            _buildActionButton(context, "+Take Notice", Icons.lens, () {_incrementActivity(1);}, color: Colors.yellow),
+            _buildActionButton(context, "+Keep Learning", Icons.book, () {_incrementActivity(2);}, color: Colors.blue),
+            _buildActionButton(context, "+Connect", Icons.link, () {_incrementActivity(3);}, color: Colors.purple),
+            _buildActionButton(context, "+Be Active", Icons.man, () {_incrementActivity(4);}, color: Colors.pinkAccent),
           ],
         ),
       ),
-
     );
   }
 
-  List<Map<String, Object>> _getActivityData(){
-    return [
-      {'label': 'Give', 'value':60.0, 'colour': Colors.orange},
-      {'label': 'Take Notice', 'value':20.0, 'colour': Colors.yellow},
-      {'label': 'Keep Learning', 'value':10.0, 'colour': Colors.blue},
-      {'label': 'Connect', 'value':15.0, 'colour': Colors.purple},
-      {'label': 'Be Active', 'value':50.0, 'colour': Colors.pinkAccent},
-    ];
-  }
+  
+  
 
   Widget _buildActivityChart(List<Map<String, Object>> data) {
     return Row(
@@ -129,6 +145,12 @@ class ProfileView extends StatelessWidget {
         label: Text(label, style: const TextStyle(color: Colors.white)),
       ),
     );
+  }
+
+  void _incrementActivity(int index){
+    setState(() {
+      activityData[index]['value'] = (activityData[index]['value'] as double) + 5.0;
+    });
   }
 
 }
