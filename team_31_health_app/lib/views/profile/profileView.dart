@@ -40,12 +40,11 @@ class _ProfileViewState extends State<ProfileView> {
             // Profile picture
             CircleAvatar(
               radius: 50,
-              //backgroundImage: NetworkImage(profileImageUrl),
+              //backgroundImage:
             ),
             const SizedBox(height: 16),
             Text(
-              //"Welcome back, $username!",
-              "Welcome back, User!",
+              "Welcome back, John!",
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
 
@@ -89,21 +88,31 @@ class _ProfileViewState extends State<ProfileView> {
         SizedBox(
           height: 200,
           width: 200,
-          child: PieChart(
-            PieChartData(
-              // Mapping the activities to the pie chart
-              sections: activityData.map((d) {
-                return PieChartSectionData(
-                  value: d['value'] as double,
-                  color: d['colour'] as Color,
-                  radius: 100,
-                  showTitle: false,
-                );
-              }).toList(),
-              centerSpaceRadius: 0,
-              sectionsSpace: 1,
+          child: Stack (children: [
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.black),
+              ),
             ),
-          ),
+            PieChart(
+              PieChartData(
+                // Mapping the activities to the pie chart
+                sections: activityData.map((d) {
+                  return PieChartSectionData(
+                    value: d['value'] as double,
+                    color: d['colour'] as Color,
+                    radius: 100,
+                    showTitle: false,
+                  );
+                }).toList(),
+                centerSpaceRadius: 0,
+                sectionsSpace: 1,
+              ),
+            ),
+          ],),
         ),
         const SizedBox(width: 20),
         Column(
@@ -137,6 +146,7 @@ class _ProfileViewState extends State<ProfileView> {
         ),
       ],
     );
+    
   }
 
   // Button with press animation  
