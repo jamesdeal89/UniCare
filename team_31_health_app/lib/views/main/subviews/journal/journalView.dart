@@ -4,30 +4,23 @@ import 'package:team_31_health_app/data/database_fields/journalEntry.dart';
 import 'addEditEntryPage.dart';
 
 class JournalView extends StatefulWidget {
-  // Add journalRepo to the constructor
   const JournalView({super.key, required this.journalRepo});
 
-  final JournalRepo journalRepo; // Store the repo instance
+  final JournalRepo journalRepo; 
 
   @override
   State<JournalView> createState() => _JournalViewState();
 }
 
 class _JournalViewState extends State<JournalView> {
-  // Remove the local _entries list, data will be fetched by FutureBuilder
-  // final List<JournalEntry> _entries = [];
-
-  // Keep track of the future for the FutureBuilder
   late Future<List<JournalEntry>> _entriesFuture;
 
   @override
   void initState() {
     super.initState();
-    // Initialize the future in initState
     _loadEntries();
   }
 
-  // Helper method to load entries and assign the future
   void _loadEntries() {
     _entriesFuture = widget.journalRepo.get();
   }
