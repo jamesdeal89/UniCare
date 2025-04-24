@@ -29,6 +29,7 @@ class _ChatView extends State<ChatView>{
     notificationObserverState = ScrollNotificationObserver.maybeOf(context);
     notificationObserverState?.addListener(_listener);
   }
+  bool botReply = true;
 
   @override
   void initState() {
@@ -156,17 +157,20 @@ class _ChatView extends State<ChatView>{
 
                                     if(idx == 0){
                                       return FutureBuilder(future: replyMessage, builder: (context, snapshot) {
+                                        
                                         print(snapshot);
                                         if (snapshot.connectionState != ConnectionState.done) {
+                                          
                                           return TypingBubble();
                                         } else if (snapshot.hasError || !snapshot.hasData){
                                           return IconButton(icon: Icon(Icons.refresh), onPressed: () {
                                             setState(() {
-                                              
+                                              // botReply = false;
                                               replyMessage = reply();
                                             });
                                             });
                                         } else {
+                                         
                                           return ChatBubble(message: snapshot.data!.msg, user: false);
                                         }
                                         });  
@@ -218,7 +222,7 @@ class _ChatView extends State<ChatView>{
                                               setState(() {
                                                 submitMsg = (formKey.currentState!.validate())
                                                     ? () async {
-                                                        if (formKey.currentState!.validate()) {
+                                                        if (formKey.currentState!.validate() && botReply) {
                                                           // This should send the text in the text field to the chat
                                                           // messages.add();
                                                           String text = msgTextEditingController.text;
