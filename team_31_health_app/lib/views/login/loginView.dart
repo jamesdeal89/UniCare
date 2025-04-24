@@ -29,6 +29,7 @@ class _LoginViewState extends State<LoginView> {
             child: TextField(
               cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: userNameTextEditingController,
+              keyboardType: TextInputType.emailAddress,
               autofillHints: [AutofillHints.email],
               decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
