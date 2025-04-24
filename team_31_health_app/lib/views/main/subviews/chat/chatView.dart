@@ -19,6 +19,8 @@ class _ChatView extends State<ChatView>{
 
   bool shouldShowScrollButton = false;
   ScrollNotificationObserverState? notificationObserverState;
+
+  late Future<ChatMsg> replyMessage;
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -31,6 +33,7 @@ class _ChatView extends State<ChatView>{
   @override
   void initState() {
     super.initState();
+    replyMessage = reply();
   }
 
   Future<List<ChatMsg>> getMessages() async {
@@ -152,11 +155,13 @@ class _ChatView extends State<ChatView>{
                                   itemBuilder: (context, idx) {
 
                                     if(idx == 0){
-                                      return FutureBuilder(future: reply(), builder: (context, snapshot) {
+                                      return FutureBuilder(future: replyMessage, builder: (context, snapshot) {
                                         if(snapshot.hasData){
                                           return ChatBubble(message: snapshot.data!.msg, user: false);
                                         } else if (snapshot.hasError){
-                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {});});
+                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {
+                                            replyMessage = reply();
+                                          });});
                                         } else {
                                           return TypingBubble();
                                         }
