@@ -17,8 +17,8 @@ class _MainView extends State<MainView> {
   Future<Database> initDB() async {
     final database = openDatabase(
       join(await getDatabasesPath(), "care_app.db"),
-      onCreate: (db, version) {
-        db.execute('CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)');
+      onCreate: (db, version) async {
+        await db.execute('CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)');
         List<ChatMsg> messages = <ChatMsg>[
           ChatMsg(true, "Oldest"),
           ChatMsg(false, "World"),
@@ -49,9 +49,9 @@ class _MainView extends State<MainView> {
           ChatMsg(true, "Newest"),
         ];
         for (var i = 0; i < messages.length; i++) {
-          db.insert('chat', messages[i].toMap());
+          await db.insert('chat', messages[i].toMap());
         }
-        db.execute('CREATE TABLE journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
+        await db.execute('CREATE TABLE journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
         List<JournalEntry> journalEntries = <JournalEntry>[
           JournalEntry(title: "Titledsadfsaf", date: DateTime.now(), description: "Description", give: true, takeNotice: true, keepLearning: true, beActive: true, connect: true),
           JournalEntry(title: "Titledasfasfd", date: DateTime.now(), description: "Description2", give: true, takeNotice: false, keepLearning: true, beActive: true, connect: true),
@@ -62,10 +62,10 @@ class _MainView extends State<MainView> {
           JournalEntry(title: "Titldasdadwqwdwqdsasdsadawqe", date: DateTime.now(), description: "Description7", give: false, takeNotice: true, keepLearning: true, beActive: true, connect: true),
         ];
         for (var i = 0; i < journalEntries.length; i++) {
-          db.insert('journal_entries', journalEntries[i].toMap());
+          await db.insert('journal_entries', journalEntries[i].toMap());
         }
       },
-      version: 2,
+      version: 1,
     );
 
     return database;
@@ -85,7 +85,6 @@ class _MainView extends State<MainView> {
             future: initDB(),
             builder: (context, AsyncSnapshot<Database> snapshot) {
               if (snapshot.hasData) {
-                ChatRepo(database: snapshot.data!);
                 return MainPage(database: snapshot.data!);
               } else if (snapshot.hasError) {
                 return IconButton(

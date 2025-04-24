@@ -70,7 +70,9 @@ class _JournalViewState extends State<JournalView> {
     }
   }
 
-  Future<void> _deleteEntry(int id) async {
+  Future<void> _deleteEntry(int? id) async {
+    if (id == null) return;
+    
     final bool? confirmDelete = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -189,18 +191,7 @@ class _JournalViewState extends State<JournalView> {
                 final entry = entries[index];
                 return ListTile(
                   title: Text(entry.title),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(entry.date.toLocal().toString().split(' ')[0]),
-                      const SizedBox(height: 4),
-                      _optionRow('Give', entry.give),
-                      _optionRow('Take Notice', entry.takeNotice),
-                      _optionRow('Keep Learning', entry.keepLearning),
-                      _optionRow('Be Active', entry.beActive),
-                      _optionRow('Connect', entry.connect),
-                    ],
-                  ),
+                  subtitle: Text(entry.date.toLocal().toString().split(' ')[0]),
                   onTap: () => _showEntryDetails(entry),
                   trailing: PopupMenuButton<String>(
                     onSelected: (String result) {

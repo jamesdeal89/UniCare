@@ -4,7 +4,7 @@ class JournalEntry implements DataModel {
   String title;
   DateTime date;
   String description;
-  final int id;
+  final int? id;
   
   final bool give;
   final bool takeNotice;
@@ -16,18 +16,17 @@ class JournalEntry implements DataModel {
     required this.title,
     required this.date,
     required this.description,
-    int? id,
+    this.id,
     this.give = false,
     this.takeNotice = false,
     this.keepLearning = false,
     this.beActive = false,
     this.connect = false,
-  }) : id = id ?? DateTime.now().millisecondsSinceEpoch;
+  });
 
   @override
   Map<String, Object?> toMap() {
-    return {
-      'id': id,
+    final map = {
       'title': title,
       'date': date.toIso8601String(), 
       'description': description,
@@ -37,6 +36,12 @@ class JournalEntry implements DataModel {
       'beActive': beActive ? 1 : 0,
       'connect': connect ? 1 : 0,
     };
+    
+    if (id != null) {
+      map['id'] = id as Object;
+    }
+    
+    return map;
   }
 
   @override
@@ -47,7 +52,7 @@ class JournalEntry implements DataModel {
 
   static JournalEntry fromMap(Map<String, dynamic> map) {
     return JournalEntry(
-      id: map['id'] as int,
+      id: map['id'] as int?,
       title: map['title'] as String,
       date: DateTime.parse(map['date'] as String), 
       description: map['description'] as String,
