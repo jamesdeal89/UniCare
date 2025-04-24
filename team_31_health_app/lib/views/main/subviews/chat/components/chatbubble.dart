@@ -13,7 +13,7 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       alignment: user ? Alignment.centerRight : Alignment.centerLeft,
-      widthFactor: 0.5,     
+      widthFactor: 0.8,     
       child: Container(
         padding: EdgeInsets.all(10),
         child: Row(

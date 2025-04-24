@@ -41,12 +41,13 @@ class ChatRepo extends DatabaseService<ChatMsg> {
   }
 
   Future<ChatMsg> reply() async {  
-    final List<Map<String,Object?>> lastMessages = await database.query('chat', limit: 1, orderBy: 'id');
+    final List<Map<String,Object?>> lastMessages = await database.query('chat', limit: 1, orderBy: 'id DESC');
     List<ChatMsg> messages = [for (final {'id': _ as int, 'message': msg as String, 'user': user as int}
         in lastMessages) 
         ChatMsg(user.isOdd, msg)
         ];
     final ChatMsg message = messages[0];
+    print(message.msg);
     if(message.user){
       final response = await http.post(
         Uri.parse('http://35.246.77.137:5005/webhooks/rest/webhook'),
