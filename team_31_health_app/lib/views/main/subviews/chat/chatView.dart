@@ -156,16 +156,20 @@ class _ChatView extends State<ChatView>{
 
                                     if(idx == 0){
                                       return FutureBuilder(future: replyMessage, builder: (context, snapshot) {
-                                        if(snapshot.hasData){
-                                          return ChatBubble(message: snapshot.data!.msg, user: false);
-                                        } else if (snapshot.hasError){
-                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {
-                                            replyMessage = reply();
-                                          });});
-                                        } else {
+                                        print(snapshot);
+                                        if (snapshot.connectionState != ConnectionState.done) {
                                           return TypingBubble();
+                                        } else if (snapshot.hasError || !snapshot.hasData){
+                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {
+                                            setState(() {
+                                              
+                                              replyMessage = reply();
+                                            });
+                                            });
+                                        } else {
+                                          return ChatBubble(message: snapshot.data!.msg, user: false);
                                         }
-                                        }); 
+                                        });  
                                     }
                                     int index = idx - 1;
 
