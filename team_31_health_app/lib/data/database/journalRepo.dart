@@ -67,7 +67,7 @@ class JournalRepo extends DatabaseService<JournalEntry> {
     }
   }
 
-  Future<void> delete(String id) async {
+  Future<void> delete(int id) async {
     running = true;
     try {
       await database.delete(
@@ -77,18 +77,6 @@ class JournalRepo extends DatabaseService<JournalEntry> {
       );
       running = false;
     } on Exception catch (_) {
-      running = false;
-      rethrow;
-    }
-  }
-
-
-  Future<void> clear() async {
-    running = true;
-    try {
-      await database.delete(tableName);
-      running = false;
-    } catch (e) {
       running = false;
       rethrow;
     }

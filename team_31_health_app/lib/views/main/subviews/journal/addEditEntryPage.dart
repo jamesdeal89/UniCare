@@ -65,7 +65,7 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
   void _saveEntry() {
     if (_formKey.currentState!.validate()) {
       final resultEntry = JournalEntry(
-        id: _isEditing ? widget.entryToEdit!.id : DateTime.now().millisecondsSinceEpoch.toString(),
+        id: _isEditing ? widget.entryToEdit!.id : null,
         title: _titleController.text,
         date: _selectedDate,
         description: _descriptionController.text,
@@ -82,7 +82,7 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Get theme data
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(_isEditing ? 'Edit Entry' : 'Add New Entry'),

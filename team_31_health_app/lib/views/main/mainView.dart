@@ -51,7 +51,7 @@ class _MainView extends State<MainView> {
         for (var i = 0; i < messages.length; i++) {
           db.insert('chat', messages[i].toMap());
         }
-        db.execute('CREATE TABLE journal(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
+        db.execute('CREATE TABLE journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
         List<JournalEntry> journalEntries = <JournalEntry>[
           JournalEntry(title: "Titledsadfsaf", date: DateTime.now(), description: "Description", give: true, takeNotice: true, keepLearning: true, beActive: true, connect: true),
           JournalEntry(title: "Titledasfasfd", date: DateTime.now(), description: "Description2", give: true, takeNotice: false, keepLearning: true, beActive: true, connect: true),
@@ -62,10 +62,10 @@ class _MainView extends State<MainView> {
           JournalEntry(title: "Titldasdadwqwdwqdsasdsadawqe", date: DateTime.now(), description: "Description7", give: false, takeNotice: true, keepLearning: true, beActive: true, connect: true),
         ];
         for (var i = 0; i < journalEntries.length; i++) {
-          db.insert('journal', journalEntries[i].toMap());
+          db.insert('journal_entries', journalEntries[i].toMap());
         }
       },
-      version: 1,
+      version: 2,
     );
 
     return database;
@@ -101,3 +101,4 @@ class _MainView extends State<MainView> {
             }));
   }
 }
+
