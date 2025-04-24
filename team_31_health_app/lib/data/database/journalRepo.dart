@@ -7,7 +7,7 @@ class JournalRepo extends DatabaseService<JournalEntry> {
 
   static const String tableName = 'journal_entries';
 
-  static const String columnId = 'id';
+  static const int columnId = 0;
   static const String columnTitle = 'title';
   static const String columnDate = 'date';
   static const String columnDescription = 'description';
@@ -56,7 +56,7 @@ class JournalRepo extends DatabaseService<JournalEntry> {
       await database.update(
         tableName,
         data.toMap(),
-        where: '$columnId = ?',
+        where: 'id = ?',
         whereArgs: [data.id],
       );
       running = false;
@@ -67,28 +67,16 @@ class JournalRepo extends DatabaseService<JournalEntry> {
     }
   }
 
-  Future<void> delete(String id) async {
+  Future<void> delete(int id) async {
     running = true;
     try {
       await database.delete(
         tableName,
-        where: '$columnId = ?',
+        where: 'id = ?',
         whereArgs: [id],
       );
       running = false;
     } on Exception catch (_) {
-      running = false;
-      rethrow;
-    }
-  }
-
-
-  Future<void> clear() async {
-    running = true;
-    try {
-      await database.delete(tableName);
-      running = false;
-    } catch (e) {
       running = false;
       rethrow;
     }

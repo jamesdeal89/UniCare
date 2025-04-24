@@ -24,13 +24,12 @@ class _MainPageState extends State<MainPage> {
   late List<Widget> _widgetOptions;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     database = widget.database;
     chatRepo = ChatRepo(database: database);
     journalRepo = JournalRepo(database: database);
     _widgetOptions = <Widget>[
-      JournalView(),
+      JournalView(journalRepo: journalRepo),
       const HelpView(),
       ChatView(chatRepo: chatRepo),
       const GamesView(),

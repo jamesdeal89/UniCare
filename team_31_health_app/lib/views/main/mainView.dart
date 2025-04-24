@@ -16,6 +16,7 @@ class _MainView extends State<MainView> {
   Future<Database> initDB() async {
     final database = openDatabase(
       join(await getDatabasesPath(), "care_app.db"),
+      
       onCreate: (db, version) async {
         await db.execute('CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)');
         List<ChatMsg> messages = <ChatMsg>[
@@ -49,8 +50,9 @@ class _MainView extends State<MainView> {
         ];
         for (var i = 0; i < messages.length; i++) {
           await db.insert('chat', messages[i].toMap());
+          await db.insert('chat', messages[i].toMap());
         }
-        await db.execute('CREATE TABLE journal(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
+        await db.execute('CREATE TABLE journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
         List<JournalEntry> journalEntries = <JournalEntry>[
           JournalEntry(title: "Titledsadfsaf", date: DateTime.now(), description: "Description", give: true, takeNotice: true, keepLearning: true, beActive: true, connect: true),
           JournalEntry(title: "Titledasfasfd", date: DateTime.now(), description: "Description2", give: true, takeNotice: false, keepLearning: true, beActive: true, connect: true),
@@ -61,7 +63,7 @@ class _MainView extends State<MainView> {
           JournalEntry(title: "Titldasdadwqwdwqdsasdsadawqe", date: DateTime.now(), description: "Description7", give: false, takeNotice: true, keepLearning: true, beActive: true, connect: true),
         ];
         for (var i = 0; i < journalEntries.length; i++) {
-          await db.insert('journal', journalEntries[i].toMap());
+          await db.insert('journal_entries', journalEntries[i].toMap());
         }
       },
       version: 1,
@@ -99,3 +101,4 @@ class _MainView extends State<MainView> {
             }));
   }
 }
+

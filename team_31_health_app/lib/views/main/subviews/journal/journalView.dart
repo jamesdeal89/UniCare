@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:team_31_health_app/data/database/journalRepo.dart'; // Import JournalRepo
 import 'package:team_31_health_app/data/database_fields/journalEntry.dart';
 import 'addEditEntryPage.dart';
 
 class JournalView extends StatefulWidget {
-  const JournalView({super.key});
+  const JournalView({super.key, required this.journalRepo});
+
+  final JournalRepo journalRepo; 
 
   @override
   State<JournalView> createState() => _JournalViewState();
 }
 
 class _JournalViewState extends State<JournalView> {
-  final List<JournalEntry> _entries = [];
+  late Future<List<JournalEntry>> _entriesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadEntries();
+  }
+
+  void _loadEntries() {
+    _entriesFuture = widget.journalRepo.get();
+  }
+
+  
+  void _refreshEntries() {
+    setState(() {
+      _loadEntries();
+    });
+  }
 
   void _navigateToAddEntry() async {
     final newEntry = await Navigator.push<JournalEntry>(
@@ -19,14 +39,18 @@ class _JournalViewState extends State<JournalView> {
     );
 
     if (newEntry != null) {
-      setState(() {
-        _entries.add(newEntry);
-        _entries.sort((a, b) => b.date.compareTo(a.date));
-      });
+      try {
+        await widget.journalRepo.insert(newEntry);
+        _refreshEntries();
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error saving entry: $e')),
+        );
+      }
     }
   }
 
-  void _navigateToEditEntry(JournalEntry entry, int index) async {
+  void _navigateToEditEntry(JournalEntry entry) async {
     final updatedEntry = await Navigator.push<JournalEntry>(
       context,
       MaterialPageRoute(
@@ -35,10 +59,53 @@ class _JournalViewState extends State<JournalView> {
     );
 
     if (updatedEntry != null) {
-      setState(() {
-        _entries[index] = updatedEntry;
-        _entries.sort((a, b) => b.date.compareTo(a.date));
-      });
+      try {
+        await widget.journalRepo.update(updatedEntry);
+        _refreshEntries(); 
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error updating entry: $e')),
+        );
+      }
+    }
+  }
+
+  Future<void> _deleteEntry(int? id) async {
+    if (id == null) return;
+    
+    final bool? confirmDelete = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Delete'),
+          content: const Text('Are you sure you want to delete this journal entry?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Delete'),
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmDelete == true) {
+      try {
+        await widget.journalRepo.delete(id);
+        _refreshEntries();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Entry deleted')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error deleting entry: $e')),
+        );
+      }
     }
   }
 
@@ -94,27 +161,73 @@ class _JournalViewState extends State<JournalView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("PLASCEHOLDER"),
+        title: const Text("Journal"),
+        actions: [ 
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: _refreshEntries,
+            tooltip: 'Refresh Entries',
+          ),
+        ],
       ),
-      body: _entries.isEmpty
-          ? const Center(
+      body: FutureBuilder<List<JournalEntry>>(
+        future: _entriesFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error loading entries: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
               child: Text('No journal entries yet. Press + to add one!'),
-            )
-          : ListView.builder(
-              itemCount: _entries.length,
+            );
+          } else {
+            final entries = snapshot.data!;
+            entries.sort((a, b) => b.date.compareTo(a.date));
+
+            return ListView.builder(
+              itemCount: entries.length,
               itemBuilder: (context, index) {
-                final entry = _entries[index];
+                final entry = entries[index];
                 return ListTile(
                   title: Text(entry.title),
                   subtitle: Text(entry.date.toLocal().toString().split(' ')[0]),
                   onTap: () => _showEntryDetails(entry),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () => _navigateToEditEntry(entry, index),
+                  trailing: PopupMenuButton<String>(
+                    onSelected: (String result) {
+                      switch (result) {
+                        case 'edit':
+                          _navigateToEditEntry(entry);
+                          break;
+                        case 'delete':
+                          _deleteEntry(entry.id);
+                          break;
+                      }
+                    },
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                      const PopupMenuItem<String>(
+                        value: 'edit',
+                        child: ListTile(
+                          leading: Icon(Icons.edit),
+                          title: Text('Edit'),
+                        ),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: 'delete',
+                        child: ListTile(
+                          leading: Icon(Icons.delete, color: Colors.red),
+                          title: Text('Delete', style: TextStyle(color: Colors.red)),
+                        ),
+                      ),
+                    ],
+                    icon: const Icon(Icons.more_vert),
                   ),
                 );
               },
-            ),
+            );
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToAddEntry,
         tooltip: 'Add Entry',
