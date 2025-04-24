@@ -20,6 +20,11 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate total to be used in percentage calculation
+    double total = 0.0;
+    for (var item in activityData){
+      total += item['value'] as double;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +53,7 @@ class _ProfileViewState extends State<ProfileView> {
             const Text("Activity Breakdown", style: TextStyle(fontSize: 18)),
             const SizedBox(height: 16),
             
-            _buildActivityChart(activityData),
+            _buildActivityChart(total),
             
             const SizedBox(height: 32),
             _buildActionButton(context, "Change Nickname", Icons.edit, () {/* TODO */}),
@@ -77,7 +82,7 @@ class _ProfileViewState extends State<ProfileView> {
   
   
 
-  Widget _buildActivityChart(List<Map<String, Object>> data) {
+  Widget _buildActivityChart(double total) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -87,7 +92,7 @@ class _ProfileViewState extends State<ProfileView> {
           child: PieChart(
             PieChartData(
               // Mapping the activities to the pie chart
-              sections: data.map((d) {
+              sections: activityData.map((d) {
                 return PieChartSectionData(
                   value: d['value'] as double,
                   color: d['colour'] as Color,
@@ -103,7 +108,10 @@ class _ProfileViewState extends State<ProfileView> {
         const SizedBox(width: 20),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: data.map((data) {
+          children: activityData.asMap().entries.map((entry) {
+            final data = entry.value;
+            final value = data['value'] as double;
+            final percentage = ((value/total)*100).toStringAsFixed(1); // 1 dec. place
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Row(
@@ -117,8 +125,9 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   const SizedBox(width: 8),
+                  // Print out percentage for the given segment
                   Text(
-                    "${data['label']} - ${data['value']}%",
+                    "${data['label']}: $percentage%",
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],
