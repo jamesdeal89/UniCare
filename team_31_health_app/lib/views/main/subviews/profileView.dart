@@ -27,6 +27,7 @@ class _ProfileView extends State<ProfileView> {
                         Text(
                           "Profile",
                           style: Theme.of(context).textTheme.titleLarge,
+                          
                         ),
                       ],
                     ),

@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:team_31_health_app/data/database/databaseService.dart';
@@ -47,10 +49,12 @@ class ChatRepo extends DatabaseService<ChatMsg> {
     final ChatMsg message = messages[0];
     if(message.user){
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:5005/webhooks/rest/webhook'),
+        Uri.parse('http://35.246.77.137:5005/webhooks/rest/webhook'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'sender': 'user', 'message': message.msg}),
-      );
+      ).timeout(Duration(seconds: 10),onTimeout: (){
+        throw TimeoutException("Bot timed out");
+      });
 
       if (response.statusCode == 200) {
         print("SUCCESSFULLY RECEIVED FROM RASA");
@@ -68,12 +72,12 @@ class ChatRepo extends DatabaseService<ChatMsg> {
             }
         }
       } else {
-        throw Exception('Failed to send message');
+        throw HttpException('Failed to send message');
       }
       running = true;
       return message;
     }
-    throw Exception("No reply");
+    throw HttpException("No reply");
   }
 
   /// This is the function to clear this table from the database.

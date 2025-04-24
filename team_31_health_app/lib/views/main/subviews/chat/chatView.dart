@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/chatRepo.dart';
 import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
+import 'package:team_31_health_app/views/main/subviews/chat/components/botMsgError.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatbubble.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/typingbubble.dart';
 
@@ -19,8 +22,6 @@ class _ChatView extends State<ChatView>{
 
   bool shouldShowScrollButton = false;
   ScrollNotificationObserverState? notificationObserverState;
-
-  late Future<ChatMsg> replyMessage;
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -29,7 +30,9 @@ class _ChatView extends State<ChatView>{
     notificationObserverState = ScrollNotificationObserver.maybeOf(context);
     notificationObserverState?.addListener(_listener);
   }
-  bool botReply = true;
+
+  late Future<ChatMsg> replyMessage;
+
 
   @override
   void initState() {
@@ -55,14 +58,23 @@ class _ChatView extends State<ChatView>{
     
   }
   Future<ChatMsg> reply() async {
-    try {
-      // return await Future.delayed(Duration(seconds: 10), () {
-      //         return ChatMsg(false, "test");
-      //       });
-      // PROD: enable for BOT USE.
-      return (await widget.chatRepo.reply());
-    } catch (_) {
-      rethrow;
+    var list = await getMessages();
+    print(list);
+    if (list.first.user){
+      try {
+      
+        return await Future.delayed(Duration(seconds: 4), () async {
+                return await sendMessage(ChatMsg(false, "test"));
+              });
+         
+        // PROD: enable for BOT USE.
+        // return (await widget.chatRepo.reply());
+      } catch (_) {
+        rethrow;
+      }
+    
+    } else {
+      throw BotMsgException();
     }
   }
 
@@ -144,11 +156,16 @@ class _ChatView extends State<ChatView>{
                                   backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
                                   child: Icon(Icons.arrow_downward_rounded, color: Theme.of(context).iconTheme.color),
                                   onPressed: () {
+                                    setState(() {
+                                      replyMessage = reply();
+                                      
+                                    });
                                     chatScrollController.animateTo(chatScrollController.position.minScrollExtent, duration: Duration(milliseconds: 100), curve: Curves.bounceInOut);
                                   })
                               : null,
                           body: Container(
                               padding: EdgeInsets.all(10),
+                              
                               child: ListView.builder(
                                   reverse: true,
                                   controller: chatScrollController,
@@ -157,23 +174,27 @@ class _ChatView extends State<ChatView>{
 
                                     if(idx == 0){
                                       return FutureBuilder(future: replyMessage, builder: (context, snapshot) {
-                                        
                                         print(snapshot);
+                                        print(snapshot.error);
                                         if (snapshot.connectionState != ConnectionState.done) {
-                                          
                                           return TypingBubble();
                                         } else if (snapshot.hasError || !snapshot.hasData){
+                                          
+                                          print(snapshot.error is BotMsgException);
+                                          if (snapshot.error is BotMsgException){
+                                            return Container();
+                                          }
                                           return IconButton(icon: Icon(Icons.refresh), onPressed: () {
                                             setState(() {
-                                              // botReply = false;
+                                              
                                               replyMessage = reply();
                                             });
                                             });
                                         } else {
-                                         
+                                          
                                           return ChatBubble(message: snapshot.data!.msg, user: false);
                                         }
-                                        });  
+                                        }); 
                                     }
                                     int index = idx - 1;
 
@@ -222,22 +243,22 @@ class _ChatView extends State<ChatView>{
                                               setState(() {
                                                 submitMsg = (formKey.currentState!.validate())
                                                     ? () async {
-                                                        if (formKey.currentState!.validate() && botReply) {
+                                                        if (formKey.currentState!.validate()) {
                                                           // This should send the text in the text field to the chat
                                                           // messages.add();
                                                           String text = msgTextEditingController.text;
                                                           msgTextEditingController.clear();
                                                           try {
                                                             await sendMessage(ChatMsg(true, text)); 
+                                                            setState(() {
+                                                              replyMessage = reply();
+                                                            });
                                                           } catch (_) {
                                                             return;
                                                           }
                                                           
 
-                                                          //TODO: Typing bubble while bot responds.
-                                                          setState(() {
-
-                                                          });
+                                                          
                                                         } else {
                                                           return;
                                                         }
