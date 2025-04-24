@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:team_31_health_app/data/database/databaseService.dart';
 import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
+import 'package:team_31_health_app/views/main/subviews/chat/components/botMsgError.dart';
 
 class ChatRepo extends DatabaseService<ChatMsg> {
   ChatRepo({required super.database});
@@ -77,8 +78,9 @@ class ChatRepo extends DatabaseService<ChatMsg> {
       }
       running = true;
       return message;
+    } else {
+      throw BotMsgException();
     }
-    throw HttpException("No reply");
   }
 
   /// This is the function to clear this table from the database.

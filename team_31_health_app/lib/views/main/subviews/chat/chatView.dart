@@ -58,23 +58,17 @@ class _ChatView extends State<ChatView>{
     
   }
   Future<ChatMsg> reply() async {
-    var list = await getMessages();
-    print(list);
-    if (list.first.user){
-      try {
-      
-        // return await Future.delayed(Duration(seconds: 4), () async {
-        //         return await sendMessage(ChatMsg(false, "test"));
-        //       });
-         
-        // PROD: enable for BOT USE.
-        return (await widget.chatRepo.reply());
-      } catch (_) {
-        rethrow;
-      }
     
-    } else {
-      throw BotMsgException();
+    try {
+      
+      // return await Future.delayed(Duration(seconds: 4), () async {
+      //         return await sendMessage(ChatMsg(false, "test"));
+      //       });
+        
+      // PROD: enable for BOT USE.
+      return (await widget.chatRepo.reply());
+    } catch (_) {
+      rethrow;
     }
   }
 
