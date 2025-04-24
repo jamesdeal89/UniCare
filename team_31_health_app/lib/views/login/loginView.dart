@@ -29,6 +29,7 @@ class _LoginViewState extends State<LoginView> {
             child: TextField(
               cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: userNameTextEditingController,
+              autofillHints: [AutofillHints.email],
               decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   border: OutlineInputBorder(),
@@ -48,6 +49,7 @@ class _LoginViewState extends State<LoginView> {
               cursorColor: Theme.of(context).colorScheme.onPrimary,
               controller: passWordTextEditingController,
               obscureText: true,
+              autofillHints: [AutofillHints.password],
               decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   border: OutlineInputBorder(),
