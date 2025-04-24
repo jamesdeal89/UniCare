@@ -44,7 +44,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 16),
             Text(
-              "Welcome back, John!",
+              "Hello John",
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
 
