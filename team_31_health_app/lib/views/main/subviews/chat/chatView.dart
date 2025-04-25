@@ -33,6 +33,22 @@ class _ChatView extends State<ChatView>{
 
   late Future<ChatMsg> replyMessage;
 
+  Future<void> _refreshMessages() async {
+    // re-trigger bot to load several messages - (kinda forceful work-around, sorry)
+    if (msgTextEditingController.text.isEmpty) {
+      msgTextEditingController.text = " ";
+      msgTextEditingController.text = "";
+    } else {
+      msgTextEditingController.text += " ";
+      msgTextEditingController.text =
+          msgTextEditingController.text.trim();
+    }
+
+    if (formKey.currentState != null) {
+      formKey.currentState!.validate();
+    }
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -66,7 +82,11 @@ class _ChatView extends State<ChatView>{
       //       });
         
       // PROD: enable for BOT USE.
-      return (await widget.chatRepo.reply());
+      ChatMsg msg = await widget.chatRepo.reply();
+      setState(() {
+        _refreshMessages();
+      });
+      return msg;
     } catch (_) {
       rethrow;
     }
@@ -243,16 +263,14 @@ class _ChatView extends State<ChatView>{
                                                           String text = msgTextEditingController.text;
                                                           msgTextEditingController.clear();
                                                           try {
-                                                            await sendMessage(ChatMsg(true, text)); 
+                                                            print("called");
+                                                            await sendMessage(ChatMsg(true, text));
                                                             setState(() {
-                                                              replyMessage = reply();
+                                                              reply();
                                                             });
                                                           } catch (_) {
                                                             return;
                                                           }
-                                                          
-
-                                                          
                                                         } else {
                                                           return;
                                                         }

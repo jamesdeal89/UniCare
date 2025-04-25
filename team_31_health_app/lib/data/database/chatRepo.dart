@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:team_31_health_app/data/database/databaseService.dart';
 import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
@@ -48,12 +50,23 @@ class ChatRepo extends DatabaseService<ChatMsg> {
         ChatMsg(user.isOdd, msg)
         ];
     final ChatMsg message = messages[0];
-    print(message.msg);
     if(message.user){
+      // get the uid of the signed-in user - allows rasa server to recognise returning users.
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      String uid = "user";
+      if (currentUser != null) {
+        print('User is signed in: ${currentUser.uid}');
+        uid = currentUser.uid;
+      } else {
+        print('No user is signed in.');
+        // create random username to keep chat privacy
+        uid = generateRandomString(12);
+      }
+
       final response = await http.post(
         Uri.parse('http://35.246.77.137:5005/webhooks/rest/webhook'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'sender': 'user', 'message': message.msg}),
+        body: json.encode({'sender': uid, 'message': message.msg}),
       ).timeout(Duration(seconds: 10),onTimeout: (){
         throw TimeoutException("Bot timed out");
       });
@@ -67,7 +80,6 @@ class ChatRepo extends DatabaseService<ChatMsg> {
               print(msg.toString());
               await database.insert('chat', botMsg.toMap());
               running = false;
-              return botMsg;
             } on Exception catch (_) {
               running = false;
               rethrow;
@@ -77,7 +89,7 @@ class ChatRepo extends DatabaseService<ChatMsg> {
         throw HttpException('Failed to send message');
       }
       running = true;
-      return message;
+      return ChatMsg(false, "");
     } else {
       throw BotMsgException();
     }
@@ -90,5 +102,16 @@ class ChatRepo extends DatabaseService<ChatMsg> {
     } catch (e) {
       rethrow;
     }
+  }
+
+  String generateRandomString(int length) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random();
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+            (_) => chars.codeUnitAt(random.nextInt(chars.length)),
+      ),
+    );
   }
 }
