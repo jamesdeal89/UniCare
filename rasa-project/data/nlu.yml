@@ -1,6 +1,10 @@
 version: "3.1"
 nlu:
 
+- intent: provide_url
+  examples: |
+    - Please check this 
+
 - intent: report_trigger
   examples: |
     - I am sensitive to the triggering word [pineapple](trigger)

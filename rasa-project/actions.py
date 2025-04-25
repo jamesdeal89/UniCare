@@ -179,12 +179,21 @@ class Action_Save_Trigger(Action):
 
 
 # Used to help the user check websites for triggering words which they provide.
-#class Action_Resources(Action):
-#    def name(self):
-#        return "action_resources"
-#    
-#    def run(self, dispatcher, tracker, domain):
 # TODO implement webiste checking functionality
+class Action_Check(Action):
+    def name(self):
+        return "action_check"
+    
+    def run(self, dispatcher, tracker, domain):
+        pass
+
+        
+class Action_Ask_Check(Action):
+    def name(self):
+        return "action_ask_check"
+    
+    def run(self, dispatcher, tracker, domain):
+        pass
 
 
 # TODO implement message scanning to filter out previously mentioned trigger words.

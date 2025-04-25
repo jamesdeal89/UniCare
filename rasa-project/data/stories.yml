@@ -2,6 +2,21 @@ version: "3.1"
 
 stories:
 
+- story: provide url and check
+  steps:
+  - itent: provide url 
+  - action: action_ask_check
+  - itent: affirm
+  - action: action_check
+
+- story: provide url and deny
+  steps:
+  - itent: provide url 
+  - action: action_ask_check
+  - itent: deny
+  - action: utter_deny_check
+
+- story: mention and save trigger
 - story: mention and save trigger
   steps: 
   - intent: report_trigger
