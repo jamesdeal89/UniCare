@@ -5,7 +5,7 @@ import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
 import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
 import 'package:team_31_health_app/views/main/subviews/journalView.dart';
-import 'package:team_31_health_app/views/main/subviews/profileView.dart';
+import 'package:team_31_health_app/views/main/subviews/profile/profileView.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.database});
