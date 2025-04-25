@@ -11,10 +11,13 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 
 |Test ID|Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|---------------|
-|1.1|Login with correct details||Taken to Chatbot homepage||||
-|1.2|Login with correct username and incorrect password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
-|1.3|Login with incorrect username and incorrect password|Username: demo1@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
-|1.4|Login with no username and a password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
+|1.1|Login with correct details|Username: demo@nottingham.ac.uk Password: TEST1234|Taken to Chatbot homepage||||
+|1.2|Login with correct email and incorrect password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
+|1.3.1|Login with incorrect email and incorrect password|Username: demo2@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
+|1.3.2|Login with valid email and incorrect password|Username: demo1@nottingham.ac.uk Password: TEST1234|Appropriate Error Message||||
+|1.3.3|Login with incorrect email and valid password|Username: demo2@nottingham.ac.uk Password: TEST123|Appropriate Error Message||||
+|1.4.1|Login with no email and a password|Username:  Password: TEST1234|Appropriate Error Message||||
+|1.4.2|Login with valid email and no password|Username: demo1@nottingham.ac.uk Password: |Appropriate Error Message||||
 |1.5|Login with malicious unsanitised input, i.e. SQL injection||Input is sanitised, error message is thrown||||
 
 
@@ -27,7 +30,10 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 |2.3|Press Journal icon in navigation from Chatbot|Press Journal Icon|Taken to Journal screen||||
 |2.4|Press Journal icon in navigation from Games|Press Journal Icon|Taken to Journal screen||||
 |2.5|Press Journal icon in navigation from Profile|Press Journal Icon|Taken to Journal screen||||
-
+|2.6|Create a journal entry|Press create journal icon and input text|Entry is displayed on jorunal screen|||
+|2.7|View a previous journal entry|Press previous journal entry|Entry is displayed on screen|||
+|2.8|View information on habits|Press info tab on journal tab|Habit information is displayed|||
+|2.9|Delete a previous journal entry|Press previous journal entry and press delete|Old journal screen is no longer displayed|||
 
 #### Function: Help Page 
 
@@ -64,6 +70,12 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 |5.3|Press Games icon in navigation from Chatbot|Press Games Icon|Taken to Games screen||||
 |5.4|Press Games icon in navigation from Games|Press Games Icon|Remain on Games screen||||
 |5.5|Press Games icon in navigation from Profile|Press Games Icon|Taken to Games screen||||
+|5.6.1|Open mordle|Press Morlde Tab|Taken to Mordle Game||||
+|5.6.2|Get a morlde hint|Press Morlde hint|Valid hint given||||
+|5.6.3|Correct morlde hint||Success message and new mordle world||||
+|5.6.4|Mordle word is incorrect||Appropritate yellow and gray lettering||||
+|5.6.5|Mordle informaton|Press Morlde info button|Morlde information is displayed||||
+
 
 
 #### Function: Profile 
@@ -77,4 +89,7 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 |6.4|Press Profile icon in navigation from Games|Press Profile Icon|Taken to Profile screen||||
 |6.5|Press Profile icon in navigation from Profile|Press Profile Icon|Remain on Profile screen||||
 |6.6|Update password|Put in valid password and press confirm|Confirmation of updated password||||
+|6.7|Update profile picture|Upload profile picture|Confirmation of updated password and new picture is displayed||||
+|6.8|Habit pi chart is updating|Add habits in journalling|Pi chart updates live|Passed|||
+
 
