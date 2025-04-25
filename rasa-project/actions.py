@@ -5,6 +5,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 import crawler
 import random
+import sqlite3
 
 # list of trusted URLs for mental health resources 
 # the bot will use these to scrape/crawl for relevant information
@@ -18,7 +19,21 @@ anxious = ["anxious","overwhelmed","stressed out"]
 sad = ["sad","not too great", "sad", "not good", "upset"]
 triggers = ["worthless", "suicidal", "disapear","suicide"]
 
-trigger_words = []
+def create_database():
+    conn = sqlite3.connect('user_data.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS user_data (
+            user_id TEXT PRIMARY KEY,
+            trigger_words TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# initialise a database for user data like triggers, last log-in time, etc.
+# shouldn't overwrite pre-exisiting DB if it exists already.
+create_database()
 
 # Detect and respond to emotion, providing relevant advice.
 class Action_advice(Action):
