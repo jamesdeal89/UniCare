@@ -24,8 +24,8 @@ def create_database():
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS user_data (
-            user_id TEXT PRIMARY KEY,
-            trigger_words TEXT
+            id TEXT PRIMARY KEY,
+            triggers TEXT
         )
     ''')
     conn.commit()
@@ -114,16 +114,52 @@ class Action_Save_Trigger(Action):
         return "action_save_trigger"
     
     def run(self, dispatcher, tracker, domain):
-        trigger_words.append(tracker.get_slot('trigger')[len(tracker.get_slot('trigger'))-1])
-        print(trigger_words)
+        # when API for rasa bot is accessed by the front-end, it should set the sender_id to the username of the logged-in account in-app.
+        # allowing it be accessed here.
+        id = str(tracker.sender_id)
+        # access the detcted NLP token for the trigger
+        trigger = tracker.get_slot("trigger")[0]
 
-        if trigger_words:
-            response = f"I understand that you find mentions of '{trigger_words[len(trigger_words)-1]}' difficult. I'll refrain from mentioning your triggers. Furthermore, I can scan websites for triggering content on your behalf if you ask."
+        # to help debug, print the id detected.
+        print(f"User ID: {id}")
+
+        conn = sqlite3.connect('user_data.db')
+        cursor = conn.cursor()
+
+        # try to access user's current trigger words saved in the persistent DB
+        try:
+            cursor.execute('SELECT triggers FROM user_data WHERE id = ?', (id,))
+            result = cursor.fetchone()
+            # for debugging, print the result
+            print(f"Query result: {result}") 
+        except Exception as e:
+            print(f"Error retrieving data: {e}")
+
+        if result:
+            # NOTE: we are storing it in an SQL column as a single long string of text.
+            # this is also done as list column support is more complex for SQL DB's in python.
+
+            # this converts back to list from the string 
+            currTriggers = result[0].split(',')  
+            # if the user already has trigger word(s) saved, append this new one to it.
+            if trigger not in currTriggers:
+                # add it to the list
+                currTriggers.append(trigger) 
+            # convert list into long string seperated by commas
+            updatedTrigs = ','.join(currTriggers)  
         else:
-            response = "I was unable to detect any previously saved triggers, feel free to inform me of any."
+            # if no trigger entry found for id, just use the single trigger.
+            updatedTrigs = trigger
 
-        dispatcher.utter_message(text=response)
-        return []
+        # update the DB entry to store the trigger word (plus any pre-existing stored triggers.)
+        cursor.execute('''
+            INSERT INTO user_data (id, triggers)
+            VALUES (?, ?)
+            ON CONFLICT(id) DO UPDATE SET triggers=excluded.triggers
+        ''', (id, updatedTrigs))
+
+        conn.commit()
+        conn.close()
 
 
 
