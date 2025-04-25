@@ -12,7 +12,10 @@ import sqlite3
 trustedUrls = ["https://mentalhealth-uk.org/",
                "https://notts-talk.co.uk/",
                "https://www.nhs.uk/mental-health/",
-               "https://www.mind.org.uk/get-involved/supported-self-help/"]
+               "https://www.mind.org.uk/get-involved/supported-self-help/"
+               "https://www.mind.org.uk/information-support/"
+               "http://www.combatstress.org.uk/"
+               "https://www.mentalhealth.org.uk/"]
 
 happy = ["happy","ecstatic"]
 anxious = ["anxious","overwhelmed","stressed out"]
@@ -106,7 +109,7 @@ class Action_Resources(Action):
             else:
                 pass
         else:
-            dispatcher.utter_message("I was unable to find any relevant resources online, but I tried my best!")
+            dispatcher.utter_message("I was sadly unable to find any relevant resources after performing a search of trusted providers.")
 
 
 class Action_Save_Trigger(Action):
