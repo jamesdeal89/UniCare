@@ -118,48 +118,60 @@ class Action_Save_Trigger(Action):
         # allowing it be accessed here.
         id = str(tracker.sender_id)
         # access the detcted NLP token for the trigger
-        trigger = tracker.get_slot("trigger")[0]
+        trigger = tracker.get_slot("trigger")
+        
+        if trigger:
+            trigger = trigger[0]
 
-        # to help debug, print the id detected.
-        print(f"User ID: {id}")
+            # to help debug, print the id detected.
+            print(f"User ID: {id}")
 
-        conn = sqlite3.connect('user_data.db')
-        cursor = conn.cursor()
+            conn = sqlite3.connect('user_data.db')
+            cursor = conn.cursor()
 
-        # try to access user's current trigger words saved in the persistent DB
-        try:
-            cursor.execute('SELECT triggers FROM user_data WHERE id = ?', (id,))
-            result = cursor.fetchone()
-            # for debugging, print the result
-            print(f"Query result: {result}") 
-        except Exception as e:
-            print(f"Error retrieving data: {e}")
+            new = False
 
-        if result:
-            # NOTE: we are storing it in an SQL column as a single long string of text.
-            # this is also done as list column support is more complex for SQL DB's in python.
+            # try to access user's current trigger words saved in the persistent DB
+            try:
+                cursor.execute('SELECT triggers FROM user_data WHERE id = ?', (id,))
+                result = cursor.fetchone()
+                # for debugging, print the result
+                print(f"Query result: {result}") 
+            except Exception as e:
+                print(f"Error retrieving data: {e}")
 
-            # this converts back to list from the string 
-            currTriggers = result[0].split(',')  
-            # if the user already has trigger word(s) saved, append this new one to it.
-            if trigger not in currTriggers:
-                # add it to the list
-                currTriggers.append(trigger) 
-            # convert list into long string seperated by commas
-            updatedTrigs = ','.join(currTriggers)  
-        else:
-            # if no trigger entry found for id, just use the single trigger.
-            updatedTrigs = trigger
+            if result:
+                # NOTE: we are storing it in an SQL column as a single long string of text.
+                # this is also done as list column support is more complex for SQL DB's in python.
 
-        # update the DB entry to store the trigger word (plus any pre-existing stored triggers.)
-        cursor.execute('''
-            INSERT INTO user_data (id, triggers)
-            VALUES (?, ?)
-            ON CONFLICT(id) DO UPDATE SET triggers=excluded.triggers
-        ''', (id, updatedTrigs))
+                # this converts back to list from the string 
+                currTriggers = result[0].split(',')  
+                # if the user already has trigger word(s) saved, append this new one to it.
+                if trigger not in currTriggers:
+                    # add it to the list
+                    currTriggers.append(trigger) 
+                # convert list into long string seperated by commas
+                updatedTrigs = ','.join(currTriggers)  
+            else:
+                new = True
+                # if no trigger entry found for id, just use the single trigger.
+                updatedTrigs = trigger
 
-        conn.commit()
-        conn.close()
+            # update the DB entry to store the trigger word (plus any pre-existing stored triggers.)
+            cursor.execute('''
+                INSERT INTO user_data (id, triggers)
+                VALUES (?, ?)
+                ON CONFLICT(id) DO UPDATE SET triggers=excluded.triggers
+            ''', (id, updatedTrigs))
+
+            conn.commit()
+            conn.close()
+
+            dispatcher.utter_message(f"I will remeber that you find mentions of {trigger} difficult. Thank you for informing me as it helps me support you.")
+            # if the user has never added a trigger word before, inform them of it's uses.
+            if new:
+                dispatcher.utter_message(f"By asking 'Can you check this website for me?' and providing a URL, I can scan the webiste for potential triggers on your behalf and warn you if it contains any.")
+
 
 
 
