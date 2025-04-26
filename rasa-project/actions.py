@@ -6,6 +6,7 @@ from rasa_sdk.types import DomainDict
 import crawler
 import random
 import sqlite3
+from bs4 import BeautifulSoup
 
 # list of trusted URLs for mental health resources 
 # the bot will use these to scrape/crawl for relevant information
@@ -178,7 +179,9 @@ class Action_Save_Trigger(Action):
 
 
 
-# Used to help the user check websites for triggering words which they provide.
+# Used to help the user check websites for triggering words which they provided.
+# Provides a warning that it cannot check multi-media.
+# While it cannot parse images/video for triggering content, it can check alt text.
 # TODO implement webiste checking functionality
 class Action_Check(Action):
     def name(self):
@@ -186,6 +189,31 @@ class Action_Check(Action):
     
     def run(self, dispatcher, tracker, domain):
         pass
+
+
+# Use BeautifulSoup library to parse website content.
+# Returns True/False depending on if any of this specific user's trigger words are found in the website's HTML.
+def containsTrigger(id,site):
+    return False
+
+# Retrieve a list of triggers for a given user id as per the DB.
+# Returns None if no triggers saved for given user id.
+def getTriggers(id):
+    conn = sqlite3.connect('user_data.db')
+    cursor = conn.cursor()
+    try:
+        cursor.execute('SELECT triggers FROM user_data WHERE id = ?', (id,))
+        result = cursor.fetchone()
+        # for debugging, print the result
+        print(f"Query result: {result}") 
+    except Exception as e:
+        print(f"Error retrieving data: {e}")
+
+    if result:
+        return result[0].split(',')  
+    else:
+        return None
+
 
         
 class Action_Ask_Check(Action):

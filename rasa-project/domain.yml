@@ -25,13 +25,24 @@ slots:
     mappings:
       - type: from_entity
         entity: trigger
+  url:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: url
+        intent: provide_url
 
 
 actions:
   - utter_greet
   - utter_ask_how_feeling
+  - action_check
+  - action_ask_check
+  - utter_deny_trigger
+  - utter_deny_check
   - action_advice
   - action_resources
+  - utter_ask_trigger
   - action_save_trigger
   - utter_goodbye
   - utter_disclosure
@@ -54,6 +65,9 @@ responses:
 
   utter_deny_trigger:
   - text: "Understood, I will not store that trigger word. I apologise."
+
+  utter_deny_check:
+  - text: "Understood. I won't check that website. I apologise if I misunderstood."
 
   utter_default:
   - text: "I'm not sure I understand. Can you please rephrase that?"
