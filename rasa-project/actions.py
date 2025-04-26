@@ -8,6 +8,7 @@ import random
 import requests
 import sqlite3
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
 
 # list of trusted URLs for mental health resources 
 # the bot will use these to scrape/crawl for relevant information
@@ -33,6 +34,13 @@ def create_database():
             triggers TEXT
         )
     ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS access_time (
+            id TEXT PRIMARY KEY,
+            last_access DATETIME
+        )
+    ''')
     conn.commit()
     conn.close()
 
@@ -46,6 +54,12 @@ class Action_advice(Action):
         return "action_advice"
 
     def run(self, dispatcher, tracker, domain):
+        id = str(tracker.sender_id)
+        code = updateAccess(id)
+        if code == 1:
+            dispatcher.utter_message("Welcome back!")
+        elif code == 2:
+            dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
         emotion = tracker.get_slot('emotion')
         if emotion in happy:
             dispatcher.utter_message("That's great! Keep doing what you're doing.")
@@ -74,6 +88,12 @@ class Action_Resources(Action):
         return relevant
     
     def run(self, dispatcher, tracker, domain):
+        id = str(tracker.sender_id)
+        code = updateAccess(id)
+        if code == 1:
+            dispatcher.utter_message("Welcome back!")
+        elif code == 2:
+            dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
         urls = []
         for url in trustedUrls:
             for link in crawler.findAllLinks(crawler.get_url(url)):
@@ -119,9 +139,14 @@ class Action_Save_Trigger(Action):
         return "action_save_trigger"
     
     def run(self, dispatcher, tracker, domain):
+        id = str(tracker.sender_id)
+        code = updateAccess(id)
+        if code == 1:
+            dispatcher.utter_message("Welcome back!")
+        elif code == 2:
+            dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
         # when API for rasa bot is accessed by the front-end, it should set the sender_id to the username of the logged-in account in-app.
         # allowing it be accessed here.
-        id = str(tracker.sender_id)
         # access the detcted NLP token for the trigger
         trigger = tracker.get_slot("trigger")
         
@@ -189,8 +214,13 @@ class Action_Check(Action):
         return "action_check"
     
     def run(self, dispatcher, tracker, domain):
-        url = tracker.get_slot("url")
         id = str(tracker.sender_id)
+        code = updateAccess(id)
+        if code == 1:
+            dispatcher.utter_message("Welcome back!")
+        elif code == 2:
+            dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
+        url = tracker.get_slot("url")
         if containsTrigger(id,url):
             dispatcher.utter_message("I would advise you not to visit the website you provided, as I detected it contains one of your triggers.")
         else:
@@ -242,10 +272,15 @@ def getTriggers(id):
         print(f"Query result: {result}") 
     except Exception as e:
         print(f"Error retrieving data: {e}")
-
+        conn.commit()
+        conn.close()
     if result:
+        conn.commit()
+        conn.close()
         return result[0].split(',')  
     else:
+        conn.commit()
+        conn.close()
         return None
 
 
@@ -258,6 +293,12 @@ class Action_Ask_Check(Action):
         return "action_ask_check"
     
     def run(self, dispatcher, tracker, domain):
+        id = str(tracker.sender_id)
+        code = updateAccess(id)
+        if code == 1:
+            dispatcher.utter_message("Welcome back!")
+        elif code == 2:
+            dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
         if getTriggers(str(tracker.sender_id)):
             dispatcher.utter_message("Would you like me to check the website you provided for triggering content you've previously informed you're sensitive to?")
         else:
@@ -265,7 +306,40 @@ class Action_Ask_Check(Action):
             dispatcher.utter_message("If you would like to inform me of any, please try saying 'I am sensitive to mentions of TRIGGER'.")
             dispatcher.utter_message("Otherwise, just tell me 'no' and I'll move on.")
 
-    
+
+# Simply takes the current user_id and updates their last access time in the DB
+# If last access (before updating it) was more than 24 hours ago, welcome the user back.
+# represented by returning 1.
+# If last access was more than 3 days ago, bring up the break and check on the user.
+# represented by returning 2.
+# otherwise, less than 24 hours, or user never added to DB, returns 0.
+def updateAccess(id):
+    currTime = datetime.now()
+    conn = sqlite3.connect('user_data.db')
+    cursor = conn.cursor()
+    code = 0
+
+    try:
+        cursor.execute("SELECT last_access FROM access_time WHERE id = ?", (id,))
+        result = cursor.fetchone
+        if result:
+            lastAccess = datetime.strptime(result[0], "%Y-%m-%d %H:%M:%S")
+            print("Previous access was " + lastAccess)
+            if currTime - lastAccess >= timedelta(hours=24):
+                code = 1
+            elif currTime - lastAccess >= timedelta(days=3):
+                code = 2
+    except Exception as e:
+        print(f"Error accessing last access time: {e}")
+
+    try:
+        cursor.execute("INSERT OR REPLACE INTO access_time (id,last_access) VALUES (?,?)", (id,currTime))
+    except Exception as e:
+        print(f"Error saving acess data: {e}")
+    conn.commit
+    conn.close
+    return code
+
 
 
 # TODO implement explanations of app features if asked.
