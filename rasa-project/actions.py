@@ -21,9 +21,9 @@ trustedUrls = ["https://mentalhealth-uk.org/",
                "https://www.mentalhealth.org.uk/"]
 
 happy = ["happy","ecstatic"]
-anxious = ["anxious","overwhelmed","stressed out"]
-sad = ["sad","not too great", "sad", "not good", "upset"]
-triggers = ["worthless", "suicidal", "disapear","suicide"]
+anxious = ["anxious","overwhelmed","stressed out","anxiety"]
+sad = ["sad","not too great", "sad", "not good", "upset","depression"]
+triggers = ["worthless", "suicidal", "disappear", "disapear","suicide"]
 
 def create_database():
     conn = sqlite3.connect('user_data.db')
@@ -91,7 +91,7 @@ class Action_Resources(Action):
     def findContaining(self, emotion, urls):
         relevant = []
         for url in urls:
-            if emotion in url:
+            if emotion.lower() in url.lower():
                 relevant.append(url);
         return relevant
     
@@ -126,6 +126,8 @@ class Action_Resources(Action):
         elif emotion in sad:
             for synonym in sad:
                 urlsE = self.findContaining(synonym,urls)
+                print(urls)
+                print(synonym)
             if (len(urlsE) > 0):
                 dispatcher.utter_message("Here is a website with information on dealing with sadness: ")
                 dispatcher.utter_message(urlsE[random.randint(0,len(urlsE)-1)])
@@ -339,7 +341,7 @@ def updateAccess(id):
 
     try:
         cursor.execute("SELECT last_access FROM access_time WHERE id = ?", (id,))
-        result = cursor.fetchone
+        result = cursor.fetchone()
         if result:
             lastAccess = datetime.strptime(result[0], "%Y-%m-%d %H:%M:%S")
             print("Previous access was " + lastAccess)
@@ -356,8 +358,8 @@ def updateAccess(id):
         cursor.execute("INSERT OR REPLACE INTO access_time (id,last_access) VALUES (?,?)", (id,currTime))
     except Exception as e:
         print(f"Error saving acess data: {e}")
-    conn.commit
-    conn.close
+    conn.commit()
+    conn.close()
     return code
 
 
