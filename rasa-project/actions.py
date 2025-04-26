@@ -216,13 +216,25 @@ def getTriggers(id):
 
 
         
+# This is an action as need to access DB and check if they have any trigger words saved.
+# If this user does not, prompt them to inform the bot of any.
+# If they do already have triggers saved, ask for confirmation and then perform check (via NLP - not programmatically)
 class Action_Ask_Check(Action):
     def name(self):
         return "action_ask_check"
     
     def run(self, dispatcher, tracker, domain):
-        pass
+        if getTriggers(str(tracker.sender_id)):
+            dispatcher.utter_message("Would you like me to check the website you provided for triggering content you've previously informed you're sensitive to?")
+        else:
+            dispatcher.utter_message("I am able to check websites you provide for triggering content. However you have yet to inform me of any triggers.")
+            dispatcher.utter_message("If you would like to inform me of any, please try saying 'I am sensitive to mentions of TRIGGER'.")
+            dispatcher.utter_message("Otherwise, just tell me 'no' and I'll move on.")
 
+    
+
+
+# TODO implement explanations of app features if asked.
 
 # TODO implement message scanning to filter out previously mentioned trigger words.
 
