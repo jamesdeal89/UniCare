@@ -5,6 +5,7 @@ intents:
   - seek_advice
   - request_help
   - report_trigger
+  - provide_url
   - affirm
   - deny
   - goodbye
@@ -12,6 +13,7 @@ intents:
 entities:
   - emotion
   - trigger
+  - url
 
 slots:
   emotion:

@@ -226,6 +226,7 @@ def containsTrigger(id,url):
             return False
 
         except requests.RequestException:
+            print("Except occured when checking if contains trigger")
             return False
     
 

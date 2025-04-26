@@ -2,18 +2,36 @@ version: "3.1"
 
 stories:
 
+- story: provide url, no saved triggers, provides new trigger, perform check
+  steps:
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
+  - action: action_ask_check
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: affirm
+  - action: action_save_trigger
+  - action: action_ask_check
+  - intent: affirm
+  - action: action_check
+
 - story: provide url and check
   steps:
-  - itent: provide url 
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
   - action: action_ask_check
-  - itent: affirm
+  - intent: affirm
   - action: action_check
 
 - story: provide url and deny
   steps:
-  - itent: provide url 
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
   - action: action_ask_check
-  - itent: deny
+  - intent: deny
   - action: utter_deny_check
 
 - story: mention and save trigger

@@ -3,7 +3,14 @@ nlu:
 
 - intent: provide_url
   examples: |
-    - Please check this 
+    - Please check this url [https://www.gov.uk/divorce](url)
+    - Please check this url [https://www.google.com/](url)
+    - [https://nottingham.ac.uk/](url)
+    - [https://google.com/](url)
+    - Can you check [https://google.com/](url) for my triggers?
+    - Can you check [https://google.com/](url)?
+    - Can you check [https://google.com/](url)?
+    - Does [https://www.meandmymind.nhs.uk/getting-help/mental-health-websites/](url) contain any of my triggers?
 
 - intent: report_trigger
   examples: |
