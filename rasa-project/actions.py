@@ -5,6 +5,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 import crawler
 import random
+import requests
 import sqlite3
 from bs4 import BeautifulSoup
 
@@ -188,13 +189,45 @@ class Action_Check(Action):
         return "action_check"
     
     def run(self, dispatcher, tracker, domain):
-        pass
+        url = tracker.get_slot("url")
+        id = str(tracker.sender_id)
+        if containsTrigger(id,url):
+            dispatcher.utter_message("I would advise you not to visit the website you provided, as I detected it contains one of your triggers.")
+        else:
+            dispatcher.utter_message("I did not detect any of your triggers in the provided website.")
+            dispatcher.utter_message("However, I am unable to fully check multi-media content and you should only use this as a preliminary check. I may be incorrect.")
 
 
 # Use BeautifulSoup library to parse website content.
 # Returns True/False depending on if any of this specific user's trigger words are found in the website's HTML.
-def containsTrigger(id,site):
-    return False
+def containsTrigger(id,url):
+        try:
+            response = requests.get(url)
+            response.raise_for_status
+            content = BeautifulSoup(response.text,"html.parser")
+            text = content.getText()
+            triggers = getTriggers(id)
+            for trigger in triggers: 
+                if trigger.lower() in text.lower():
+                    return True
+            # also check multi-media alt text as an additional check
+            for img in content.find_all("img"):
+                alt = img.get("alt","")
+                for trigger in triggers:
+                    if trigger.lower() in alt.lower():
+                        return True
+            for vid in content.find_all("video"):
+                for track in vid.find_all("track"):
+                    label = track.get("label","")
+                    kind = track.get("kind","")
+                    for trigger in triggers:
+                        if (trigger.lower() in label.lower()) or (trigger.lower() in kind.lower()):
+                            return True
+            return False
+
+        except requests.RequestException:
+            return False
+    
 
 # Retrieve a list of triggers for a given user id as per the DB.
 # Returns None if no triggers saved for given user id.
