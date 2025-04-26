@@ -226,7 +226,6 @@ class Action_Save_Trigger(Action):
 # Used to help the user check websites for triggering words which they provided.
 # Provides a warning that it cannot check multi-media.
 # While it cannot parse images/video for triggering content, it can check alt text.
-# TODO implement webiste checking functionality
 class Action_Check(Action):
     def name(self):
         return "action_check"
@@ -238,21 +237,28 @@ class Action_Check(Action):
             dispatcher.utter_message("Welcome back!")
         elif code == 2:
             dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
-        url = tracker.get_slot("url")
-        if containsTrigger(id,url):
-            dispatcher.utter_message("I would advise you not to visit the website you provided, as I detected it contains one of your triggers.")
+        urllist = tracker.get_slot("url")
+        if urllist:
+            url = url[0]
+            if containsTrigger(id,url):
+                dispatcher.utter_message("I would advise you not to visit the website you provided, as I detected it contains one of your triggers.")
+            else:
+                dispatcher.utter_message("I did not detect any of your triggers in the provided website.")
+                dispatcher.utter_message("However, I am unable to fully check multi-media content and you should only use this as a preliminary check. I may be incorrect.")
         else:
-            dispatcher.utter_message("I did not detect any of your triggers in the provided website.")
-            dispatcher.utter_message("However, I am unable to fully check multi-media content and you should only use this as a preliminary check. I may be incorrect.")
+            dispatcher.utter_message("I apologise, I was unable to detect the URL in your message. Please retry with different phrasing.")
 
 
 # Use BeautifulSoup library to parse website content.
 # Returns True/False depending on if any of this specific user's trigger words are found in the website's HTML.
 def containsTrigger(id,url):
+        print("checking " + url)
         try:
-            response = requests.get(url)
-            response.raise_for_status
-            content = BeautifulSoup(response.text,"html.parser")
+            # set an agent as sometimes sites block python's default one
+            headers = {"User-Agent": "Mozilla/5.0"}
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status() 
+            content = BeautifulSoup(response.text, "html.parser")
             text = content.getText()
             triggers = getTriggers(id)
             for trigger in triggers: 
@@ -264,13 +270,6 @@ def containsTrigger(id,url):
                 for trigger in triggers:
                     if trigger.lower() in alt.lower():
                         return True
-            for vid in content.find_all("video"):
-                for track in vid.find_all("track"):
-                    label = track.get("label","")
-                    kind = track.get("kind","")
-                    for trigger in triggers:
-                        if (trigger.lower() in label.lower()) or (trigger.lower() in kind.lower()):
-                            return True
             return False
 
         except requests.RequestException:
@@ -343,8 +342,8 @@ def updateAccess(id):
         cursor.execute("SELECT last_access FROM access_time WHERE id = ?", (id,))
         result = cursor.fetchone()
         if result:
-            lastAccess = datetime.strptime(result[0], "%Y-%m-%d %H:%M:%S")
-            print("Previous access was " + lastAccess)
+            lastAccess = datetime.strptime(result[0], "%Y-%m-%d %H:%M:%S.%f")
+            print("Previous access was " + str(lastAccess))
             if currTime - lastAccess >= timedelta(hours=24):
                 code = 1
             elif currTime - lastAccess >= timedelta(days=3):
@@ -366,16 +365,6 @@ def updateAccess(id):
 
 # TODO implement explanations of app features if asked.
 
-# TODO implement message scanning to filter out previously mentioned trigger words.
-
 
 # TODO bot provides various journalling prompts to help users engage with the journal feature of the app.
 
-
-# TODO reminders - based on server system time, if a time-period has passed, send a relevant reminder - perhaps set by the user earlier.
-# for example, if they havent messaged for a couple days, send a 'welcome back' message before the main response.
-
-
-
-
-# TODO use sender_id to hide private data - individualise the action.py behaviour.

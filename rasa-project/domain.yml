@@ -27,8 +27,9 @@ slots:
     mappings:
       - type: from_entity
         entity: trigger
+        intent: report_trigger
   url:
-    type: text
+    type: list
     mappings:
       - type: from_entity
         entity: url

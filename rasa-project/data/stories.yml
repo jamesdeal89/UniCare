@@ -2,6 +2,26 @@ version: "3.1"
 
 stories:
 
+- story: hello, feelings, provide trigger, ask to check, affirm
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: action_resources
+  - action: utter_disclosure
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: affirm
+  - action: action_save_trigger
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
+  - action: action_ask_check
+  - intent: affirm
+  - action: action_check
+
 - story: provide url, no saved triggers, provides new trigger, perform check
   steps:
   - intent: provide_url 
@@ -12,6 +32,9 @@ stories:
   - action: utter_ask_trigger
   - intent: affirm
   - action: action_save_trigger
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
   - action: action_ask_check
   - intent: affirm
   - action: action_check
@@ -20,7 +43,7 @@ stories:
   steps:
   - intent: provide_url 
   - slot_was_set:
-            - url: "https://www.google.com/"  
+            - url: "https://www.example.com/"  
   - action: action_ask_check
   - intent: affirm
   - action: action_check
@@ -29,7 +52,7 @@ stories:
   steps:
   - intent: provide_url 
   - slot_was_set:
-            - url: "https://www.google.com/"  
+            - url: "https://www.rasa.co.uk/"  
   - action: action_ask_check
   - intent: deny
   - action: utter_deny_check

@@ -2,6 +2,13 @@ version: "3.1"
 
 language: en
 
+# help recognise urls with regex
+pipeline:
+- name: RegexEntityExtractor
+  patterns:
+    - pattern: "(https?://\S+|www\.\S+)"
+      name: "url"
+
 pipeline:
 - name: WhitespaceTokenizer
 - name: RegexFeaturizer

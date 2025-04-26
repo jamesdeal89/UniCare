@@ -11,6 +11,9 @@ nlu:
     - Can you check [https://google.com/](url)?
     - Can you check [https://google.com/](url)?
     - Does [https://www.meandmymind.nhs.uk/getting-help/mental-health-websites/](url) contain any of my triggers?
+    - [https://rasa.com](url)
+    - Look at this: [http://example.org](url)
+    - The site is [https://new-url.dev](url)
 
 - intent: report_trigger
   examples: |
