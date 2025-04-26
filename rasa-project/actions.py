@@ -60,6 +60,14 @@ class Action_advice(Action):
             dispatcher.utter_message("Welcome back!")
         elif code == 2:
             dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
+        elif code == 3:
+            dispatcher.utter_message("I noticed you're new here, before I respond to your prompt, here are some of my features for future reference:")
+            dispatcher.utter_message("You can inform me of triggering words via 'I respond badly to TRIGGER'.")
+            dispatcher.utter_message("You can ask me to scan websites for previously mentioned triggers by providing a URL.")
+            dispatcher.utter_message("You can express your feelings. E.g: 'I feel overwhelmed' and I'll try give you advice and find resources online.")
+            dispatcher.utter_message("I can provide journalling prompts to help you write via 'help me with my journal entry'.")
+            dispatcher.utter_message("If you need other aspects of this app explained you can ask me. E.g: 'Explain the games section'.")
+            dispatcher.utter_message("Now, responding to what you said:")
         emotion = tracker.get_slot('emotion')
         if emotion in happy:
             dispatcher.utter_message("That's great! Keep doing what you're doing.")
@@ -94,6 +102,14 @@ class Action_Resources(Action):
             dispatcher.utter_message("Welcome back!")
         elif code == 2:
             dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
+        elif code == 3:
+            dispatcher.utter_message("I noticed you're new here, before I respond to your prompt, here are some of my features for future reference:")
+            dispatcher.utter_message("You can inform me of triggering words via 'I respond badly to TRIGGER'.")
+            dispatcher.utter_message("You can ask me to scan websites for previously mentioned triggers by providing a URL.")
+            dispatcher.utter_message("You can express your feelings. E.g: 'I feel overwhelmed' and I'll try give you advice and find resources online.")
+            dispatcher.utter_message("I can provide journalling prompts to help you write via 'help me with my journal entry'.")
+            dispatcher.utter_message("If you need other aspects of this app explained you can ask me. E.g: 'Explain the games section'.")
+            dispatcher.utter_message("Now, responding to what you said:")
         urls = []
         for url in trustedUrls:
             for link in crawler.findAllLinks(crawler.get_url(url)):
@@ -312,7 +328,9 @@ class Action_Ask_Check(Action):
 # represented by returning 1.
 # If last access was more than 3 days ago, bring up the break and check on the user.
 # represented by returning 2.
-# otherwise, less than 24 hours, or user never added to DB, returns 0.
+# If the user is new, it returns 3.
+# this signals the caller to output an explanation of features.
+# otherwise, less than 24 hours, returns 0.
 def updateAccess(id):
     currTime = datetime.now()
     conn = sqlite3.connect('user_data.db')
@@ -329,6 +347,8 @@ def updateAccess(id):
                 code = 1
             elif currTime - lastAccess >= timedelta(days=3):
                 code = 2
+        else:
+            code = 3
     except Exception as e:
         print(f"Error accessing last access time: {e}")
 
