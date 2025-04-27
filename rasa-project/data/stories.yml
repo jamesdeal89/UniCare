@@ -1,6 +1,14 @@
 version: "3.1"
 
 stories:
+
+- story: ask for explanation, provide explanation
+  steps:
+  - intent: ask_explain
+  - slot_was_set:
+            - feature: "games"  
+  - action: action_explain
+
 - story: hello, feelings, provide trigger, ask to check, affirm
   steps:
   - intent: greet

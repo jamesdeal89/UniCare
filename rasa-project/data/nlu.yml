@@ -9,6 +9,7 @@ nlu:
 - intent: ask_explain
   examples: |
     - Can you explain the [games](feature) section
+    - Can you explain the [murdle](feature) game
     - Please explain the benefit of the [games](feature)
     - how does [murdle](feature) work?
     - Explain the [journaling](feature) section
