@@ -239,7 +239,7 @@ class Action_Check(Action):
             dispatcher.utter_message("I haven't seen you in a while! Is everything okay?")
         urllist = tracker.get_slot("url")
         if urllist:
-            url = url[0]
+            url = urllist[0]
             if containsTrigger(id,url):
                 dispatcher.utter_message("I would advise you not to visit the website you provided, as I detected it contains one of your triggers.")
             else:
