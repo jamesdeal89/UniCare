@@ -7,10 +7,12 @@ intents:
   - report_trigger
   - provide_url
   - affirm
+  - ask_explain
   - deny
   - goodbye
 
 entities:
+  - feature
   - emotion
   - trigger
   - url
@@ -34,6 +36,12 @@ slots:
       - type: from_entity
         entity: url
         intent: provide_url
+  feature:
+    type: list
+    mappings:
+      - type: from_entity
+        entity: feature
+        intent: ask_explain
 
 
 actions:
@@ -45,6 +53,7 @@ actions:
   - utter_deny_check
   - action_advice
   - action_resources
+  - action_explain
   - utter_ask_trigger
   - action_save_trigger
   - utter_goodbye

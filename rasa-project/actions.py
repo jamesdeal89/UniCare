@@ -300,7 +300,6 @@ def getTriggers(id):
         conn.close()
         return None
 
-
         
 # This is an action as need to access DB and check if they have any trigger words saved.
 # If this user does not, prompt them to inform the bot of any.
@@ -362,8 +361,35 @@ def updateAccess(id):
     return code
 
 
+# TODO explanations of app features if asked.
+# Guides the user through different aspects of the app (outside the chatbot).
+# Alongside highlighting their mental health benefits.
+class Action_Explain(Action):
+    def name(self):
+        return "action_explain"
+    
+    def run(self, dispatcher, tracker, domain):
+        feature = tracker.get_slot("feature")
+        
+        if feature:
+            feature = feature[0]
+            if feature.lower() in ["game","murdle","wordle","mordle","games"]:
+                dispatcher.utter_message("The 'Games' section allows you to engage with mentally stimulating activites.")
+                dispatcher.utter_message("Keeping your brain active by trying to solve puzzles is shown to benefit your mental health.")
+                dispatcher.utter_message("See this article from the University of Oxford: https://www.ox.ac.uk/news/2020-11-16-groundbreaking-new-study-says-time-spent-playing-video-games-can-be-good-your-well")
+                dispatcher.utter_message("The 'Murdle' game is based around guessing a short word within a given number of attempts.")
+                dispatcher.utter_message("After each guess, it will show you which letters you guessed are in the target word in yellow, and which letters are both in the word and in the correct position in green.")
+                dispatcher.utter_message("Remeber! the word's meaning will always be related to something positive in this version of the game.")
+            elif feature.lower() in ["journal","journalling","journaling","diary"]:
+                dispatcher.utter_message("The 'Journalling' section lets you keep a self-written record of your daily activites.")
+                dispatcher.utter_message("However, the amount you write or the frequency is entirely up to you! Journalling should be a fun part of your routine so it's okay to do it less frequently if you can't find the time.")
+                dispatcher.utter_message("There is research to suggest it can help your mental health as you reflect on your day.")
+                dispatcher.utter_message("See this article from the National Library of Medicine for more information on the benefits: https://pmc.ncbi.nlm.nih.gov/articles/PMC6305886/")
 
-# TODO implement explanations of app features if asked.
+            else:
+                dispatcher.utter_message("I'm not sure what feature you're refering to. Perhaps try phrasing it as 'games' or 'journalling' for example.")
+
+        
 
 
 # TODO bot provides various journalling prompts to help users engage with the journal feature of the app.

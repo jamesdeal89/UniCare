@@ -6,6 +6,14 @@ nlu:
     - '(www\.[^\s]+)'    
     - '([^\s]+\.(com|org|net|uk)[^\s]*)'  
 
+- intent: ask_explain
+  examples: |
+    - Can you explain the [games](feature) section
+    - Please explain the benefit of the [games](feature)
+    - how does [murdle](feature) work?
+    - Explain the [journaling](feature) section
+    - why would I want to do [journalling](feature)
+
 - intent: provide_url
   examples: |
     - Please check this url [https://www.gov.uk/divorce](url)
