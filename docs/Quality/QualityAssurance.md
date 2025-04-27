@@ -7,7 +7,7 @@ Quality assurance is essential for a successful project. We need to be very thor
 #### Test Plans
 We used mostly manual tests but we have also implemented some unit tests. We used unit tests for features
 
-#### Function: Login 
+#### Feature: Login 
 
 |Test ID|Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|---------------|

@@ -12,9 +12,9 @@ _Highlighting key:_
 - _Yellow_ means use-case.
 - _Blue_ mean an actor.
 
-![textual analysis page 1](../reqs_specs_assets/textualAnalysis_1.png)
-![textual analysis page 2](../reqs_specs_assets/textualAnalysis_2.png)
-![textual analysis summary](../reqs_specs_assets/textualAnalysis_3.png)
+![textual analysis page 1](/reqs_specs_assets/textualAnalysis_1.png)
+![textual analysis page 2](/reqs_specs_assets/textualAnalysis_2.png)
+![textual analysis summary](/reqs_specs_assets/textualAnalysis_3.png)
 
 ## Updated Textual Analysis - Internal Version
 
@@ -24,8 +24,8 @@ In response, we have pivoted the product to be less BAC-IN specific and ___more 
 
 Our project supervisor kindly provided us with an ___updated brief___ which takes these changes into account:
 
-![textual analysis updated page 1](../reqs_specs_assets/updatedTextAnalysis.png)
-![textual analysis updated summary](../reqs_specs_assets/TextAnalysisTableUpdated.png)
+![textual analysis updated page 1](/reqs_specs_assets/updatedTextAnalysis.png)
+![textual analysis updated summary](/reqs_specs_assets/TextAnalysisTableUpdated.png)
 
 ## Purpose
 
