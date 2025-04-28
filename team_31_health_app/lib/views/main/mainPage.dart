@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:team_31_health_app/data/database/chatRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
-import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
 import 'package:team_31_health_app/views/main/subviews/journalView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/inhailView.dart';
 import 'package:team_31_health_app/views/main/subviews/profile/profileView.dart';
 
 class MainPage extends StatefulWidget {
@@ -30,6 +32,8 @@ class _MainPageState extends State<MainPage> {
       ChatView(chatRepo: ChatRepo(database: database)),
       const GamesView(),
       const ProfileView(),
+      const MordleView(),
+      const InhailView(),
     ];
   }
 
