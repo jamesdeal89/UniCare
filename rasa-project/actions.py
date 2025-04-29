@@ -7,6 +7,7 @@ import crawler
 import random
 import requests
 import sqlite3
+from math import factorial
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 
@@ -20,6 +21,13 @@ trustedUrls = ["https://mentalhealth-uk.org/",
                "http://www.combatstress.org.uk/"
                "https://www.mentalhealth.org.uk/"]
 
+# set of journalling prompts 
+# (i.e for the other feature of the app where the user can store daily text entries) 
+# which the user may ask for - it will be randomly selected from this pool
+prompts = ["PROMPT 1",
+           "PROMPT 2",
+           "PROMPT 3"]
+
 happy = ["happy","ecstatic"]
 anxious = ["anxious","overwhelmed","stressed out","anxiety"]
 sad = ["sad","not too great", "sad", "not good", "upset","depression"]
@@ -28,17 +36,31 @@ triggers = ["worthless", "suicidal", "disappear", "disapear","suicide"]
 def create_database():
     conn = sqlite3.connect('user_data.db')
     cursor = conn.cursor()
+    # Create table for tracking user's private information (like trigger words).
+    # Primary key is the user's unique ID.
+    # (ensure that ID cannot be spoofed in the app to access private info.)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS user_data (
             id TEXT PRIMARY KEY,
             triggers TEXT
         )
     ''')
-
+    # Create table for tracking access times.
+    # Primary key is the user's unique ID.
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS access_time (
             id TEXT PRIMARY KEY,
             last_access DATETIME
+        )
+    ''')
+    # Create table for tracking journal prompts used. 
+    # No primary key as it's not required to be unique, we're accepting duplicate id records.
+    # Accessed via id.
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS journal_records (
+            id TEXT,
+            last_access DATETIME,
+            ind INTEGER
         )
     ''')
     conn.commit()
@@ -394,6 +416,70 @@ class Action_Explain(Action):
 
         
 
+# Provide journalling prompts to the user if they ask.
+# Randomly selected, but uses the server-side DB to check which prompts were recently given to a specific user.
+# If a prompt has been randomly selected, but has been given before within the last 2 days, it reselects.
+class Action_Journal(Action):
+    def name(self):
+        return "action_journal"
+    
+    def run(self, dispatcher, tracker, domain):
+        conn = sqlite3.connect('user_data.db')
+        cursor = conn.cursor()
+        id = str(tracker.sender_id)
+        blacklist = []
+        currTime = datetime.now()
 
-# TODO bot provides various journalling prompts to help users engage with the journal feature of the app.
+        try:
+            cursor.execute("SELECT last_access, ind FROM journal_records WHERE id = ?", (id,))
+            results = cursor.fetchall()
+            if results:
+                for i in range(len(results)):
+                    # not here the 0th index is the last use datetime
+                    # and the 1st index is the index into the prompts list for that prompt
+                    lastAccess = datetime.strptime(results[i][0], "%Y-%m-%d %H:%M:%S.%f")
+                    if currTime - lastAccess <= timedelta(hours=48):
+                        recent = results[i][1]
+                        if recent not in blacklist:
+                            blacklist.append(recent)
+                            print("blacklisted prompt: ", recent)
+        except Exception as e:
+            print(f"Error accessing last access time: {e}")
+
+        selected = random.randint(0,len(prompts)-1) 
+        # need to prevent infinite loop caused by all indexes into prompts list being blacklisted.
+        # to determine if all indexes are blacklisted: use the factorial of the length of prompts list
+        # compared to the sum of the blacklisted indexes.
+        # e.g: assume:
+        # blacklist = 0,1,2,3
+        # len(prompts) = 4 
+        # then:
+        # factorial(4-1) = 1 + 2 + 3 = 6
+        # sum of 0,1,2,3 = 6
+        # equality comparison will be true and we know all indexes are blacklisted.
+        print(blacklist)
+        if sum(blacklist) >= factorial((len(prompts)-1)):
+            # if all indexes blacklisted, don't enter an infinite unique generation loop,
+            # instead just add a disclaimer informing the user that the prompt won't be fresh.
+            dispatcher.utter_message("Sorry, but I'll have to recycle a prompt I've used within the past couple days.")
+        else:
+            # in this case, we know not all indexes are blacklisted
+            while selected in blacklist:
+                print("regenerate index")
+                selected = random.randint(0,len(prompts)-1) 
+
+        dispatcher.utter_message("Here is a prompt to help you journal/write:")
+        dispatcher.utter_message(prompts[selected])
+
+        # Add the prompt we just sent to the DB so we know to not use it again too soon
+        cursor.execute('''
+                    INSERT INTO journal_records (id, last_access, ind) VALUES (?,?,?)
+        ''',(id,currTime,selected))
+
+        # close the DB connection while committing any changes
+        conn.commit()
+        conn.close()
+
+
+        
 

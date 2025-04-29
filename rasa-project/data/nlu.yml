@@ -6,6 +6,17 @@ nlu:
     - '(www\.[^\s]+)'    
     - '([^\s]+\.(com|org|net|uk)[^\s]*)'  
 
+- intent: ask_prompt
+  examples: |
+    - Can you give me a journalling prompt
+    - Can you give me a writing prompt
+    - writing prompt
+    - journalling prompt
+    - Can you help we start my journal entry
+    - Can you help me write my diary entry
+    - Can you help me write my journal log
+    - Im not sure where to start with my journal
+
 - intent: ask_explain
   examples: |
     - Can you explain the [games](feature) section

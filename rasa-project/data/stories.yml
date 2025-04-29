@@ -1,6 +1,12 @@
 version: "3.1"
 
 stories:
+
+- story: ask for a journalling prompt, provide journalling prompt
+  steps:
+  - intent: ask_prompt
+  - action: action_journal
+
 - story: ask for explanation, provide answer but different 2
   steps:
   - intent: ask_explain
