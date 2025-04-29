@@ -37,6 +37,15 @@ class _HelpView extends State<HelpView> {
   Widget build(BuildContext context) {
     final List<Charity> charities = [
       Charity(
+        name: 'University of Nottingham Mental Health and Wellbeing',
+        description: 'Pro-actively taking care of your mental health and wellbeing can play a key part in having a positive and successful university experience.',
+        phoneNumber: '0115 9514985',
+        website: 'https://www.nottingham.ac.uk/studentservices/wellbeing/healthyu/mental-health/bodymind.aspx/',
+        icon: Icons.menu_book,
+        colour: const Color.fromARGB(255, 48, 118, 184),
+        opening: 'Nottingham Nightline - 7pm - 8am, daily',
+      ),
+      Charity(
         name: 'NHS Mental Health Resources',
         description: 'Access support from the National Health Service.',
         phoneNumber: '111',
