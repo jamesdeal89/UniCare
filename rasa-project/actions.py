@@ -361,7 +361,6 @@ def updateAccess(id):
     return code
 
 
-# TODO explanations of app features if asked.
 # Guides the user through different aspects of the app (outside the chatbot).
 # Alongside highlighting their mental health benefits.
 class Action_Explain(Action):
@@ -372,6 +371,7 @@ class Action_Explain(Action):
         feature = tracker.get_slot("feature")
         
         if feature:
+            print(feature)
             feature = feature[0]
             print(feature)
             if feature.lower() in ["game","murdle","wordle","mordle","games"]:

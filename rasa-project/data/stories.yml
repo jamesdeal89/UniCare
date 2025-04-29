@@ -1,6 +1,19 @@
 version: "3.1"
 
 stories:
+- story: ask for explanation, provide answer but different 2
+  steps:
+  - intent: ask_explain
+  - slot_was_set:
+            - feature: "journal"  
+  - action: action_explain
+
+- story: ask for explanation, provide answer but different feature set
+  steps:
+  - intent: ask_explain
+  - slot_was_set:
+            - feature: "journalling"  
+  - action: action_explain
 
 - story: ask for explanation, provide explanation
   steps:
