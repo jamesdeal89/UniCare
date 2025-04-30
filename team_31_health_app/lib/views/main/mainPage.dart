@@ -6,7 +6,7 @@ import 'package:team_31_health_app/views/main/subviews/games/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
 import 'package:team_31_health_app/views/main/subviews/journalView.dart';
 import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
-import 'package:team_31_health_app/views/main/subviews/games/inhailView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/inhaleView.dart';
 import 'package:team_31_health_app/views/main/subviews/profile/profileView.dart';
 
 class MainPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
       const GamesView(),
       const ProfileView(),
       const MordleView(),
-      const InhailView(),
+      const InhaleView(),
     ];
   }
 
