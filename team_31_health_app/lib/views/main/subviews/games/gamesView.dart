@@ -77,7 +77,7 @@ class _GamesViewState extends State<GamesView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
                                   Text("Inhale", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                                  Text("Breathing excercises for stress and anxiety"),
+                                  Text("Breathing exercises for stress and anxiety"),
                                 ],
                               ),
                             ),

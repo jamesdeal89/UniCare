@@ -211,7 +211,11 @@ class _InhaleSessionState extends State<InhaleSession> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.exercise.name)),
+      appBar: AppBar(
+          title: Text(
+        widget.exercise.name,
+        style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onSurface),
+      )),
       body: Center(
           child: phase == 'DONE'
               ? Column(
@@ -227,11 +231,11 @@ class _InhaleSessionState extends State<InhaleSession> {
                           startTimer();
                         });
                       },
-                      child: const Text("Start Again"),
+                      child: Text("Start Again", style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onSurface)),
                     ),
                     ElevatedButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text("Back to Menu"),
+                      child: Text("Back to Menu", style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onSurface)),
                     ),
                   ],
                 )
