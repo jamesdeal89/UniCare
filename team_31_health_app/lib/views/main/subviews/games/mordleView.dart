@@ -1,14 +1,14 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class GamesView extends StatefulWidget {
-  const GamesView({super.key});
+class MordleView extends StatefulWidget {
+  const MordleView({super.key});
 
   @override
-  State<GamesView> createState() => _GamesViewState();
+  State<MordleView> createState() => _MordleViewState();
 }
 
-class _GamesViewState extends State<GamesView> {
+class _MordleViewState extends State<MordleView> {
   final List<String> keyboardRows = [
     "QWERTYUIOP",
     "ASDFGHJKL",
@@ -51,6 +51,7 @@ class _GamesViewState extends State<GamesView> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         foregroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onSurface),
         title: Text(
           "Mordle",
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -144,7 +145,8 @@ class _GamesViewState extends State<GamesView> {
     return LayoutBuilder(builder: (context, constraints) {
       final keyWidth = (constraints.maxWidth - 24) / 10;
 
-      return Column(
+      return SingleChildScrollView(
+          child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -181,7 +183,7 @@ class _GamesViewState extends State<GamesView> {
             ),
           ),
         ],
-      );
+      ));
     });
   }
 
