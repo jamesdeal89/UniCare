@@ -16,7 +16,14 @@ nlu:
     - Can you help me write my diary entry
     - Can you help me write my journal log
     - Im not sure where to start with my journal
-    - 
+    - Suggest something for my diary
+    - help me brainstorm a journal topic
+    - im stuck on what to journal about
+    - need a creative writing prompt
+    - I need a prompt for self reflection
+    - what could I write about today
+    - I need inspiration for my diary
+    - I need inspiration for my journal
 
 - intent: ask_explain
   examples: |
@@ -27,6 +34,14 @@ nlu:
     - how does [murdle](feature) work?
     - Explain the [journaling](feature) section
     - why would I want to do [journalling](feature)
+    - Can you describe how the [games](feature) work
+    - can you explain how the [games](feature) work
+    - can you clarify what the [journalling](feature) section is for?
+    - what's special about [murdle](feature)
+    - tell me about the [games](feature)
+    - tell me about [journalling](feature)
+    - Explain how [journalling](feature) helps
+    - Explain how keeping a [dairy](feature) helps
 
 - intent: provide_url
   examples: |

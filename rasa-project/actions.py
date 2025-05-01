@@ -24,14 +24,26 @@ trustedUrls = ["https://mentalhealth-uk.org/",
 # set of journalling prompts 
 # (i.e for the other feature of the app where the user can store daily text entries) 
 # which the user may ask for - it will be randomly selected from this pool
-prompts = ["PROMPT 1",
-           "PROMPT 2",
-           "PROMPT 3"]
+prompts = ["What's something you're proud of today?",
+           "What is a challenge you've faced recently? What has it taught you?",
+           "Write a letter to your future self in 5 years.",
+           "Who has the biggest positive impact on your life? Why is that?",
+           "Write about a time when kindness, which you have received or which you've given, has impacted you.",
+           "Write about someone who inspires you and why.",
+           "Describe and recall and memorable conversation you've had with someone which impacted you.",
+           "What emotions have you noticed the most today? If you had to imagine them on your body, where would you feel them?",
+           "Describe your surroundings using all 5 senses.",
+           "Write a detailed description of a place where you feel safe or secure."]
+           
 
 happy = ["happy","ecstatic"]
 anxious = ["anxious","overwhelmed","stressed out","anxiety"]
 sad = ["sad","not too great", "sad", "not good", "upset","depression"]
-triggers = ["worthless", "suicidal", "disappear", "disapear","suicide"]
+# trigger words which lead to crisis services being reccomended.
+# not to be confused with 'trigger words' which refers to words the user finds uncomfortable.
+# these are based on NHS suicide prevention warning signs, as seen in this help page:
+# https://www.merseycare.nhs.uk/health-and-wellbeing/suicide-prevention/worried-about-someone/warning-signs
+triggers = ["worthless", "suicidal", "disappear", "disapear", "suicide", "death", "dead", "burden", "hopeless", "ashamed", "hate myself", "give up", "given up"]
 
 def create_database():
     conn = sqlite3.connect('user_data.db')
