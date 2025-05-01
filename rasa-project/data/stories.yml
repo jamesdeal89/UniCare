@@ -28,6 +28,11 @@ stories:
             - feature: "games"  
   - action: action_explain
 
+- story: crisis detected
+  steps:
+  - intent: crisis
+  - action: action_crisis
+
 - story: hello, feelings, provide trigger, ask to check, affirm
   steps:
   - intent: greet

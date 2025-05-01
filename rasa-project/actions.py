@@ -185,6 +185,18 @@ class Action_Resources(Action):
         else:
             dispatcher.utter_message("I was sadly unable to find any relevant resources after performing a search of trusted providers.")
 
+class Action_Crisis(Action):
+    def name(self):
+        return "action_crisis"
+    
+    def run(self, dispatcher, tracker, domain):
+        dispatcher.utter_message("You are important and don't have to face these issues alone. There are people who can help. Please consider reaching out to one of the 24/7 hotlines below: ")
+        dispatcher.utter_message("Online: samaritans.org")
+        dispatcher.utter_message("UK phone - Samaritans: 116 123")
+        dispatcher.utter_message("UK phone - National Suicide Prevention Hotline: 0800 587 0800")
+        dispatcher.utter_message("Globally - https://findahelpline.com/ can help you find help no matter where you are.")
+
+
 
 class Action_Save_Trigger(Action):
     def name(self):

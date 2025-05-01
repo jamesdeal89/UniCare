@@ -6,6 +6,17 @@ nlu:
     - '(www\.[^\s]+)'    
     - '([^\s]+\.(com|org|net|uk)[^\s]*)'  
 
+- intent: crisis
+  examples: |
+    - I want to self harm
+    - I'm thinking about killing myself
+    - I'm worthless
+    - Nobody would notice if I disappeared
+    - I want to sh
+    - I'm going to cut myself
+    - I hate myself
+    - I'm ashamed of myself
+
 - intent: ask_prompt
   examples: |
     - Can you give me a journalling prompt

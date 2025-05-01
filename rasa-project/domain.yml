@@ -9,6 +9,7 @@ intents:
   - provide_url
   - affirm
   - ask_explain
+  - crisis
   - ask_prompt
   - deny
   - goodbye
@@ -56,6 +57,7 @@ actions:
   - utter_deny_check
   - action_advice
   - action_resources
+  - action_crisis
   - action_explain
   - utter_ask_trigger
   - action_save_trigger
