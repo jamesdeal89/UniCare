@@ -16,6 +16,7 @@ nlu:
     - Can you help me write my diary entry
     - Can you help me write my journal log
     - Im not sure where to start with my journal
+    - 
 
 - intent: ask_explain
   examples: |
@@ -106,6 +107,19 @@ nlu:
     - Hey there
     - Good morning
     - Good afternoon
+    - hi
+    - howdy
+    - gday
+    - nice to see you
+    - long time no see
+    - whassup bot
+    - hey bot
+    - hi bot
+    - hi how are you
+    - hello how are you
+    - hows it going
+    - sup
+    - salutations
 
 - intent: express_emotion
   examples: |
