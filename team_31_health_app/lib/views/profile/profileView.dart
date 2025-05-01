@@ -1,47 +1,85 @@
-import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart'; // Add fl_chart to your pubspec.yaml
+import 'package:flutter/material.dart';
+import 'package:team_31_health_app/data/database/journalRepo.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+  const ProfileView({super.key, required this.journalRepo});
+  final JournalRepo journalRepo;
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  List<Map<String, Object>> activityData = [
-    {
-      'label': 'Give',
-      'value': 10.0,
-      'colour': Colors.orange
-    },
-    {
-      'label': 'Take Notice',
-      'value': 10.0,
-      'colour': Colors.yellow
-    },
-    {
-      'label': 'Keep Learning',
-      'value': 10.0,
-      'colour': Colors.blue
-    },
-    {
-      'label': 'Connect',
-      'value': 10.0,
-      'colour': Colors.purple
-    },
-    {
-      'label': 'Be Active',
-      'value': 10.0,
-      'colour': Colors.pinkAccent
-    },
-  ];
+  // 
+  late Future<List<Map<String, Object>>> activityData;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // setState(() {
+    activityData = getActivityData();
+    // });
+  }
+
+  Future<List<Map<String, Object>>> getActivityData() async {
+    try {
+      int give = await widget.journalRepo.count(0);
+      int takeNotice = await widget.journalRepo.count(1);
+      int keepLearning = await widget.journalRepo.count(2);
+      int connect = await widget.journalRepo.count(3);
+      int beActive = await widget.journalRepo.count(4);
+
+      List<Map<String, Object>> activityData = [
+        {
+          'label': 'Give',
+          'value': 10.0,
+          'colour': Colors.orange
+        },
+        {
+          'label': 'Take Notice',
+          'value': 10.0,
+          'colour': Colors.yellow
+        },
+        {
+          'label': 'Keep Learning',
+          'value': 10.0,
+          'colour': Colors.blue
+        },
+        {
+          'label': 'Connect',
+          'value': 10.0,
+          'colour': Colors.purple
+        },
+        {
+          'label': 'Be Active',
+          'value': 10.0,
+          'colour': Colors.pinkAccent
+        },
+      ];
+      return activityData;
+    } catch (e) {
+      rethrow;
+    }
+    
+  }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder(future: activityData, builder: (context, snapshot) {
+      if(snapshot.connectionState != ConnectionState.done){
+        return Text("Loading");
+      }
+      if (snapshot.hasError || !snapshot.hasData){
+        setState(() {
+          activityData = getActivityData();
+        });
+        return Text("Retrying");
+      } else {
+  
     // Calculate total to be used in percentage calculation
     double total = 0.0;
-    for (var item in activityData) {
+    for (var item in snapshot.data!) {
       total += item['value'] as double;
     }
 
@@ -127,75 +165,89 @@ class _ProfileViewState extends State<ProfileView> {
         ),
       ),
     );
+    }
+    });
   }
 
   Widget _buildActivityChart(double total) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 200,
-          width: 200,
-          child: Stack(
-            children: [
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black),
+    return FutureBuilder(future: activityData,builder: (context, snapshot) {
+      if(snapshot.connectionState != ConnectionState.done){
+        return Text("Loading");
+      }
+      if (snapshot.hasError || !snapshot.hasData){
+        setState(() {
+          activityData = getActivityData();
+        });
+        return Text("Retrying");
+      } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 200,
+            width: 200,
+            child: Stack(
+              children: [
+                Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black),
+                  ),
                 ),
-              ),
-              PieChart(
-                PieChartData(
-                  // Mapping the activities to the pie chart
-                  sections: activityData.map((d) {
-                    return PieChartSectionData(
-                      value: d['value'] as double,
-                      color: d['colour'] as Color,
-                      radius: 100,
-                      showTitle: false,
-                    );
-                  }).toList(),
-                  centerSpaceRadius: 0,
-                  sectionsSpace: 1,
+                PieChart(
+                  PieChartData(
+                    // Mapping the activities to the pie chart
+                    sections: snapshot.data!.map((d) {
+                      return PieChartSectionData(
+                        value: d['value'] as double,
+                        color: d['colour'] as Color,
+                        radius: 100,
+                        showTitle: false,
+                      );
+                    }).toList(),
+                    centerSpaceRadius: 0,
+                    sectionsSpace: 1,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const SizedBox(width: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: activityData.asMap().entries.map((entry) {
-            final data = entry.value;
-            final value = data['value'] as double;
-            final percentage = ((value / total) * 100).toStringAsFixed(1); // 1 dec. place
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 16,
-                    height: 16,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: data['colour'] as Color,
+          const SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: snapshot.data!.asMap().entries.map((entry) {
+              final data = entry.value;
+              final value = data['value'] as double;
+              final percentage = ((value / total) * 100).toStringAsFixed(1); // 1 dec. place
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 16,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: data['colour'] as Color,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  // Print out percentage for the given segment
-                  Text(
-                    "${data['label']}: $percentage%",
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
-      ],
-    );
+                    const SizedBox(width: 8),
+                    // Print out percentage for the given segment
+                    Text(
+                      "${data['label']}: $percentage%",
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      );
+    }});
+  
   }
 
   // Button with press animation
@@ -217,7 +269,7 @@ class _ProfileViewState extends State<ProfileView> {
 
   void _incrementActivity(int index) {
     setState(() {
-      activityData[index]['value'] = (activityData[index]['value'] as double) + 5.0;
+      // activityData[index]['value'] = (activityData[index]['value'] as double) + 5.0;
     });
   }
 }

@@ -19,6 +19,12 @@ class _TypingBubbleState extends State<TypingBubble> with SingleTickerProviderSt
 
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    animationController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       alignment: Alignment.centerLeft,

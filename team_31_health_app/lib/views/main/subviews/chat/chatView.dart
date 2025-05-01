@@ -35,7 +35,8 @@ class _ChatView extends State<ChatView>{
 
   Future<List<ChatMsg>> getMessages() async {
     try {
-      return (await widget.chatRepo.get()).reversed.toList();
+      return [ChatMsg(false, "msg")];
+      // return (await widget.chatRepo.get()).reversed.toList();
     } catch (_) {
       rethrow;
     }
