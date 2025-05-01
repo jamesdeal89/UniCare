@@ -11,6 +11,7 @@ import 'package:team_31_health_app/views/main/subviews/chat/components/botMsgErr
 
 class ChatRepo extends DatabaseService<ChatMsg> {
   ChatRepo({required super.database});
+  String uid = "user";
 
 
   @override
@@ -53,14 +54,18 @@ class ChatRepo extends DatabaseService<ChatMsg> {
     if(message.user){
       // get the uid of the signed-in user - allows rasa server to recognise returning users.
       User? currentUser = FirebaseAuth.instance.currentUser;
-      String uid = "user";
       if (currentUser != null) {
         print('User is signed in: ${currentUser.uid}');
         uid = currentUser.uid;
       } else {
         print('No user is signed in.');
-        // create random username to keep chat privacy
-        uid = generateRandomString(12);
+        // create random username to keep chat privacy (only occurs if in Demo Mode.)
+        // This will only set it once (per session.)
+        // If the uid is not the default "user", this will not override it.
+        // Means that even in Demo Mode, it'll keep a temporary session record of triggers, user access times, etc.
+        if (uid == "user") {
+          uid = generateRandomString(12);
+        }
       }
 
       final response = await http.post(
