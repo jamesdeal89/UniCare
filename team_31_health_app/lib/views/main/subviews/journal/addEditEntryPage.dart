@@ -95,7 +95,9 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
             children: <Widget>[
               TextFormField(
                 controller: _titleController,
+                style: Theme.of(context).textTheme.titleLarge,
                 decoration: const InputDecoration(
+                  
                   labelText: 'Title',
                 ),
                 validator: (value) {
@@ -185,6 +187,7 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: _descriptionController,
+                style: Theme.of(context).textTheme.bodyMedium,
                 decoration: const InputDecoration(
                   labelText: 'Description',
                   alignLabelWithHint: true,
