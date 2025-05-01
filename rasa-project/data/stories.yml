@@ -108,6 +108,9 @@ stories:
   - action: action_resources
   - action: utter_disclosure
    
+- story: greet example
+  steps:
+
 - story: happy path step
   steps:
   - intent: greet
@@ -144,6 +147,11 @@ stories:
   - action: action_advice
   - action: action_resources
   - action: utter_disclosure
+
+- story: thanks bot
+  steps:
+  - intent: thanks
+  - action: utter_welcome
 
 - story: goodbye
   steps:

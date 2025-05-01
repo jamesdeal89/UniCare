@@ -1,6 +1,7 @@
 version: '3.1'
 intents:
   - greet
+  - thanks
   - express_emotion
   - seek_advice
   - request_help
@@ -60,8 +61,12 @@ actions:
   - action_save_trigger
   - utter_goodbye
   - utter_disclosure
+  - utter_welcome
 
 responses:
+  utter_welcome:
+  - text: "You're very welcome. I'm always here to help."
+
   utter_greet:
   - text: "Hello! How can I help?"
 

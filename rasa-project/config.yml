@@ -21,7 +21,7 @@ pipeline:
 - name: DIETClassifier
   # prevent clashes with the Regex for url entities
   entities: ["emotion", "trigger"]
-  epochs: 100
+  epochs: 80
 - name: EntitySynonymMapper
 - name: FallbackClassifier
   threshold: 0.3
@@ -30,6 +30,6 @@ policies:
 - name: MemoizationPolicy
 - name: TEDPolicy
   max_history: 5
-  epochs: 100
+  epochs: 80
   assistant_id: 20250225-150340-visible-latitude
 assistant_id: 20250427-121359-strong-ion
