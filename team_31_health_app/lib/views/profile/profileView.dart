@@ -17,9 +17,7 @@ class _ProfileViewState extends State<ProfileView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // setState(() {
     activityData = getActivityData();
-    // });
   }
 
   Future<List<Map<String, Object>>> getActivityData() async {
@@ -33,27 +31,27 @@ class _ProfileViewState extends State<ProfileView> {
       List<Map<String, Object>> activityData = [
         {
           'label': 'Give',
-          'value': 10.0,
+          'value': give.toDouble(),
           'colour': Colors.orange
         },
         {
           'label': 'Take Notice',
-          'value': 10.0,
+          'value': takeNotice.toDouble(),
           'colour': Colors.yellow
         },
         {
           'label': 'Keep Learning',
-          'value': 10.0,
+          'value': keepLearning.toDouble(),
           'colour': Colors.blue
         },
         {
           'label': 'Connect',
-          'value': 10.0,
+          'value': connect.toDouble(),
           'colour': Colors.purple
         },
         {
           'label': 'Be Active',
-          'value': 10.0,
+          'value': beActive.toDouble(),
           'colour': Colors.pinkAccent
         },
       ];
@@ -70,101 +68,106 @@ class _ProfileViewState extends State<ProfileView> {
       if(snapshot.connectionState != ConnectionState.done){
         return Text("Loading");
       }
-      if (snapshot.hasError || !snapshot.hasData){
-        setState(() {
-          activityData = getActivityData();
-        });
-        return Text("Retrying");
+      else if (snapshot.hasError || !snapshot.hasData){
+        print(snapshot.hasError);
+        return TextButton(
+          onPressed: (){
+            setState(() {
+              activityData = getActivityData();
+            });
+          },
+          child: Text("Retry")
+        );
+        
       } else {
-  
-    // Calculate total to be used in percentage calculation
-    double total = 0.0;
-    for (var item in snapshot.data!) {
-      total += item['value'] as double;
-    }
+        // Calculate total to be used in percentage calculation
+        double total = 0.0;
+        for (var item in snapshot.data!) {
+          total += item['value'] as double;
+        }
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20, right: 32, top: 32),
-                child: Text(
-                  "Profile",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Profile picture
-                      CircleAvatar(
-                        radius: 50,
-                        //backgroundImage:
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        "Hello John",
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-
-                      const SizedBox(height: 24),
-                      const Text("Activity Breakdown", style: TextStyle(fontSize: 18)),
-                      const SizedBox(height: 16),
-
-                      _buildActivityChart(total),
-
-                      const SizedBox(height: 32),
-                      _buildActionButton(context, "Change Nickname", Icons.edit, () {
-                        /* TODO */
-                      }),
-                      _buildActionButton(context, "Change Password", Icons.lock, () {
-                        /* TODO */
-                      }),
-                      _buildActionButton(context, "Delete Account", Icons.delete_forever, () {
-                        /* TODO */
-                      }, color: Colors.red),
-
-                      // Demo buttons
-                      const SizedBox(height: 10),
-                      Text(
-                        "Demo Buttons",
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      _buildActionButton(context, "+Give", Icons.handshake, () {
-                        _incrementActivity(0);
-                      }, color: Colors.orange),
-                      _buildActionButton(context, "+Take Notice", Icons.lens, () {
-                        _incrementActivity(1);
-                      }, color: Colors.yellow),
-                      _buildActionButton(context, "+Keep Learning", Icons.book, () {
-                        _incrementActivity(2);
-                      }, color: Colors.blue),
-                      _buildActionButton(context, "+Connect", Icons.link, () {
-                        _incrementActivity(3);
-                      }, color: Colors.purple),
-                      _buildActionButton(context, "+Be Active", Icons.man, () {
-                        _incrementActivity(4);
-                      }, color: Colors.pinkAccent),
-                    ],
+        return Scaffold(
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20, right: 32, top: 32),
+                    child: Text(
+                      "Profile",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
                 ),
-              ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // Profile picture
+                          CircleAvatar(
+                            radius: 50,
+                            //backgroundImage:
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            "Hello John",
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+
+                          const SizedBox(height: 24),
+                          const Text("Activity Breakdown", style: TextStyle(fontSize: 18)),
+                          const SizedBox(height: 16),
+
+                          _buildActivityChart(total),
+
+                          const SizedBox(height: 32),
+                          _buildActionButton(context, "Change Nickname", Icons.edit, () {
+                            /* TODO */
+                          }),
+                          _buildActionButton(context, "Change Password", Icons.lock, () {
+                            /* TODO */
+                          }),
+                          _buildActionButton(context, "Delete Account", Icons.delete_forever, () {
+                            /* TODO */
+                          }, color: Colors.red),
+
+                          // Demo buttons
+                          const SizedBox(height: 10),
+                          Text(
+                            "Demo Buttons",
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 10),
+                          _buildActionButton(context, "+Give", Icons.handshake, () {
+                            _incrementActivity(0);
+                          }, color: Colors.orange),
+                          _buildActionButton(context, "+Take Notice", Icons.lens, () {
+                            _incrementActivity(1);
+                          }, color: Colors.yellow),
+                          _buildActionButton(context, "+Keep Learning", Icons.book, () {
+                            _incrementActivity(2);
+                          }, color: Colors.blue),
+                          _buildActionButton(context, "+Connect", Icons.link, () {
+                            _incrementActivity(3);
+                          }, color: Colors.purple),
+                          _buildActionButton(context, "+Be Active", Icons.man, () {
+                            _incrementActivity(4);
+                          }, color: Colors.pinkAccent),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
     }
     });
   }
