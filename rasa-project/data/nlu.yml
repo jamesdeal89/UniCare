@@ -177,9 +177,11 @@ nlu:
 - intent: thanks
   examples: |
     - thanks
+    - I appreciate the help
+    - thanks for helping
+    - thanks for the help
     - thank you
     - that's useful, thanks
-    - thank you 
     - thanks for the help bot
     - thanks bot
 
