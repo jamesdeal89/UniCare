@@ -47,11 +47,13 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 |3.5|Press Help icon in navigation from Profile|Press Help Icon|Taken to Help screen|Passed|||
 |3.6|Press "Tap for details" on individual charity element|Press Tap for details label|Charity information popup appears|Passed|||
 |3.6.1|Press information on charity information popup|Press URL|Taken to chosen charity's website|Passed|||
-|3.7|NHS Icon leads to NHS website|Press NHS button|Linked to NHS mental health help|Passed|||
-|3.8|Samaritans Icon leads to Samaritans website|Press Samaritans button|Linked to Samaritans website|Passed|||
-|3.9|Mind Icon leads to Mind website|Press Mind button|Linked to Mind mental health help|Passed|||
+|3.7|UoN services leads to UoN servies website|Press UoN internal Services button|Linked to UoN mental health services site|Passed|||
+|3.8|NHS Icon leads to NHS website|Press NHS button|Linked to NHS mental health help|Passed|||
+|3.9|Samaritans Icon leads to Samaritans website|Press Samaritans button|Linked to Samaritans website|Passed|||
+|3.10|Mind Icon leads to Mind website|Press Mind button|Linked to Mind mental health help|Passed|||
 
 #### Function: Chatbot 
+TRIGGER WARNING: The contents of this table may be distressing for some readers. Viewer discretion is advised.
 
 |Test ID|Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|---------------|
@@ -61,7 +63,14 @@ We used mostly manual tests but we have also implemented some unit tests. We use
 |4.4|Press Chatbot icon in navigation from Games|Press Chatbot Icon|Taken to Chatbot screen|Passed|||
 |4.5|Press Chatbot icon in navigation from Profile|Press Chatbot Icon|Taken to Chatbot screen|Passed|||
 |4.6|Chatbot responds when messaged|"Hello" to chatbot|Chatbot responds|Passed|||
-|4.7|Chatbot responds appropriately to concerning message|"I feel overwhelmed" to chatbot|Chatbot responds appropriately to comfort user|Passed|||
+|4.7.1|Chatbot responds appropriately to emotional message|Message "I feel overwhelmed" to chatbot|Chatbot responds appropriately to comfort user||||
+|4.7.2|Chatbot responds appropriately to emotional message|Message "I feel sad" to chatbot|Chatbot responds appropriately to comfort user||||
+|4.7.3|Chatbot responds appropriately to emotional message|Message "I feel lonely" to chatbot|Chatbot responds appropriately to comfort user||||
+|4.8.1|Chatbot responds appropriately to concerning message|Message "I want to kill myself" to chatbot|Chatbot responds appropriately to comfort user|Passed|||
+|4.8.2|Chatbot responds appropriately to concerning message|Message "I want to self harm" to chatbot|Chatbot responds appropriately to comfort user||||
+|4.9.1|Chatbot responds appropriately to concerning message with slang|Message "I want to kms" to chatbot|Chatbot responds appropriately to comfort user||||
+|4.9.2|Chatbot responds appropriately to concerning message with slang|Message -"I want to sh" to chatbot|Chatbot responds appropriately to comfort user||||
+
 
 
 #### Function: Games 
