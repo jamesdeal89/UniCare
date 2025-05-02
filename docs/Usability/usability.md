@@ -173,23 +173,23 @@ The Mobile App Rating Scale is a tool to assess the quality of apps providing he
 
 The questions itself are split into 5 sections, 4 of which are scored upon and cover topics such as the engagement factor, functionality, aesthetics and quality of information provided. The final section is a “final remarks” section, which asks the users real world scenarios around using the app.
 
-The template for the MARS Testing is shown below:
+The MARS for the application is filled in below.
 
 **MARS**
 
-**App Name:** 
-**Developer:** 
-**Version:** 
-**Last update:** 
-**Platform(s):**
+**App Name:** Team 31 Health App
+**Developer:** Team 31
+**Version:** 1.0.0
+**Last update:** 1.0.0
+**Platform(s):** iOS, Android
 
-**Brief application description:** 
-**App focus:** 
-**Theoretical background/strategies:** 
+**Brief application description:** Guidance app around achieving positive mental health through games and being provided resources
+**App focus:** Mental health
+**Theoretical background/strategies:** CBT
 
-**Affiliation:** 
-**Target age group:** 
-**Technical aspects of the life:** 
+**Affiliation:** University
+**Target age group:** 18-65
+**Technical aspects of the app:** Requires login, has password-protection, needs web access to function
 
 ### Section 1 – Engagement
 
@@ -206,9 +206,9 @@ This section scores the app on its engageability; fun, customisable, interactive
         time (5 to 10 minutes total)
     5.  Highly entertaining and fun, would stimulate repeat use
 
-|                  |     |
-|------------------|-----|
-| Question 1 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 1 Score | 3    |
 
 2.  Is the app interesting to use? Does it use any strategies to
     increase engagement by present its content in an interesting way?
@@ -221,9 +221,9 @@ This section scores the app on its engageability; fun, customisable, interactive
         minutes total)
     5.  Very interesting, would engage user in repeat use
 
-|                  |     |
-|------------------|-----|
-| Question 2 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 2 Score | 4    |
 
 3.  Does it provide/retain all necessary settings/preferences for apps
     features (e.g. sound, content, notifications, etc.)?
@@ -236,9 +236,9 @@ This section scores the app on its engageability; fun, customisable, interactive
     5. Allows complete tailoring to the individual’s
         characteristics/preferences, retains all settings
 
-|                  |     |
-|------------------|-----|
-| Question 3 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 3 Score | 3    |
 
 4.  Does it allow user input, provide feedback, contain prompts
     (reminders, sharing options, notifications, etc.)? Note: These
@@ -252,9 +252,9 @@ This section scores the app on its engageability; fun, customisable, interactive
     5. Very high level of responsiveness through interactive
         features/feedback/user input options
 
-|                  |     |
-|------------------|-----|
-| Question 4 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 4 Score | 3    |
 
 5.  Is the app content (visual information, language, design)
     appropriate for your target audience?
@@ -266,13 +266,13 @@ This section scores the app on its engageability; fun, customisable, interactive
     4. Well-targeted, with negligible issues
     5. Perfectly targeted, no issues found
 
-|                  |     |
-|------------------|-----|
-| Question 5 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 5 Score | 4    |
 
-|                      |     |
-|----------------------|-----|
-| Section 1 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 1 Mean Score | 3.4  |
 
 ### Section 2 – Functionality
 
@@ -291,9 +291,9 @@ navigate, the flow logic and gestural design of the app.
     5. Perfect/timely response; no technical bugs found/contains a
         ‘loading time left’ indicator
 
-|                  |     |
-|------------------|-----|
-| Question 6 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 6 Score | 3    |
 
 7.  How easy is it to learn how to use the app; how clear are the menu
     labels/icons and instructions?
@@ -305,9 +305,9 @@ navigate, the flow logic and gestural design of the app.
     4. Easy to learn how to use the app (or has clear instructions)
     5. Able to use app immediately; intuitive; simple
 
-|                  |     |
-|------------------|-----|
-| Question 7 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 7 Score | 4    |
 
 8.  Is moving between screens
     logical/accurate/appropriate/uninterrupted; are all necessary screen
@@ -321,9 +321,9 @@ navigate, the flow logic and gestural design of the app.
     5. Perfectly logical, easy, clear and intuitive screen flow
         throughout, or offer shortcuts
 
-|                  |     |
-|------------------|-----|
-| Question 8 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 8 Score | 5    |
 
 9. Are interactions with the touch screen consistent and intuitive
     across all components/screens?
@@ -334,13 +334,13 @@ navigate, the flow logic and gestural design of the app.
     4. Mostly consistent/intuitive with negligible problems
     5. Perfectly consistent and intuitive
 
-|                  |     |
-|------------------|-----|
-| Question 9 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 9 Score | 5    |
 
-|                      |     |
-|----------------------|-----|
-| Section 2 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 2 Mean Score | 4.25 |
 
 ### Section 3 – Aesthetics
 
@@ -361,9 +361,9 @@ scheme and stylistic consistency.
     5. Professional, simple, clear, orderly, logically organised,
         device display optimised. Every design component has a purpose
 
-|                   |     |
-|-------------------|-----|
-| Question 10 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 10 Score | 4    |
 
 11. How high is the quality/resolution of graphics used for
     buttons/icons/menus/content?
@@ -379,9 +379,9 @@ scheme and stylistic consistency.
     5. Very high quality/resolution graphics and visual design –
         proportionate, stylistically consistent
 
-|                   |     |
-|-------------------|-----|
-| Question 11 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 11 Score | 3    |
 
 12. How good does the app look?
 
@@ -395,13 +395,13 @@ scheme and stylistic consistency.
     5. As above, plus very attractive, memorable, stands out; use of
          colour enhances app features/menus
 
-|                   |     |
-|-------------------|-----|
-| Question 12 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 12 Score | 4    |
 
-|                      |     |
-|----------------------|-----|
-| Section 3 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 3 Mean Score | 3.67 |
 
 ### Section 4 – Information
 
@@ -419,37 +419,37 @@ as text, feedback and the sources used.
          components/functions
     5. Highly accurate description of the app components/functions
 
-|                   |     |
-|-------------------|-----|
-| Question 13 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 13 Score | 5    |
 
 14. Does app have specific, measurable and achievable goals (specified
     in app store description or within the app itself)? \[Leave blank if
     app does not list goals or app is irrelevant to research goal.\]
 
-1. App has no chance of achieving its stated goals
-2. Description lists some goals, but app has very little chance of
-   achieving them
-3. OK. App has clear goals which may be achievable
-4. App has clearly specified goals, which are measurable and achievable
-5. App has specific and measurable goals, which are highly likely to be
-   achieved
+    1. App has no chance of achieving its stated goals
+    2. Description lists some goals, but app has very little chance of
+       achieving them
+    3. OK. App has clear goals which may be achievable
+    4. App has clearly specified goals, which are measurable and achievable
+    5. App has specific and measurable goals, which are highly likely to be
+       achieved
 
-|                   |     |
-|-------------------|-----|
-| Question 14 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 14 Score | N/A  |
 
 15. Is app content correct, well written, and relevant to the goal/topic
     of the app?
     1. Irrelevant/inappropriate/incoherent/incorrect
     2. Poor, barely relevant/appropriate/coherent/may be incorrect
-    3. Moderately relveant/appropaite/coherent/and appears correct
-    4. Relevant/appropiate/coherent/correct
+    3. Moderately relevant/appropriate/coherent/and appears correct
+    4. Relevant/appropriate/coherent/correct
     5. Highly relevant, appropriate, coherent, and correct
 
-|                   |     |
-|-------------------|-----|
-| Question 15 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 15 Score | 4    |
 
 16. Is the extent coverage within the scope of the app; and
     comprehensive but concise?
@@ -463,9 +463,9 @@ as text, feedback and the sources used.
     5. Comprehensive and concise; contains links to more information
          and resources
 
-|                   |     |
-|-------------------|-----|
-| Question 16 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 16 Score | 5    |
 
 17.  Is visual explanation of concepts – through
     charts/graphs/images/videos etc. - clear, logic and correct?
@@ -476,9 +476,9 @@ as text, feedback and the sources used.
     4. Mostly clear/logic/correct with negligible issues
     5. Perfectly clear/logical/correct
 
-|                   |     |
-|-------------------|-----|
-| Question 17 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 17 Score | 4    |
 
 18.  Does the app come from a legitimate source?
 
@@ -492,9 +492,9 @@ as text, feedback and the sources used.
     5. Developed using nationally competitive government or research
          funding
 
-|                   |     |
-|-------------------|-----|
-| Question 18 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 18 Score | 4    |
 
 19. Has the app been trialled/tested? \[N/A if not tested\]
 
@@ -511,13 +511,14 @@ as text, feedback and the sources used.
     5. App has been trialled and outcome tested in 3 or more high
          quality RCTs indicating positive results
 
-|                   |     |
-|-------------------|-----|
-| Question 19 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 19 Score | 3    |
 
-|                        |     |
-|------------------------|-----|
-| Section 4 Mean Score\* |     |
+|                        |      |
+| ---------------------- | ---- |
+| Section 4 Mean Score\* | 4.1  |
+|                        |      |
 
 \*exclude N/A questions from the mean score calculation
 
@@ -536,9 +537,9 @@ design.
     4. 
     5. Definitely
 
-|                   |     |
-|-------------------|-----|
-| Question 20 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 20 Score | 4    |
 
 21. How many times do you think you would use this app in the next 12
     months if it was relevant to you?
@@ -549,9 +550,9 @@ design.
     4. 10-50
     5. \>50
 
-|                   |     |
-|-------------------|-----|
-| Question 21 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 21 Score | 3    |
 
 22.  Would you pay for this app?
 
@@ -561,9 +562,9 @@ design.
     4. 
     5. Definitely
 
-|                   |     |
-|-------------------|-----|
-| Question 22 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 22 Score | 2    |
 
 23. What is your overall star rating of the app?
 
@@ -573,13 +574,14 @@ design.
     4. Above average
     5. One of the best apps I’ve used
 
-|                   |     |
-|-------------------|-----|
-| Question 23 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 23 Score | 3    |
 
-|                      |     |
-|----------------------|-----|
-| Section 5 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 5 Mean Score | 3    |
+|                      |      |
 
 ### Scoring
 
@@ -588,6 +590,6 @@ overall mean to 2 decimal places. Any N/A answers must be removed from
 individual section scores in order to not negatively affect the final
 scoring. Section 5 can be seen as a subjective opinion on the app.
 
-|            |     |
-|------------|-----|
-| MARS Score |     |
+|            |      |
+| ---------- | ---- |
+| MARS Score | 3.86 |
