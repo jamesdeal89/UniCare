@@ -11,6 +11,8 @@ To prevent potential legal issues, the application must conform to a “Level AA
 
 Some sections may seem irrelevant to the app, but it is a good idea to include them anyway to recognise any areas where accessibility may need improvement.
 
+This section has been performed internally and has not been verified independently. Areas which are perceived to be in conformation are denoted with an "X".
+
 ### Section 1- Perceivable
 
 This section dictates how information and user interface components must be presentable to users in ways they can perceive. The definition of each section can be [found here.](https://www.w3.org/TR/WCAG22/#abstract)
@@ -19,42 +21,42 @@ This section dictates how information and user interface components must be pres
 |----|----|----|
 | Section 1: Perceivable | Level of Conformity | Conforms? |
 | **1.1 Text Alternatives** | \- | \- |
-| 1.1.1 Non-Text Content | A |  |
+| 1.1.1 Non-Text Content | A | X |
 | **1.2 Time-Based Media** | \- | \- |
-| 1.2.1 Audio-only and Video-only (Pre-recorded) | A |  |
-| 1.2.2 Captions (Pre-recorded) | A |  |
-| 1.2.3 Audio Description or Media Alternative (Pre-recorded) | A |  |
-| 1.2.4 Captions (Live) | AA |  |
-| 1.2.5 Audio Description (Pre-recorded) | AA |  |
-| 1.2.6 Sign Language (Pre-recorded) | AAA |  |
-| 1.2.7 Extended Audio Description (Pre-recorded) | AAA |  |
-| 1.2.8 Media Alternative (Pre-recorded) | AAA |  |
-| 1.2.9 Audio-only (Live) | AAA |  |
+| 1.2.1 Audio-only and Video-only (Pre-recorded) | A | N/A |
+| 1.2.2 Captions (Pre-recorded) | A | N/A |
+| 1.2.3 Audio Description or Media Alternative (Pre-recorded) | A | N/A |
+| 1.2.4 Captions (Live) | AA | N/A |
+| 1.2.5 Audio Description (Pre-recorded) | AA | N/A |
+| 1.2.6 Sign Language (Pre-recorded) | AAA | N/A |
+| 1.2.7 Extended Audio Description (Pre-recorded) | AAA | N/A |
+| 1.2.8 Media Alternative (Pre-recorded) | AAA | N/A |
+| 1.2.9 Audio-only (Live) | AAA | N/A |
 | **1.3 Adaptable** | \-------------------------- | -- |
-| 1.3.1 Info and Relationships | A |  |
-| 1.3.2 Meaningful Sequence | A |  |
-| 1.3.3 Sensory Characteristics | A |  |
-| 1.3.4 Orientation | AA |  |
-| 1.3.5 Identify Input Purpose | AA |  |
+| 1.3.1 Info and Relationships | A | X |
+| 1.3.2 Meaningful Sequence | A | X |
+| 1.3.3 Sensory Characteristics | A | X |
+| 1.3.4 Orientation | AA | X |
+| 1.3.5 Identify Input Purpose | AA | X |
 | 1.3.6 Identify Purpose | AAA |  |
 | **1.4 Distinguishable** | ***-*** | \- |
-| 1.4.1 Use of colour | A |  |
-| 1.4.2 Audio Control | A |  |
-| 1.4.3 Contrast (Minimum) | AA |  |
-| 1.4.4 Resize Text | AA |  |
-| 1.4.5 Images of Text | AA |  |
+| 1.4.1 Use of colour | A | X |
+| 1.4.2 Audio Control | A | N/A |
+| 1.4.3 Contrast (Minimum) | AA | X |
+| 1.4.4 Resize Text | AA | X |
+| 1.4.5 Images of Text | AA | X |
 | 1.4.6 Contrast (Enhanced) | AAA |  |
-| 1.4.7 Low or No Background Audio | AAA |  |
-| 1.4.8 Visual Presentation | AAA |  |
-| 1.4.9 Images of Text (No Exception) | AAA |  |
-| 1.4.10 Reflow | AA |  |
-| 1.4.11 Non-text Contrast | AA |  |
-| 1.4.12 Text Spacing | AA |  |
-| 1.4.13 Content on Hover or Focus | AA |  |
+| 1.4.7 Low or No Background Audio | AAA | X |
+| 1.4.8 Visual Presentation | AAA | X |
+| 1.4.9 Images of Text (No Exception) | AAA | X |
+| 1.4.10 Reflow | AA | X |
+| 1.4.11 Non-text Contrast | AA | X |
+| 1.4.12 Text Spacing | AA | X |
+| 1.4.13 Content on Hover or Focus | AA | N/A |
 
-|                              |     |
-|------------------------------|-----|
-| Level of Conformity Achieved |     |
+|                              |      |
+| ---------------------------- | ---- |
+| Level of Conformity Achieved | AA   |
 
 ### Section 2 – Operable
 
