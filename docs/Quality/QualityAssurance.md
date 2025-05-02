@@ -1,12 +1,12 @@
-#### Introduction
+### Introduction
 Our project at its base is a mental health app with a chatbot and mental health themed games. The objective of the app is to provide users with access to mental health services and information through a chatbot whilst also providing entertainment through games which encourage the users to learn and understand positive vocabulary.
 
-#### The importance of quality asuurance
+#### The importance of quality assurance
 Quality assurance is essential for a successful project. We need to be very thorough in ensuring that there are no bugs in the app as new versions come out and that the app runs correctly. We have very done extensive Isolation testing to ensure that the app works as intended as we add new features.
 
-The 1st set of testing was completed before the final implementations of Journal and Profile which is why many tests fail here.
+The 1st set of testing was completed before the final implementations of Journal and Profile which is why many tests fail here. They will be reran once these are integrated within the app.
 #### Test Plans
-We used mostly manual tests but we have also implemented some unit tests. We used unit tests for features
+We used manual tests for the process as a way to test app functionality in a way that the user would be able to achieve.
 
 #### Function: Login 
 
@@ -82,10 +82,10 @@ TRIGGER WARNING: The contents of this table may be distressing for some readers.
 |5.3|Press Games icon in navigation from Chatbot|Press Games Icon|Taken to Games screen|Passed|||
 |5.4|Press Games icon in navigation from Games|Press Games Icon|Remain on Games screen|Passed|||
 |5.5|Press Games icon in navigation from Profile|Press Games Icon|Taken to Games screen|Passed|||
-|5.7.1|Open mordle|Press Morlde Tab|Taken to Mordle Game|Passed|||
-|5.7.2|Get a morlde hint|Press Morlde hint|Valid hint given|Passed|||
-|5.7.3|Correct morlde word||Success message and new mordle word|Passed|||
-|5.7.4|Mordle word is incorrect||Appropritate yellow and gray lettering|Passed|||
+|5.7.1|Open mordle|Press Mordle Tab|Taken to Mordle Game|Passed|||
+|5.7.2|Get a Mordle hint|Press Mordle hint|Valid hint given|Passed|||
+|5.7.3|Correct Mordle word|Enter correct Mordle word|Success message and new mordle word|Passed|||
+|5.7.4|Mordle word is incorrect|Enter incorrect Mordle word|Appropriate yellow and grey lettering|Passed|||
 |5.7.5|Return to games screen from Mordle|Press Backwards arrow|Taken to Games Screen|Passed|||
 |5.8.1|Open inhail|Press Inhail Tab|Taken to Inhail Game|Passed|||
 |5.8.2|Open Coherent Breathing|Press Coherent Breathing|Coherent Breathing exercise initiated|Passed|||
@@ -108,5 +108,4 @@ TRIGGER WARNING: The contents of this table may be distressing for some readers.
 |6.6|Update password|Put in valid password and press confirm|Confirmation of updated password|Failed|||
 |6.7|Update profile picture|Upload profile picture|Confirmation of updated password and new picture is displayed|Failed|||
 |6.8|Habit pi chart is updating|Add habits in journalling|Pi chart updates live|Passed|||
-
 
