@@ -51,6 +51,7 @@ class _MordleViewState extends State<MordleView> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         foregroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onSurface),
         title: Text(
           "Mordle",
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -145,7 +146,7 @@ class _MordleViewState extends State<MordleView> {
       final keyWidth = (constraints.maxWidth - 24) / 10;
 
       return SingleChildScrollView(
-        child: Column(
+          child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
