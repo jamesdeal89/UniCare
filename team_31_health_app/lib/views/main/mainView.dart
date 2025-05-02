@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,10 +13,12 @@ class MainView extends StatefulWidget {
 }
 
 class _MainView extends State<MainView> {
+  final User? currentUser = FirebaseAuth.instance.currentUser;
   /// This command
   Future<Database> initDB() async {
-    final database = openDatabase(
-      join(await getDatabasesPath(), "care_app.db"),
+    String key = ((currentUser?.uid) != null) ? currentUser!.uid : "";
+    final database = await openDatabase(
+      join(await getDatabasesPath(), "care_app$key.db"),
       
       onCreate: (db, version) async {
         await db.execute('CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)');
@@ -67,8 +70,9 @@ class _MainView extends State<MainView> {
         }
       },
       version: 1,
-    );
-
+    ).then((db){
+      db.execute("sql");
+    });
     return database;
   }
 
@@ -96,6 +100,7 @@ class _MainView extends State<MainView> {
                     },
                     icon: Icon(Icons.error));
               } else {
+                
                 return MainPage(database: snapshot.data!);
               } 
             }));

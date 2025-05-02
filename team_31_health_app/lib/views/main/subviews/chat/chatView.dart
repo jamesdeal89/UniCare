@@ -74,6 +74,14 @@ class _ChatView extends State<ChatView>{
     }
     
   }
+
+  Future<void> deleteChat() async {
+    try {
+      return (await widget.chatRepo.clear());
+    } catch (e) {
+      rethrow;
+    }
+  }
   Future<ChatMsg> reply() async {
     
     try {
@@ -163,9 +171,15 @@ class _ChatView extends State<ChatView>{
                                 color: Theme.of(context).colorScheme.primary,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Icon(
-                                Icons.refresh,
-                                color: Theme.of(context).colorScheme.onPrimary,
+                              child: IconButton(
+                                onPressed: () {
+                                  deleteChat();
+                                },
+                                icon: Icon(
+                                  Icons.refresh,
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                )
+                                
                               ),
                             ),
                           ],
