@@ -70,9 +70,7 @@ class _MainView extends State<MainView> {
         }
       },
       version: 1,
-    ).then((db){
-      db.execute("sql");
-    });
+    );
     return database;
   }
 
