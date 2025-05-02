@@ -50,58 +50,57 @@ class ChatRepo extends DatabaseService<ChatMsg> {
         in lastMessages) 
         ChatMsg(user.isOdd, msg)
         ];
-    if(messages.isEmpty){
-      throw BotMsgException();
-    } else {
-      final ChatMsg message = messages[0];
-      if(message.user){
-        // get the uid of the signed-in user - allows rasa server to recognise returning users.
-        User? currentUser = FirebaseAuth.instance.currentUser;
-        if (currentUser != null) {
-          print('User is signed in: ${currentUser.uid}');
-          uid = currentUser.uid;
-        } else {
-          print('No user is signed in.');
-          // create random username to keep chat privacy (only occurs if in Demo Mode.)
-          // This will only set it once (per session.)
-          // If the uid is not the default "user", this will not override it.
-          // Means that even in Demo Mode, it'll keep a temporary session record of triggers, user access times, etc.
-          if (uid == "user") {
-            uid = generateRandomString(12);
-          }
-        }
-
-        final response = await http.post(
-          Uri.parse('http://35.246.77.137:5005/webhooks/rest/webhook'),
-          headers: {'Content-Type': 'application/json'},
-          body: json.encode({'sender': uid, 'message': message.msg}),
-        ).timeout(Duration(seconds: 10),onTimeout: (){
-          throw TimeoutException("Bot timed out");
-        });
-
-        if (response.statusCode == 200) {
-          print("SUCCESSFULLY RECEIVED FROM RASA");
-          final List<dynamic> responseData = json.decode(response.body);
-          for (var msg in responseData) {
-              try {
-                ChatMsg botMsg = ChatMsg(false,msg['text'].toString());
-                print(msg.toString());
-                await database.insert('chat', botMsg.toMap());
-                running = false;
-              } on Exception catch (_) {
-                running = false;
-                rethrow;
-              }
-          }
-        } else {
-          throw HttpException('Failed to send message');
-        }
-        running = true;
-        return ChatMsg(false, "");
+    print(messages);
+  
+    final ChatMsg message = messages[0];
+    if(message.user){
+      // get the uid of the signed-in user - allows rasa server to recognise returning users.
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        print('User is signed in: ${currentUser.uid}');
+        uid = currentUser.uid;
       } else {
-        throw BotMsgException();
+        print('No user is signed in.');
+        // create random username to keep chat privacy (only occurs if in Demo Mode.)
+        // This will only set it once (per session.)
+        // If the uid is not the default "user", this will not override it.
+        // Means that even in Demo Mode, it'll keep a temporary session record of triggers, user access times, etc.
+        if (uid == "user") {
+          uid = generateRandomString(12);
+        }
       }
+
+      final response = await http.post(
+        Uri.parse('http://35.246.77.137:5005/webhooks/rest/webhook'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'sender': uid, 'message': message.msg}),
+      ).timeout(Duration(seconds: 10),onTimeout: (){
+        throw TimeoutException("Bot timed out");
+      });
+
+      if (response.statusCode == 200) {
+        print("SUCCESSFULLY RECEIVED FROM RASA");
+        final List<dynamic> responseData = json.decode(response.body);
+        for (var msg in responseData) {
+            try {
+              ChatMsg botMsg = ChatMsg(false,msg['text'].toString());
+              print(msg.toString());
+              await database.insert('chat', botMsg.toMap());
+              running = false;
+            } on Exception catch (_) {
+              running = false;
+              rethrow;
+            }
+        }
+      } else {
+        throw HttpException('Failed to send message');
+      }
+      running = true;
+      return ChatMsg(false, "");
+    } else {
+      throw BotMsgException();
     }
+    
   }
 
   /// This is the function to clear this table from the database.

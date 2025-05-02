@@ -53,8 +53,9 @@ class _ChatView extends State<ChatView>{
   @override
   void initState() {
     super.initState();
-    replyMessage = reply();
     messages = getMessages();
+    print("initing");
+    replyMessage = reply();
   }
 
   Future<List<ChatMsg>> getMessages() async {
@@ -174,8 +175,10 @@ class _ChatView extends State<ChatView>{
                               child: IconButton(
                                 onPressed: () async {
                                   await deleteChat();
+                                  await sendMessage(ChatMsg(false, "Welcome! Feel free to talk about your day! I'm here to help! :)"));
                                   setState(() {
                                     this.messages = getMessages();
+
                                   });
                                 },
                                 icon: Icon(
