@@ -67,48 +67,48 @@ This section gives guidance on the operability of user interface components and 
 | --------------------------------------- | ------------------- | --------- |
 | **Section 2: Operable**                 | Level of Conformity | Conforms? |
 | **2.1 Keyboard Accessible**             | \-                  | \-        |
-| 2.1.1 Keyboard                          | A                   |           |
-| 2.1.2 No Keyboard Tap                   | A                   |           |
-| 2.1.3 Keyboard (No Exception)           | AAA                 |           |
-| 2.1.4 Character Key Shortcuts           | AAA                 |           |
+| 2.1.1 Keyboard                          | A                   | X         |
+| 2.1.2 No Keyboard Tap                   | A                   | X         |
+| 2.1.3 Keyboard (No Exception)           | AAA                 | X         |
+| 2.1.4 Character Key Shortcuts           | AAA                 | N/A       |
 | **2.2 Enough Time**                     | \-                  | \-        |
-| 2.2.1 Timing Adjustable                 | A                   |           |
-| 2.2.2 Pause, Stop Hide                  | A                   |           |
-| 2.2.3 No Timing                         | AAA                 |           |
-| 2.2.4 Interruptions                     | AAA                 |           |
-| 2.2.5 Re-authenticating                 | AAA                 |           |
-| 2.2.6 Timeouts                          | AAA                 |           |
+| 2.2.1 Timing Adjustable                 | A                   | N/A       |
+| 2.2.2 Pause, Stop Hide                  | A                   | N/A       |
+| 2.2.3 No Timing                         | AAA                 | X         |
+| 2.2.4 Interruptions                     | AAA                 | N/A       |
+| 2.2.5 Re-authenticating                 | AAA                 | X         |
+| 2.2.6 Timeouts                          | AAA                 | X         |
 | **2.3 Seizures and Physical Reactions** | \-                  | \-        |
-| 2.3.1 Three Flashes or Below Threshold  | A                   |           |
-| 2.3.2 Three Flashes                     | AAA                 |           |
-| 2.3.3 Animation from Interactions       | AAA                 |           |
+| 2.3.1 Three Flashes or Below Threshold  | A                   | N/A       |
+| 2.3.2 Three Flashes                     | AAA                 | X         |
+| 2.3.3 Animation from Interactions       | AAA                 | X         |
 | **2.4 Navigable**                       | \-                  | \-        |
-| 2.4.1 Bypass Blocks                     | A                   |           |
-| 2.4.2 Page Titled                       | A                   |           |
-| 2.4.3 Focus Order                       | A                   |           |
-| 2.4.4 Link Purpose (in context)         | A                   |           |
-| 2.4.5 Multiple Ways                     | AA                  |           |
-| 2.4.6 Headings and Labels               | AA                  |           |
-| 2.4.7 Focus Viable                      | AA                  |           |
-| 2.4.8 Location                          | AAA                 |           |
-| 2.4.9 Link Purpose (Link Only)          | AAA                 |           |
-| 2.4.10 Section Headings                 | AAA                 |           |
-| 2.4.11 Focus Not Obscured (Minimum)     | AA                  |           |
-| 2.4.12 Focus Not Obscured (Enhanced)    | AAA                 |           |
-| 2.4.13 Focus Appearance                 | AAA                 |           |
+| 2.4.1 Bypass Blocks                     | A                   | N/A       |
+| 2.4.2 Page Titled                       | A                   | X         |
+| 2.4.3 Focus Order                       | A                   | X         |
+| 2.4.4 Link Purpose (in context)         | A                   | X         |
+| 2.4.5 Multiple Ways                     | AA                  | X         |
+| 2.4.6 Headings and Labels               | AA                  | X         |
+| 2.4.7 Focus Viable                      | AA                  | X         |
+| 2.4.8 Location                          | AAA                 | X         |
+| 2.4.9 Link Purpose (Link Only)          | AAA                 | X         |
+| 2.4.10 Section Headings                 | AAA                 | X         |
+| 2.4.11 Focus Not Obscured (Minimum)     | AA                  | X         |
+| 2.4.12 Focus Not Obscured (Enhanced)    | AAA                 | X         |
+| 2.4.13 Focus Appearance                 | AAA                 | X         |
 | **2.5 Input Modalities**                | \-                  | \-        |
-| 2.5.1 Pointer Gestures                  | A                   |           |
-| 2.5.2 Pointer Cancellation              | A                   |           |
-| 2.5.3 Label in Name                     | A                   |           |
-| 2.5.4 Motion Actuation                  | A                   |           |
-| 2.5.5 Target Size (Enhanced)            | AAA                 |           |
-| 2.5.6 Concurrent Input Mechanisms       | AAA                 |           |
-| 2.5.7 Dragging Movements                | AA                  |           |
-| 2.5.8 Target Size (Minimum)             | AA                  |           |
+| 2.5.1 Pointer Gestures                  | A                   | N/A       |
+| 2.5.2 Pointer Cancellation              | A                   | N/A       |
+| 2.5.3 Label in Name                     | A                   | X         |
+| 2.5.4 Motion Actuation                  | A                   | X         |
+| 2.5.5 Target Size (Enhanced)            | AAA                 | N/A       |
+| 2.5.6 Concurrent Input Mechanisms       | AAA                 | N/A       |
+| 2.5.7 Dragging Movements                | AA                  | N/A       |
+| 2.5.8 Target Size (Minimum)             | AA                  | N/A       |
 
-|                              |     |
-|------------------------------|-----|
-| Level of Conformity Achieved |     |
+|                              |      |
+| ---------------------------- | ---- |
+| Level of Conformity Achieved | AAA  |
 
 ### Section 3 – Understandable
 
@@ -118,33 +118,33 @@ This section details how information and the operation of the user interface mus
 |----|----|----|
 | Section 3: Understandable | Level of Conformity | Conforms? |
 | **3.1 Readable** | \- | \- |
-| 3.1.1 Language of Page | A |  |
-| 3.1.2 Language of Parts | AA |  |
-| 3.1.3 Unusual Words | AAA |  |
-| 3.1.4 Abbreviations | AAA |  |
-| 3.1.5 Reading Level | AAA |  |
-| 3.1.6 Pronunciation | AAA |  |
+| 3.1.1 Language of Page | A | X |
+| 3.1.2 Language of Parts | AA | X |
+| 3.1.3 Unusual Words | AAA | N/A |
+| 3.1.4 Abbreviations | AAA | N/A |
+| 3.1.5 Reading Level | AAA | X |
+| 3.1.6 Pronunciation | AAA | N/A |
 | **3.2 Predictable** | - | - |
-| 3.2.1 On Focus | A |  |
-| 3.2.2 On Input | A |  |
-| 3.3.3 Consistent Navigation | AA |  |
-| 3.2.4 Consistent Identification | AA |  |
-| 3.2.5 Change on Request | AAA |  |
-| 3.2.6 Consistent Help | A |  |
+| 3.2.1 On Focus | A | X |
+| 3.2.2 On Input | A | X |
+| 3.3.3 Consistent Navigation | AA | X |
+| 3.2.4 Consistent Identification | AA | X |
+| 3.2.5 Change on Request | AAA | X |
+| 3.2.6 Consistent Help | A | X |
 | **3.3 Input Assistance** | - | - |
-| 3.3.1 Error Identification | A |  |
-| 3.3.2 Labels or Instructions | A |  |
-| 3.3.3 Error Suggestion | AA |  |
-| 3.3.4 Error Prevention (Legal, Financial, Data) | AA |  |
+| 3.3.1 Error Identification | A | X |
+| 3.3.2 Labels or Instructions | A | X |
+| 3.3.3 Error Suggestion | AA | X |
+| 3.3.4 Error Prevention (Legal, Financial, Data) | AA | N/A |
 | 3.3.5 Help | AAA |  |
-| 3.3.6 Error Prevention (All) | AAA |  |
-| 3.3.7 Redundant Entry | A |  |
-| 3.3.8 Accessible Authentication (Minimum) | AA |  |
-| 3.3.9 Accessible Authentication | AAA |  |
+| 3.3.6 Error Prevention (All) | AAA | N/A |
+| 3.3.7 Redundant Entry | A | N/A |
+| 3.3.8 Accessible Authentication (Minimum) | AA | X |
+| 3.3.9 Accessible Authentication | AAA | X |
 
 |                              |      |
 | ---------------------------- | ---- |
-| Level of Conformity Achieved |      |
+| Level of Conformity Achieved | AA   |
 
 ### Section 4 – Robust
 
@@ -158,16 +158,16 @@ section can be [*found here.*](https://www.w3.org/TR/WCAG22/#robust)
 | Section 4: Robust      | Level of Conformity | Conforms? |
 | **4.1 Compatible**     | \-                  | \-        |
 | 4.1.1 \[OBSOLETE\]     | \-                  | \-        |
-| 4.1.2 Name, Role Value | A                   |           |
-| 4.1.3 Status Messages  | AA                  |           |
+| 4.1.2 Name, Role Value | A                   | X         |
+| 4.1.3 Status Messages  | AA                  | X         |
 
 |                                  |      |
 | -------------------------------- | ---- |
-| **Level of Conformity Achieved** |      |
+| **Level of Conformity Achieved** | AA   |
 
 |                                          |      |
 | ---------------------------------------- | ---- |
-| **Overall Level of Conformity Achieved** |      |
+| **Overall Level of Conformity Achieved** | AA   |
 
 ## MARS Testing
 
