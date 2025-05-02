@@ -49,11 +49,12 @@ class _ChatView extends State<ChatView>{
     }
     setState(() {});
   }
-
+  late Future<List<ChatMsg>> messages;
   @override
   void initState() {
     super.initState();
     replyMessage = reply();
+    messages = getMessages();
   }
 
   Future<List<ChatMsg>> getMessages() async {
@@ -125,7 +126,18 @@ class _ChatView extends State<ChatView>{
   Widget build(BuildContext context) {
     return FutureBuilder(
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState != ConnectionState.done) {
+                return Text("Loading");
+              } else if (snapshot.hasError || !snapshot.hasData) {
+                return IconButton(
+                    onPressed: () {
+                      setState(() {
+                        messages = getMessages();
+                        // initDB();
+                      });
+                    },
+                    icon: Icon(Icons.error));
+              } else {
             List<ChatMsg> messages = snapshot.data!;
             return Scaffold(
               body: Column(
@@ -288,21 +300,8 @@ class _ChatView extends State<ChatView>{
                 ],
               ),
             );
-          } else if (snapshot.hasError) {
-            return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                child: TextButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
-                  child: Text("Retry"),
-                ),
-              )
-            ]);
-          } else {
-            return Container();
           }
         },
-        future: getMessages());
+        future: messages);
   }
 }

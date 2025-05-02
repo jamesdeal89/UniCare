@@ -85,9 +85,9 @@ class _MainView extends State<MainView> {
         body: FutureBuilder(
             future: initDB(),
             builder: (context, AsyncSnapshot<Database> snapshot) {
-              if (snapshot.hasData) {
-                return MainPage(database: snapshot.data!);
-              } else if (snapshot.hasError) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return Text("Loading");
+              } else if (snapshot.hasError || !snapshot.hasData) {
                 return IconButton(
                     onPressed: () {
                       setState(() {
@@ -96,8 +96,8 @@ class _MainView extends State<MainView> {
                     },
                     icon: Icon(Icons.error));
               } else {
-                return Text("Loading");
-              }
+                return MainPage(database: snapshot.data!);
+              } 
             }));
   }
 }
