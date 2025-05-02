@@ -50,8 +50,8 @@ class ChatRepo extends DatabaseService<ChatMsg> {
         in lastMessages) 
         ChatMsg(user.isOdd, msg)
         ];
+    
     print(messages);
-  
     final ChatMsg message = messages[0];
     if(message.user){
       // get the uid of the signed-in user - allows rasa server to recognise returning users.
@@ -106,7 +106,10 @@ class ChatRepo extends DatabaseService<ChatMsg> {
   /// This is the function to clear this table from the database.
   Future<void> clear() async {
     try {
-      await database.delete("chat");      
+      await database.delete("chat");  
+      ChatMsg _greeting = ChatMsg(false, "Welcome! Feel free to talk about your day! I'm here to help! :)");    
+      await insert(_greeting);
+
     } catch (e) {
       rethrow;
     }

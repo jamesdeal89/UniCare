@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/chatRepo.dart';
 import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
+import 'package:team_31_health_app/data/result.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/botMsgError.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatbubble.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/typingbubble.dart';
@@ -31,7 +32,7 @@ class _ChatView extends State<ChatView>{
     notificationObserverState?.addListener(_listener);
   }
 
-  late Future<ChatMsg> replyMessage;
+  late Future<Result<ChatMsg>> replyMessage;
 
   Future<void> _refreshMessages() async {
     // re-trigger bot to load several messages - (kinda forceful work-around, sorry)
@@ -49,12 +50,12 @@ class _ChatView extends State<ChatView>{
     }
     setState(() {});
   }
-  late Future<List<ChatMsg>> messages;
+  late Future<List<ChatMsg>> chatMessages;
   @override
   void initState() {
     super.initState();
-    messages = getMessages();
-    print("initing");
+    chatMessages = getMessages();
+    
     replyMessage = reply();
   }
 
@@ -83,7 +84,7 @@ class _ChatView extends State<ChatView>{
       rethrow;
     }
   }
-  Future<ChatMsg> reply() async {
+  Future<Result<ChatMsg>> reply() async {
     
     try {
       
@@ -95,10 +96,11 @@ class _ChatView extends State<ChatView>{
       ChatMsg msg = await widget.chatRepo.reply();
       setState(() {
         _refreshMessages();
+        chatMessages = getMessages();
       });
-      return msg;
-    } catch (_) {
-      rethrow;
+      return Result.ok(msg);
+    } on Exception catch (e) {
+      return Result.error(e);
     }
   }
 
@@ -133,20 +135,21 @@ class _ChatView extends State<ChatView>{
   void Function()? submitMsg;
   @override
   Widget build(BuildContext context) {
+    
     return FutureBuilder(
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
                 return Text("Loading");
-              } else if (snapshot.hasError || !snapshot.hasData) {
+          } else if (snapshot.hasError || !snapshot.hasData) {
                 return IconButton(
                     onPressed: () {
                       setState(() {
-                        messages = getMessages();
+                        chatMessages = getMessages();
                         // initDB();
                       });
                     },
                     icon: Icon(Icons.error));
-              } else {
+          } else {
             List<ChatMsg> messages = snapshot.data!;
             return Scaffold(
               body: Column(
@@ -175,9 +178,8 @@ class _ChatView extends State<ChatView>{
                               child: IconButton(
                                 onPressed: () async {
                                   await deleteChat();
-                                  await sendMessage(ChatMsg(false, "Welcome! Feel free to talk about your day! I'm here to help! :)"));
                                   setState(() {
-                                    this.messages = getMessages();
+                                    this.chatMessages = getMessages();
 
                                   });
                                 },
@@ -222,30 +224,37 @@ class _ChatView extends State<ChatView>{
                                       return FutureBuilder(future: replyMessage, builder: (context, snapshot) {
                                         print(snapshot);
                                         print(snapshot.error);
+                                        
                                         if (snapshot.connectionState != ConnectionState.done) {
                                           return TypingBubble();
-                                        } else if (snapshot.hasError || !snapshot.hasData){
-                                          
-                                          print(snapshot.error is BotMsgException);
-                                          if (snapshot.error is BotMsgException){
-                                            return Container();
-                                          }
-                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {
-                                            setState(() {
+                                        } else if(snapshot.hasData) {
+                                          final result = snapshot.data;
+                                          switch (result) {
+                                            case Ok<ChatMsg>():
+                                              ChatMsg message = result.value;
+                                              return ChatBubble(message: message.msg, user: false);
                                               
-                                              replyMessage = reply();
-                                            });
-                                            });
+                                            case Error<BotMsgException>():
+                                              return Container();
+                                            case Error<Exception>():
+                                              return IconButton(icon: Icon(Icons.refresh), onPressed: () {
+                                                setState(() {
+                                                  
+                                                  replyMessage = reply();
+                                                });
+                                              });
+                                            default:
+                                              return Container();
+                                          }
                                         } else {
-                                          
-                                          return ChatBubble(message: snapshot.data!.msg, user: false);
+                                          return Container();
                                         }
-                                        }); 
+                                      }); 
+                                    } else {
+                                      int index = idx-1;
+
+                                      return ChatBubble(message: messages[index].msg, user: messages[index].user);
                                     }
-                                    int index = idx - 1;
-
-                                    return ChatBubble(message: messages[index].msg, user: messages[index].user);
-
                                   })))),
                   
 
@@ -322,6 +331,6 @@ class _ChatView extends State<ChatView>{
             );
           }
         },
-        future: messages);
+        future: chatMessages);
   }
 }

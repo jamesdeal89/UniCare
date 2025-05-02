@@ -86,7 +86,7 @@ class _MainView extends State<MainView> {
     return Scaffold(
         body: FutureBuilder(
             future: initDB(),
-            builder: (context, AsyncSnapshot<Database> snapshot) {
+            builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return Text("Loading");
               } else if (snapshot.hasError || !snapshot.hasData) {
