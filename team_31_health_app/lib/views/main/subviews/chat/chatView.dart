@@ -172,8 +172,11 @@ class _ChatView extends State<ChatView>{
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: IconButton(
-                                onPressed: () {
-                                  deleteChat();
+                                onPressed: () async {
+                                  await deleteChat();
+                                  setState(() {
+                                    this.messages = getMessages();
+                                  });
                                 },
                                 icon: Icon(
                                   Icons.refresh,
