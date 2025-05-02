@@ -2,9 +2,9 @@
 Our project at its base is a mental health app with a chatbot and mental health themed games. The objective of the app is to provide users with access to mental health services and information through a chatbot whilst also providing entertainment through games which encourage the users to learn and understand positive vocabulary.
 
 #### The importance of quality assurance
-Quality assurance is essential for a successful project. We need to be very thorough in ensuring that there are no bugs in the app as new versions come out and that the app runs correctly. We have very done extensive Isolation testing to ensure that the app works as intended as we add new features.
+Quality assurance is essential for a successful project. We need to be very thorough in ensuring that there are no major bugs in the app as new versions come out and that the app runs correctly across multiple use cases. We have done very extensive isolation testing to ensure that the app works as intended as we continue to add new features.
 
-The 1st set of testing was completed before the final implementations of Journal and Profile which is why many tests fail here. They will be reran once these are integrated within the app.
+The first set of testing was completed before the final implementations of the Journal and Profile screens which is why many tests fail on the first pass. They will be reran once the aforementioned screens are integrated within the app.
 #### Test Plans
 We used manual tests for the process as a way to test app functionality in a way that the user would be able to achieve.
 
