@@ -30,7 +30,6 @@ class _ProfileViewState extends State<ProfileView> {
   late Future<List<Map<String, Object>>> activityData;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     activityData = getActivityData();
   }
@@ -80,13 +79,31 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     ImageProvider backgroundImage;
-    Widget? avatar;
     if(_profileImage != null){
       backgroundImage = FileImage(_profileImage!);
-      avatar = null;
     } else {
-      backgroundImage = AssetImage('assets/images/example_profile_pricture.jpg');
-      avatar = Icon(Icons.add_a_photo, color: Colors.white70, size: 30);
+      backgroundImage = AssetImage('assets/images/example_profile_picture.jpg');
+    }
+
+    if(_isImageEnlarged && _profileImage != null){
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            _isImageEnlarged = false;
+          });
+        },
+        child: Container(
+          color: Colors.black,
+          alignment: Alignment.center,
+          child: Hero(
+            tag: 'profile-picture',
+            child: Image.file(
+              _profileImage!,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+      );
     }
 
     return FutureBuilder(future: activityData, builder: (context, snapshot) {
@@ -146,14 +163,13 @@ class _ProfileViewState extends State<ProfileView> {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: backgroundImage,
-                              child: avatar,
                             ),
                           ),
                           const SizedBox(height: 12),
                           ElevatedButton.icon(
                             onPressed: _pickImage,
-                            icon: const Icon(Icons.photo_library),
-                            label: const Text("Change Profile Picture"),
+                            icon: const Icon(Icons.photo_library,color: Colors.white),
+                            label: const Text("Change Profile Picture", style: TextStyle(color: Colors.white)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -175,7 +191,6 @@ class _ProfileViewState extends State<ProfileView> {
 
                           const SizedBox(height: 32),
                           _buildActionButton(context, "Change Nickname", Icons.edit, () {}, color: Colors.green),
-                          _buildActionButton(context, "Change Profile Picture", Icons.photo, _pickImage, color: Colors.green),
                           // For the sake of the demo, these buttons are placeholders
                           _buildActionButton(context, "Change Password", Icons.lock, () {}, color: Colors.green),
                           _buildActionButton(context, "Delete Account", Icons.delete_forever, () {}, color: Colors.red),
@@ -188,7 +203,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
           ),
         );
-    }
+      }
     });
   }
 
@@ -203,74 +218,74 @@ class _ProfileViewState extends State<ProfileView> {
         });
         return Text("Retrying");
       } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 200,
-            width: 200,
-            child: Stack(
-              children: [
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.black),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 200,
+              width: 200,
+              child: Stack(
+                children: [
+                  Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black),
+                    ),
                   ),
-                ),
-                PieChart(
-                  PieChartData(
-                    // Mapping the activities to the pie chart
-                    sections: snapshot.data!.map((d) {
-                      return PieChartSectionData(
-                        value: d['value'] as double,
-                        color: d['colour'] as Color,
-                        radius: 100,
-                        showTitle: false,
-                      );
-                    }).toList(),
-                    centerSpaceRadius: 0,
-                    sectionsSpace: 1,
+                  PieChart(
+                    PieChartData(
+                      // Mapping the activities to the pie chart
+                      sections: snapshot.data!.map((d) {
+                        return PieChartSectionData(
+                          value: d['value'] as double,
+                          color: d['colour'] as Color,
+                          radius: 100,
+                          showTitle: false,
+                        );
+                      }).toList(),
+                      centerSpaceRadius: 0,
+                      sectionsSpace: 1,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: snapshot.data!.asMap().entries.map((entry) {
-              final data = entry.value;
-              final value = data['value'] as double;
-              final percentage = ((value / total) * 100).toStringAsFixed(1); // Calculate percentage to 1 d.p.
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: data['colour'] as Color,
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: snapshot.data!.asMap().entries.map((entry) {
+                final data = entry.value;
+                final value = data['value'] as double;
+                final percentage = ((value / total) * 100).toStringAsFixed(1); // Calculate percentage to 1 d.p.
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: data['colour'] as Color,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    // Print out percentage for the given segment
-                    Text(
-                      "${data['label']}: $percentage%",
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
-        ],
-      );
-    }});
-  
+                      const SizedBox(width: 8),
+                      // Print out percentage for the given segment
+                      Text(
+                        "${data['label']}: $percentage%",
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+        );
+        }
+    });
   }
 
   // Button with press animation
