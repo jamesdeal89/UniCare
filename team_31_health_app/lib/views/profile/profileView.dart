@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart'; // Add fl_chart to your pubspec.yaml
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/journalRepo.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key, required this.journalRepo});
@@ -11,7 +13,20 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  // 
+  File? _profileImage;
+  final ImagePicker _picker = ImagePicker();
+  bool _isImageEnlarged = false;
+
+  Future<void> _pickImage() async {
+    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    if(pickedImage != null){
+      setState(() {
+        _profileImage = File(pickedImage.path);
+      });
+    }
+  }
+
+
   late Future<List<Map<String, Object>>> activityData;
   @override
   void initState() {
@@ -64,6 +79,16 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider backgroundImage;
+    Widget? avatar;
+    if(_profileImage != null){
+      backgroundImage = FileImage(_profileImage!);
+      avatar = null;
+    } else {
+      backgroundImage = AssetImage('assets/images/example_profile_pricture.jpg');
+      avatar = Icon(Icons.add_a_photo, color: Colors.white70, size: 30);
+    }
+
     return FutureBuilder(future: activityData, builder: (context, snapshot) {
       if(snapshot.connectionState != ConnectionState.done){
         return Text("Loading");
@@ -109,11 +134,33 @@ class _ProfileViewState extends State<ProfileView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+
+                          
                           // Profile picture
-                          CircleAvatar(
-                            radius: 50,
-                            //backgroundImage:
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _isImageEnlarged = true;
+                              });
+                            },
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundImage: backgroundImage,
+                              child: avatar,
+                            ),
                           ),
+                          const SizedBox(height: 12),
+                          ElevatedButton.icon(
+                            onPressed: _pickImage,
+                            icon: const Icon(Icons.photo_library),
+                            label: const Text("Change Profile Picture"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            ),
+                          ),
+
+
                           const SizedBox(height: 16),
                           Text(
                             "Hello John",
@@ -124,10 +171,11 @@ class _ProfileViewState extends State<ProfileView> {
                           const Text("Activity Breakdown", style: TextStyle(fontSize: 18)),
                           const SizedBox(height: 16),
 
-                          _buildActivityChart(total),
+                          _buildActivityPieChart(total),
 
                           const SizedBox(height: 32),
                           _buildActionButton(context, "Change Nickname", Icons.edit, () {}, color: Colors.green),
+                          _buildActionButton(context, "Change Profile Picture", Icons.photo, _pickImage, color: Colors.green),
                           // For the sake of the demo, these buttons are placeholders
                           _buildActionButton(context, "Change Password", Icons.lock, () {}, color: Colors.green),
                           _buildActionButton(context, "Delete Account", Icons.delete_forever, () {}, color: Colors.red),
@@ -144,7 +192,7 @@ class _ProfileViewState extends State<ProfileView> {
     });
   }
 
-  Widget _buildActivityChart(double total) {
+  Widget _buildActivityPieChart(double total) {
     return FutureBuilder(future: activityData,builder: (context, snapshot) {
       if(snapshot.connectionState != ConnectionState.done){
         return Text("Loading");
@@ -195,7 +243,7 @@ class _ProfileViewState extends State<ProfileView> {
             children: snapshot.data!.asMap().entries.map((entry) {
               final data = entry.value;
               final value = data['value'] as double;
-              final percentage = ((value / total) * 100).toStringAsFixed(1); // 1 dec. place
+              final percentage = ((value / total) * 100).toStringAsFixed(1); // Calculate percentage to 1 d.p.
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Row(
