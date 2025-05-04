@@ -127,38 +127,10 @@ class _ProfileViewState extends State<ProfileView> {
                           _buildActivityChart(total),
 
                           const SizedBox(height: 32),
-                          _buildActionButton(context, "Change Nickname", Icons.edit, () {
-                            /* TODO */
-                          }),
-                          _buildActionButton(context, "Change Password", Icons.lock, () {
-                            /* TODO */
-                          }),
-                          _buildActionButton(context, "Delete Account", Icons.delete_forever, () {
-                            /* TODO */
-                          }, color: Colors.red),
-
-                          // Demo buttons
-                          const SizedBox(height: 10),
-                          Text(
-                            "Demo Buttons",
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          _buildActionButton(context, "+Give", Icons.handshake, () {
-                            _incrementActivity(0);
-                          }, color: Colors.orange),
-                          _buildActionButton(context, "+Take Notice", Icons.lens, () {
-                            _incrementActivity(1);
-                          }, color: Colors.yellow),
-                          _buildActionButton(context, "+Keep Learning", Icons.book, () {
-                            _incrementActivity(2);
-                          }, color: Colors.blue),
-                          _buildActionButton(context, "+Connect", Icons.link, () {
-                            _incrementActivity(3);
-                          }, color: Colors.purple),
-                          _buildActionButton(context, "+Be Active", Icons.man, () {
-                            _incrementActivity(4);
-                          }, color: Colors.pinkAccent),
+                          _buildActionButton(context, "Change Nickname", Icons.edit, () {}, color: Colors.green),
+                          // For the sake of the demo, these buttons are placeholders
+                          _buildActionButton(context, "Change Password", Icons.lock, () {}, color: Colors.green),
+                          _buildActionButton(context, "Delete Account", Icons.delete_forever, () {}, color: Colors.red),
                         ],
                       ),
                     ),
@@ -268,11 +240,5 @@ class _ProfileViewState extends State<ProfileView> {
         label: Text(label, style: const TextStyle(color: Colors.white)),
       ),
     );
-  }
-
-  void _incrementActivity(int index) {
-    setState(() {
-      // activityData[index]['value'] = (activityData[index]['value'] as double) + 5.0;
-    });
   }
 }
