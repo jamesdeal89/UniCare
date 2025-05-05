@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class InhailView extends StatefulWidget {
-  const InhailView({super.key});
+class InhaleView extends StatefulWidget {
+  const InhaleView({super.key});
 
   @override
-  State<InhailView> createState() => _InhailViewState();
+  State<InhaleView> createState() => _InhaleViewState();
 }
 
 class BreathingExercise {
@@ -18,7 +18,7 @@ class BreathingExercise {
   BreathingExercise({required this.inhale, required this.inhaleHold, required this.exhale, required this.cycles, required this.exhaleHold, required this.name});
 }
 
-class _InhailViewState extends State<InhailView> {
+class _InhaleViewState extends State<InhaleView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _InhailViewState extends State<InhailView> {
           foregroundColor: Theme.of(context).colorScheme.primary,
           iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onSurface),
           title: Text(
-            "Inhail",
+            "Inhale",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
@@ -192,20 +192,19 @@ class _InhaleSessionState extends State<InhaleSession> {
     } else if (phase == 'INHALE_HOLD') {
       phase = 'EXHALE';
       timeLeft = widget.exercise.exhale;
-    } else if (phase == 'EXHALE'){
+    } else if (phase == 'EXHALE') {
       if (widget.exercise.exhaleHold > 0) {
         phase = 'EXHALE_HOLD';
         timeLeft = widget.exercise.exhaleHold;
       } else {
-       incrementCycle();
+        incrementCycle();
       }
     } else if (phase == 'EXHALE_HOLD') {
       incrementCycle();
-      }
+    }
   }
-    
 
-  void incrementCycle(){
+  void incrementCycle() {
     cyclesCompleted++;
     if (cyclesCompleted < maxCycles) {
       phase = 'INHALE';
@@ -215,6 +214,7 @@ class _InhaleSessionState extends State<InhaleSession> {
       phase = 'DONE';
     }
   }
+
   @override
   void dispose() {
     timer.cancel();

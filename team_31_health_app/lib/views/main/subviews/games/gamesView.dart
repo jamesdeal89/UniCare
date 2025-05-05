@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
-import 'package:team_31_health_app/views/main/subviews/games/inhailView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/inhaleView.dart';
 
 class GamesView extends StatefulWidget {
   const GamesView({super.key});
@@ -69,7 +69,7 @@ class _GamesViewState extends State<GamesView> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const InhailView()),
+                                  MaterialPageRoute(builder: (context) => const InhaleView()),
                                 );
                               },
                               child: Column(
