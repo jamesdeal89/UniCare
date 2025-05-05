@@ -44,6 +44,38 @@ class _ProfileViewState extends State<ProfileView> {
     });
   }
 
+  void _changeNickname() async{
+    final controller = TextEditingController(text: _nickname);
+    final prefs = await SharedPreferences.getInstance();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Change Nickname"),
+        content: TextField(
+          controller: controller,
+          decoration: const InputDecoration(hintText: "Enter new nickname here"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () { Navigator.of(context).pop();},
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _nickname = controller.text;
+              });
+              prefs.setString('nickname', _nickname);
+              Navigator.of(context).pop();
+            },
+            child: const Text("Save"),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   late Future<List<Map<String, Object>>> activityData;
   @override
@@ -59,7 +91,6 @@ class _ProfileViewState extends State<ProfileView> {
       context: context, 
       builder: (_) => Dialog(
         backgroundColor: Colors.transparent,
-        
         child: SafeArea(
           child: GestureDetector(
             onTap: () => Navigator.of(context).pop(),
@@ -207,7 +238,7 @@ class _ProfileViewState extends State<ProfileView> {
                           _buildActivityPieChart(total),
 
                           const SizedBox(height: 32),
-                          _buildActionButton(context, "Change Nickname", Icons.edit, () {}, color: Colors.green),
+                          _buildActionButton(context, "Change Nickname", Icons.edit, _changeNickname, color: Colors.green),
                           // For the sake of the demo, the buttons below are placeholders
                           _buildActionButton(context, "Change Password", Icons.lock, () {}, color: Colors.green),
                           _buildActionButton(context, "Delete Account", Icons.delete_forever, () {}, color: Colors.red),
