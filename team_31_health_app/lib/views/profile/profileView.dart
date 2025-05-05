@@ -44,6 +44,7 @@ class _ProfileViewState extends State<ProfileView> {
     });
   }
 
+  // An alert box appears on the screen when the "Change Nickname" button is pressed
   void _changeNickname() async{
     final controller = TextEditingController(text: _nickname);
     final prefs = await SharedPreferences.getInstance();
@@ -59,16 +60,22 @@ class _ProfileViewState extends State<ProfileView> {
         actions: [
           TextButton(
             onPressed: () { Navigator.of(context).pop();},
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.error,
+              textStyle: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+            ),
             child: const Text("Cancel"),
           ),
           ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _nickname = controller.text;
-              });
+            onPressed: () {setState(() { _nickname = controller.text;});
               prefs.setString('nickname', _nickname);
               Navigator.of(context).pop();
             },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
             child: const Text("Save"),
           ),
         ],
