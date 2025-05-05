@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/mainView.dart';
+import 'package:team_31_health_app/views/login/privacyView.dart';
 import 'package:team_31_health_app/data/theme.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key
@@ -128,6 +130,24 @@ class _LoginViewState extends State<LoginView> {
                     );
                   },
                   child: Text("Demo Mode"),
+                ))),
+
+            // priv policy
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
+                child: Center(
+                    child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.secondary,
+                    backgroundColor: Theme.of(context).colorScheme.onError,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PrivacyView()),
+                    );
+                  },
+                  child: Text("Privacy Policy"),
                 )))
           ])),
         );
