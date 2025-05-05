@@ -18,6 +18,13 @@ class _TypingBubbleState extends State<TypingBubble> with SingleTickerProviderSt
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
 
   }
+
+  @override
+  void dispose() {
+    animationController.dispose(); // Dispose the controller
+    super.dispose();
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose

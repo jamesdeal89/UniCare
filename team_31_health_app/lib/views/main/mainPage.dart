@@ -3,10 +3,12 @@ import 'package:sqflite/sqlite_api.dart';
 import 'package:team_31_health_app/data/database/chatRepo.dart';
 import 'package:team_31_health_app/data/database/journalRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
-import 'package:team_31_health_app/views/main/subviews/gamesView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
 import 'package:team_31_health_app/views/main/subviews/journalView.dart';
-import 'package:team_31_health_app/views/profile/profileView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/inhaleView.dart';
+import 'package:team_31_health_app/views/main/subviews/profile/profileView.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.database});
@@ -31,6 +33,8 @@ class _MainPageState extends State<MainPage> {
       ChatView(chatRepo: ChatRepo(database: database)),
       const GamesView(),
       ProfileView(journalRepo: JournalRepo(database: database)),
+      const MordleView(),
+      const InhaleView(),
     ];
   }
 

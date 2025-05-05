@@ -18,12 +18,10 @@ Recently, we faced issues in communications with BAC-IN and later learned our pr
 
 |Tasks:      |Link:          |
 | ------------- |:-------------:|
-|Software Requirements Specification| [SRS Document](docs/Requirements.md)|
-|Diagrams| [Use Case Diagram](docs/UseCase.md) |
-|| [Activity Diagram](docs/Activity.md) |
-|| [Sequence Diagram](docs/Sequence.md) |
-|Personas| [Personas](docs/Personas.md) |
-|User Stories|[User Stories](docs/UserStories.md)|
+|Software Requirements Specification| [SRS Document](docs/ReqSpec/Requirements.md)|
+|Use Case Diagram| [Use Case Diagram](docs/ReqSpec/UseCase.md) |
+|Sequence Diagram| [Sequence Diagram](docs/ReqSpec/Sequence.md) |
+|User Stories|[User Stories](docs/ReqSpec/UserStories.md)|
 
 
 
