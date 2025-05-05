@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/journalRepo.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key, required this.journalRepo});
@@ -15,15 +16,32 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   File? _profileImage;
   final ImagePicker _picker = ImagePicker();
-  bool _isImageEnlarged = false;
+  String _nickname = "John"; // By default, set to "John"
 
+  // Method to allow teh user to select image from photo gallery
   Future<void> _pickImage() async {
     final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     if(pickedImage != null){
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('profile_picture', pickedImage.path);
       setState(() {
         _profileImage = File(pickedImage.path);
       });
     }
+  }
+
+  Future<void> _loadProfileData() async{
+    final prefs = await SharedPreferences.getInstance();
+    final path = prefs.getString('profile_picture');
+    final savedNickname = prefs.getString('nickname');
+    setState(() {
+      if(path != null){
+        _profileImage = File(path);
+      }
+      if(savedNickname != null){
+        _nickname = savedNickname;
+      }
+    });
   }
 
 
@@ -32,8 +50,34 @@ class _ProfileViewState extends State<ProfileView> {
   void initState() {
     super.initState();
     activityData = getActivityData();
+    _loadProfileData(); // Load the saved profile picture and nickname
   }
 
+
+  void _showEnlargedProfileImage(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        
+        child: SafeArea(
+          child: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Container(
+              color: Colors.black,
+              child: Center(
+                child: _profileImage != null
+                  ? Image.file(_profileImage!)
+                  : Image.asset('assets/images/example_profile_picture.jpg')
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Get 5 Ways to WEllbeing data from the journalRepo
   Future<List<Map<String, Object>>> getActivityData() async {
     try {
       int give = await widget.journalRepo.count(0);
@@ -79,32 +123,6 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     ImageProvider backgroundImage;
-    if(_profileImage != null){
-      backgroundImage = FileImage(_profileImage!);
-    } else {
-      backgroundImage = AssetImage('assets/images/example_profile_picture.jpg');
-    }
-
-    if(_isImageEnlarged && _profileImage != null){
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            _isImageEnlarged = false;
-          });
-        },
-        child: Container(
-          color: Colors.black,
-          alignment: Alignment.center,
-          child: Hero(
-            tag: 'profile-picture',
-            child: Image.file(
-              _profileImage!,
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-      );
-    }
 
     return FutureBuilder(future: activityData, builder: (context, snapshot) {
       if(snapshot.connectionState != ConnectionState.done){
@@ -122,7 +140,7 @@ class _ProfileViewState extends State<ProfileView> {
         );
         
       } else {
-        // Calculate total to be used in percentage calculation
+        // Calculate total to be used in percentage calculation of pie chart segments
         double total = 0.0;
         for (var item in snapshot.data!) {
           total += item['value'] as double;
@@ -151,21 +169,19 @@ class _ProfileViewState extends State<ProfileView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-
                           
                           // Profile picture
                           GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _isImageEnlarged = true;
-                              });
-                            },
+                            onTap: () => _showEnlargedProfileImage(context), // shows enlarged image when pressed
                             child: CircleAvatar(
                               radius: 50,
-                              backgroundImage: backgroundImage,
+                              backgroundImage: _profileImage != null
+                                            ? backgroundImage = backgroundImage = FileImage(_profileImage!)
+                                            : backgroundImage = AssetImage('assets/images/example_profile_picture.jpg'),
                             ),
                           ),
                           const SizedBox(height: 12),
+                          // Button to change profile picture
                           ElevatedButton.icon(
                             onPressed: _pickImage,
                             icon: const Icon(Icons.photo_library,color: Colors.white),
@@ -178,8 +194,9 @@ class _ProfileViewState extends State<ProfileView> {
 
 
                           const SizedBox(height: 16),
+                          
                           Text(
-                            "Hello John",
+                            "Hello $_nickname",
                             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
 
@@ -191,7 +208,7 @@ class _ProfileViewState extends State<ProfileView> {
 
                           const SizedBox(height: 32),
                           _buildActionButton(context, "Change Nickname", Icons.edit, () {}, color: Colors.green),
-                          // For the sake of the demo, these buttons are placeholders
+                          // For the sake of the demo, the buttons below are placeholders
                           _buildActionButton(context, "Change Password", Icons.lock, () {}, color: Colors.green),
                           _buildActionButton(context, "Delete Account", Icons.delete_forever, () {}, color: Colors.red),
                         ],
@@ -253,6 +270,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
             ),
             const SizedBox(width: 20),
+            // Lists pie chart percentages next to the chart
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: snapshot.data!.asMap().entries.map((entry) {
