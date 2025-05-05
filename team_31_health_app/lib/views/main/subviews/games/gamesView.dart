@@ -1,7 +1,6 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
-import 'package:team_31_health_app/views/main/subviews/games/inhaleView.dart';
+import 'package:team_31_health_app/views/main/subviews/games/inhailView.dart';
 
 class GamesView extends StatefulWidget {
   const GamesView({super.key});
@@ -70,13 +69,13 @@ class _GamesViewState extends State<GamesView> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const InhaleView()),
+                                  MaterialPageRoute(builder: (context) => const InhailView()),
                                 );
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                  Text("Inhale", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                                  Text("Inhail", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                                   Text("Breathing exercises for stress and anxiety"),
                                 ],
                               ),
