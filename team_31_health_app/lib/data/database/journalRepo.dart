@@ -110,7 +110,7 @@ class JournalRepo extends DatabaseService<JournalEntry> {
       print(results[0]);
       final result = int.tryParse(results[0]["Result"].toString());
       if (result == null) {
-        throw FormatException();
+        return 0;
       }
       return result;
     } catch (_) {

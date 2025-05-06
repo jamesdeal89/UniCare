@@ -287,6 +287,7 @@ class _ProfileViewState extends State<ProfileView> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.black),
+                          color: Colors.grey,
                         ),
                       ),
                       PieChart(
