@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
 import 'package:team_31_health_app/views/main/subviews/games/inhaleView.dart';
@@ -76,7 +75,7 @@ class _GamesViewState extends State<GamesView> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                  Text("Inhale", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                                  Text("Inhail", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                                   Text("Breathing exercises for stress and anxiety"),
                                 ],
                               ),

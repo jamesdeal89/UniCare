@@ -10,11 +10,12 @@ class InhaleView extends StatefulWidget {
 
 class BreathingExercise {
   final int inhale;
-  final int hold;
+  final int inhaleHold;
   final int exhale;
+  final int exhaleHold;
   final int cycles;
   final String name;
-  BreathingExercise({required this.inhale, required this.hold, required this.exhale, required this.cycles, required this.name});
+  BreathingExercise({required this.inhale, required this.inhaleHold, required this.exhale, required this.cycles, required this.exhaleHold, required this.name});
 }
 
 class _InhaleViewState extends State<InhaleView> {
@@ -56,7 +57,7 @@ class _InhaleViewState extends State<InhaleView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => InhaleSession(
-                                          exercise: BreathingExercise(inhale: 6, hold: 0, exhale: 6, cycles: 5, name: 'Coherent Breathing'),
+                                          exercise: BreathingExercise(inhale: 6, inhaleHold: 0, exhale: 6, exhaleHold: 0, cycles: 5, name: 'Coherent Breathing'),
                                         )),
                               );
                             },
@@ -89,7 +90,7 @@ class _InhaleViewState extends State<InhaleView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => InhaleSession(
-                                          exercise: BreathingExercise(inhale: 4, hold: 4, exhale: 4, cycles: 5, name: 'Box Breathing'),
+                                          exercise: BreathingExercise(inhale: 4, inhaleHold: 4, exhale: 4, exhaleHold: 4, cycles: 4, name: 'Box Breathing'),
                                         )),
                               );
                             },
@@ -122,7 +123,7 @@ class _InhaleViewState extends State<InhaleView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => InhaleSession(
-                                          exercise: BreathingExercise(inhale: 4, hold: 7, exhale: 8, cycles: 3, name: '4-7-8 Breathing'),
+                                          exercise: BreathingExercise(inhale: 4, inhaleHold: 7, exhale: 8, exhaleHold: 0, cycles: 3, name: '4-7-8 Breathing'),
                                         )),
                               );
                             },
@@ -154,7 +155,7 @@ class InhaleSession extends StatefulWidget {
 class _InhaleSessionState extends State<InhaleSession> {
   late int timeLeft;
   late Timer timer;
-  String phase = 'INHALE';
+  late String phase;
   int cyclesCompleted = 0;
   late int maxCycles;
 
@@ -163,6 +164,7 @@ class _InhaleSessionState extends State<InhaleSession> {
     super.initState();
     timeLeft = widget.exercise.inhale;
     maxCycles = widget.exercise.cycles;
+    phase = 'INHALE';
     startTimer();
   }
 
@@ -180,25 +182,36 @@ class _InhaleSessionState extends State<InhaleSession> {
 
   void nextPhase() {
     if (phase == 'INHALE') {
-      if (widget.exercise.hold > 0) {
-        phase = 'HOLD';
-        timeLeft = widget.exercise.hold;
+      if (widget.exercise.inhaleHold > 0) {
+        phase = 'INHALE_HOLD';
+        timeLeft = widget.exercise.inhaleHold;
       } else {
         phase = 'EXHALE';
         timeLeft = widget.exercise.exhale;
       }
-    } else if (phase == 'HOLD') {
+    } else if (phase == 'INHALE_HOLD') {
       phase = 'EXHALE';
       timeLeft = widget.exercise.exhale;
     } else if (phase == 'EXHALE') {
-      cyclesCompleted++;
-      if (cyclesCompleted < maxCycles) {
-        phase = 'INHALE';
-        timeLeft = widget.exercise.inhale;
+      if (widget.exercise.exhaleHold > 0) {
+        phase = 'EXHALE_HOLD';
+        timeLeft = widget.exercise.exhaleHold;
       } else {
-        timer.cancel();
-        phase = 'DONE';
+        incrementCycle();
       }
+    } else if (phase == 'EXHALE_HOLD') {
+      incrementCycle();
+    }
+  }
+
+  void incrementCycle() {
+    cyclesCompleted++;
+    if (cyclesCompleted < maxCycles) {
+      phase = 'INHALE';
+      timeLeft = widget.exercise.inhale;
+    } else {
+      timer.cancel();
+      phase = 'DONE';
     }
   }
 
@@ -243,7 +256,7 @@ class _InhaleSessionState extends State<InhaleSession> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      phase,
+                      (phase == 'INHALE_HOLD' || phase == 'EXHALE_HOLD') ? 'HOLD' : phase,
                       style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                     ),
                     Text(

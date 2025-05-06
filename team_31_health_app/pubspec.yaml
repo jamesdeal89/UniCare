@@ -31,6 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   fl_chart: ^0.71.0
+  image_picker: ^1.1.2
+  permission_handler: ^12.0.0+1
+  shared_preferences: ^2.5.3
   url_launcher: ^6.2.1
   http: ^0.13.3
 
@@ -43,6 +46,7 @@ dependencies:
 
   sqflite: ^2.4.2
   path: ^1.9.1
+  markdown_widget: ^2.3.2+8
 
 
 dev_dependencies:
@@ -75,6 +79,8 @@ flutter:
 
   assets:
     - assets/images/Nottingham_Blue_white_text_logo_SCREEN.png
+    - assets/privacy_policy.md
+    - assets/images/example_profile_picture.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -11,6 +11,8 @@ To prevent potential legal issues, the application must conform to a “Level AA
 
 Some sections may seem irrelevant to the app, but it is a good idea to include them anyway to recognise any areas where accessibility may need improvement.
 
+This section has been performed internally and has not been verified independently. Areas which are perceived to be in conformation are denoted with an "X".
+
 ### Section 1- Perceivable
 
 This section dictates how information and user interface components must be presentable to users in ways they can perceive. The definition of each section can be [found here.](https://www.w3.org/TR/WCAG22/#abstract)
@@ -19,42 +21,42 @@ This section dictates how information and user interface components must be pres
 |----|----|----|
 | Section 1: Perceivable | Level of Conformity | Conforms? |
 | **1.1 Text Alternatives** | \- | \- |
-| 1.1.1 Non-Text Content | A |  |
+| 1.1.1 Non-Text Content | A | X |
 | **1.2 Time-Based Media** | \- | \- |
-| 1.2.1 Audio-only and Video-only (Pre-recorded) | A |  |
-| 1.2.2 Captions (Pre-recorded) | A |  |
-| 1.2.3 Audio Description or Media Alternative (Pre-recorded) | A |  |
-| 1.2.4 Captions (Live) | AA |  |
-| 1.2.5 Audio Description (Pre-recorded) | AA |  |
-| 1.2.6 Sign Language (Pre-recorded) | AAA |  |
-| 1.2.7 Extended Audio Description (Pre-recorded) | AAA |  |
-| 1.2.8 Media Alternative (Pre-recorded) | AAA |  |
-| 1.2.9 Audio-only (Live) | AAA |  |
+| 1.2.1 Audio-only and Video-only (Pre-recorded) | A | N/A |
+| 1.2.2 Captions (Pre-recorded) | A | N/A |
+| 1.2.3 Audio Description or Media Alternative (Pre-recorded) | A | N/A |
+| 1.2.4 Captions (Live) | AA | N/A |
+| 1.2.5 Audio Description (Pre-recorded) | AA | N/A |
+| 1.2.6 Sign Language (Pre-recorded) | AAA | N/A |
+| 1.2.7 Extended Audio Description (Pre-recorded) | AAA | N/A |
+| 1.2.8 Media Alternative (Pre-recorded) | AAA | N/A |
+| 1.2.9 Audio-only (Live) | AAA | N/A |
 | **1.3 Adaptable** | \-------------------------- | -- |
-| 1.3.1 Info and Relationships | A |  |
-| 1.3.2 Meaningful Sequence | A |  |
-| 1.3.3 Sensory Characteristics | A |  |
-| 1.3.4 Orientation | AA |  |
-| 1.3.5 Identify Input Purpose | AA |  |
+| 1.3.1 Info and Relationships | A | X |
+| 1.3.2 Meaningful Sequence | A | X |
+| 1.3.3 Sensory Characteristics | A | X |
+| 1.3.4 Orientation | AA | X |
+| 1.3.5 Identify Input Purpose | AA | X |
 | 1.3.6 Identify Purpose | AAA |  |
 | **1.4 Distinguishable** | ***-*** | \- |
-| 1.4.1 Use of colour | A |  |
-| 1.4.2 Audio Control | A |  |
-| 1.4.3 Contrast (Minimum) | AA |  |
-| 1.4.4 Resize Text | AA |  |
-| 1.4.5 Images of Text | AA |  |
+| 1.4.1 Use of colour | A | X |
+| 1.4.2 Audio Control | A | N/A |
+| 1.4.3 Contrast (Minimum) | AA | X |
+| 1.4.4 Resize Text | AA | X |
+| 1.4.5 Images of Text | AA | X |
 | 1.4.6 Contrast (Enhanced) | AAA |  |
-| 1.4.7 Low or No Background Audio | AAA |  |
-| 1.4.8 Visual Presentation | AAA |  |
-| 1.4.9 Images of Text (No Exception) | AAA |  |
-| 1.4.10 Reflow | AA |  |
-| 1.4.11 Non-text Contrast | AA |  |
-| 1.4.12 Text Spacing | AA |  |
-| 1.4.13 Content on Hover or Focus | AA |  |
+| 1.4.7 Low or No Background Audio | AAA | X |
+| 1.4.8 Visual Presentation | AAA | X |
+| 1.4.9 Images of Text (No Exception) | AAA | X |
+| 1.4.10 Reflow | AA | X |
+| 1.4.11 Non-text Contrast | AA | X |
+| 1.4.12 Text Spacing | AA | X |
+| 1.4.13 Content on Hover or Focus | AA | N/A |
 
-|                              |     |
-|------------------------------|-----|
-| Level of Conformity Achieved |     |
+|                              |      |
+| ---------------------------- | ---- |
+| Level of Conformity Achieved | AA   |
 
 ### Section 2 – Operable
 
@@ -65,48 +67,48 @@ This section gives guidance on the operability of user interface components and 
 | --------------------------------------- | ------------------- | --------- |
 | **Section 2: Operable**                 | Level of Conformity | Conforms? |
 | **2.1 Keyboard Accessible**             | \-                  | \-        |
-| 2.1.1 Keyboard                          | A                   |           |
-| 2.1.2 No Keyboard Tap                   | A                   |           |
-| 2.1.3 Keyboard (No Exception)           | AAA                 |           |
-| 2.1.4 Character Key Shortcuts           | AAA                 |           |
+| 2.1.1 Keyboard                          | A                   | X         |
+| 2.1.2 No Keyboard Tap                   | A                   | X         |
+| 2.1.3 Keyboard (No Exception)           | AAA                 | X         |
+| 2.1.4 Character Key Shortcuts           | AAA                 | N/A       |
 | **2.2 Enough Time**                     | \-                  | \-        |
-| 2.2.1 Timing Adjustable                 | A                   |           |
-| 2.2.2 Pause, Stop Hide                  | A                   |           |
-| 2.2.3 No Timing                         | AAA                 |           |
-| 2.2.4 Interruptions                     | AAA                 |           |
-| 2.2.5 Re-authenticating                 | AAA                 |           |
-| 2.2.6 Timeouts                          | AAA                 |           |
+| 2.2.1 Timing Adjustable                 | A                   | N/A       |
+| 2.2.2 Pause, Stop Hide                  | A                   | N/A       |
+| 2.2.3 No Timing                         | AAA                 | X         |
+| 2.2.4 Interruptions                     | AAA                 | N/A       |
+| 2.2.5 Re-authenticating                 | AAA                 | X         |
+| 2.2.6 Timeouts                          | AAA                 | X         |
 | **2.3 Seizures and Physical Reactions** | \-                  | \-        |
-| 2.3.1 Three Flashes or Below Threshold  | A                   |           |
-| 2.3.2 Three Flashes                     | AAA                 |           |
-| 2.3.3 Animation from Interactions       | AAA                 |           |
+| 2.3.1 Three Flashes or Below Threshold  | A                   | N/A       |
+| 2.3.2 Three Flashes                     | AAA                 | X         |
+| 2.3.3 Animation from Interactions       | AAA                 | X         |
 | **2.4 Navigable**                       | \-                  | \-        |
-| 2.4.1 Bypass Blocks                     | A                   |           |
-| 2.4.2 Page Titled                       | A                   |           |
-| 2.4.3 Focus Order                       | A                   |           |
-| 2.4.4 Link Purpose (in context)         | A                   |           |
-| 2.4.5 Multiple Ways                     | AA                  |           |
-| 2.4.6 Headings and Labels               | AA                  |           |
-| 2.4.7 Focus Viable                      | AA                  |           |
-| 2.4.8 Location                          | AAA                 |           |
-| 2.4.9 Link Purpose (Link Only)          | AAA                 |           |
-| 2.4.10 Section Headings                 | AAA                 |           |
-| 2.4.11 Focus Not Obscured (Minimum)     | AA                  |           |
-| 2.4.12 Focus Not Obscured (Enhanced)    | AAA                 |           |
-| 2.4.13 Focus Appearance                 | AAA                 |           |
+| 2.4.1 Bypass Blocks                     | A                   | N/A       |
+| 2.4.2 Page Titled                       | A                   | X         |
+| 2.4.3 Focus Order                       | A                   | X         |
+| 2.4.4 Link Purpose (in context)         | A                   | X         |
+| 2.4.5 Multiple Ways                     | AA                  | X         |
+| 2.4.6 Headings and Labels               | AA                  | X         |
+| 2.4.7 Focus Viable                      | AA                  | X         |
+| 2.4.8 Location                          | AAA                 | X         |
+| 2.4.9 Link Purpose (Link Only)          | AAA                 | X         |
+| 2.4.10 Section Headings                 | AAA                 | X         |
+| 2.4.11 Focus Not Obscured (Minimum)     | AA                  | X         |
+| 2.4.12 Focus Not Obscured (Enhanced)    | AAA                 | X         |
+| 2.4.13 Focus Appearance                 | AAA                 | X         |
 | **2.5 Input Modalities**                | \-                  | \-        |
-| 2.5.1 Pointer Gestures                  | A                   |           |
-| 2.5.2 Pointer Cancellation              | A                   |           |
-| 2.5.3 Label in Name                     | A                   |           |
-| 2.5.4 Motion Actuation                  | A                   |           |
-| 2.5.5 Target Size (Enhanced)            | AAA                 |           |
-| 2.5.6 Concurrent Input Mechanisms       | AAA                 |           |
-| 2.5.7 Dragging Movements                | AA                  |           |
-| 2.5.8 Target Size (Minimum)             | AA                  |           |
+| 2.5.1 Pointer Gestures                  | A                   | N/A       |
+| 2.5.2 Pointer Cancellation              | A                   | N/A       |
+| 2.5.3 Label in Name                     | A                   | X         |
+| 2.5.4 Motion Actuation                  | A                   | X         |
+| 2.5.5 Target Size (Enhanced)            | AAA                 | N/A       |
+| 2.5.6 Concurrent Input Mechanisms       | AAA                 | N/A       |
+| 2.5.7 Dragging Movements                | AA                  | N/A       |
+| 2.5.8 Target Size (Minimum)             | AA                  | N/A       |
 
-|                              |     |
-|------------------------------|-----|
-| Level of Conformity Achieved |     |
+|                              |      |
+| ---------------------------- | ---- |
+| Level of Conformity Achieved | AAA  |
 
 ### Section 3 – Understandable
 
@@ -116,33 +118,33 @@ This section details how information and the operation of the user interface mus
 |----|----|----|
 | Section 3: Understandable | Level of Conformity | Conforms? |
 | **3.1 Readable** | \- | \- |
-| 3.1.1 Language of Page | A |  |
-| 3.1.2 Language of Parts | AA |  |
-| 3.1.3 Unusual Words | AAA |  |
-| 3.1.4 Abbreviations | AAA |  |
-| 3.1.5 Reading Level | AAA |  |
-| 3.1.6 Pronunciation | AAA |  |
+| 3.1.1 Language of Page | A | X |
+| 3.1.2 Language of Parts | AA | X |
+| 3.1.3 Unusual Words | AAA | N/A |
+| 3.1.4 Abbreviations | AAA | N/A |
+| 3.1.5 Reading Level | AAA | X |
+| 3.1.6 Pronunciation | AAA | N/A |
 | **3.2 Predictable** | - | - |
-| 3.2.1 On Focus | A |  |
-| 3.2.2 On Input | A |  |
-| 3.3.3 Consistent Navigation | AA |  |
-| 3.2.4 Consistent Identification | AA |  |
-| 3.2.5 Change on Request | AAA |  |
-| 3.2.6 Consistent Help | A |  |
+| 3.2.1 On Focus | A | X |
+| 3.2.2 On Input | A | X |
+| 3.3.3 Consistent Navigation | AA | X |
+| 3.2.4 Consistent Identification | AA | X |
+| 3.2.5 Change on Request | AAA | X |
+| 3.2.6 Consistent Help | A | X |
 | **3.3 Input Assistance** | - | - |
-| 3.3.1 Error Identification | A |  |
-| 3.3.2 Labels or Instructions | A |  |
-| 3.3.3 Error Suggestion | AA |  |
-| 3.3.4 Error Prevention (Legal, Financial, Data) | AA |  |
+| 3.3.1 Error Identification | A | X |
+| 3.3.2 Labels or Instructions | A | X |
+| 3.3.3 Error Suggestion | AA | X |
+| 3.3.4 Error Prevention (Legal, Financial, Data) | AA | N/A |
 | 3.3.5 Help | AAA |  |
-| 3.3.6 Error Prevention (All) | AAA |  |
-| 3.3.7 Redundant Entry | A |  |
-| 3.3.8 Accessible Authentication (Minimum) | AA |  |
-| 3.3.9 Accessible Authentication | AAA |  |
+| 3.3.6 Error Prevention (All) | AAA | N/A |
+| 3.3.7 Redundant Entry | A | N/A |
+| 3.3.8 Accessible Authentication (Minimum) | AA | X |
+| 3.3.9 Accessible Authentication | AAA | X |
 
 |                              |      |
 | ---------------------------- | ---- |
-| Level of Conformity Achieved |      |
+| Level of Conformity Achieved | AA   |
 
 ### Section 4 – Robust
 
@@ -156,16 +158,16 @@ section can be [*found here.*](https://www.w3.org/TR/WCAG22/#robust)
 | Section 4: Robust      | Level of Conformity | Conforms? |
 | **4.1 Compatible**     | \-                  | \-        |
 | 4.1.1 \[OBSOLETE\]     | \-                  | \-        |
-| 4.1.2 Name, Role Value | A                   |           |
-| 4.1.3 Status Messages  | AA                  |           |
+| 4.1.2 Name, Role Value | A                   | X         |
+| 4.1.3 Status Messages  | AA                  | X         |
 
 |                                  |      |
 | -------------------------------- | ---- |
-| **Level of Conformity Achieved** |      |
+| **Level of Conformity Achieved** | AA   |
 
 |                                          |      |
 | ---------------------------------------- | ---- |
-| **Overall Level of Conformity Achieved** |      |
+| **Overall Level of Conformity Achieved** | AA   |
 
 ## MARS Testing
 
@@ -173,23 +175,23 @@ The Mobile App Rating Scale is a tool to assess the quality of apps providing he
 
 The questions itself are split into 5 sections, 4 of which are scored upon and cover topics such as the engagement factor, functionality, aesthetics and quality of information provided. The final section is a “final remarks” section, which asks the users real world scenarios around using the app.
 
-The template for the MARS Testing is shown below:
+The MARS for the application is filled in below.
 
 **MARS**
 
-**App Name:** 
-**Developer:** 
-**Version:** 
-**Last update:** 
-**Platform(s):**
+**App Name:** Team 31 Health App
+**Developer:** Team 31
+**Version:** 1.0.0
+**Last update:** 1.0.0
+**Platform(s):** iOS, Android
 
-**Brief application description:** 
-**App focus:** 
-**Theoretical background/strategies:** 
+**Brief application description:** Guidance app around achieving positive mental health through games and being provided resources
+**App focus:** Mental health
+**Theoretical background/strategies:** CBT
 
-**Affiliation:** 
-**Target age group:** 
-**Technical aspects of the life:** 
+**Affiliation:** University
+**Target age group:** 18-65
+**Technical aspects of the app:** Requires login, has password-protection, needs web access to function
 
 ### Section 1 – Engagement
 
@@ -206,9 +208,9 @@ This section scores the app on its engageability; fun, customisable, interactive
         time (5 to 10 minutes total)
     5.  Highly entertaining and fun, would stimulate repeat use
 
-|                  |     |
-|------------------|-----|
-| Question 1 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 1 Score | 3    |
 
 2.  Is the app interesting to use? Does it use any strategies to
     increase engagement by present its content in an interesting way?
@@ -221,9 +223,9 @@ This section scores the app on its engageability; fun, customisable, interactive
         minutes total)
     5.  Very interesting, would engage user in repeat use
 
-|                  |     |
-|------------------|-----|
-| Question 2 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 2 Score | 4    |
 
 3.  Does it provide/retain all necessary settings/preferences for apps
     features (e.g. sound, content, notifications, etc.)?
@@ -236,9 +238,9 @@ This section scores the app on its engageability; fun, customisable, interactive
     5. Allows complete tailoring to the individual’s
         characteristics/preferences, retains all settings
 
-|                  |     |
-|------------------|-----|
-| Question 3 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 3 Score | 3    |
 
 4.  Does it allow user input, provide feedback, contain prompts
     (reminders, sharing options, notifications, etc.)? Note: These
@@ -252,9 +254,9 @@ This section scores the app on its engageability; fun, customisable, interactive
     5. Very high level of responsiveness through interactive
         features/feedback/user input options
 
-|                  |     |
-|------------------|-----|
-| Question 4 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 4 Score | 3    |
 
 5.  Is the app content (visual information, language, design)
     appropriate for your target audience?
@@ -266,13 +268,13 @@ This section scores the app on its engageability; fun, customisable, interactive
     4. Well-targeted, with negligible issues
     5. Perfectly targeted, no issues found
 
-|                  |     |
-|------------------|-----|
-| Question 5 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 5 Score | 4    |
 
-|                      |     |
-|----------------------|-----|
-| Section 1 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 1 Mean Score | 3.4  |
 
 ### Section 2 – Functionality
 
@@ -291,9 +293,9 @@ navigate, the flow logic and gestural design of the app.
     5. Perfect/timely response; no technical bugs found/contains a
         ‘loading time left’ indicator
 
-|                  |     |
-|------------------|-----|
-| Question 6 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 6 Score | 3    |
 
 7.  How easy is it to learn how to use the app; how clear are the menu
     labels/icons and instructions?
@@ -305,9 +307,9 @@ navigate, the flow logic and gestural design of the app.
     4. Easy to learn how to use the app (or has clear instructions)
     5. Able to use app immediately; intuitive; simple
 
-|                  |     |
-|------------------|-----|
-| Question 7 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 7 Score | 4    |
 
 8.  Is moving between screens
     logical/accurate/appropriate/uninterrupted; are all necessary screen
@@ -321,9 +323,9 @@ navigate, the flow logic and gestural design of the app.
     5. Perfectly logical, easy, clear and intuitive screen flow
         throughout, or offer shortcuts
 
-|                  |     |
-|------------------|-----|
-| Question 8 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 8 Score | 5    |
 
 9. Are interactions with the touch screen consistent and intuitive
     across all components/screens?
@@ -334,13 +336,13 @@ navigate, the flow logic and gestural design of the app.
     4. Mostly consistent/intuitive with negligible problems
     5. Perfectly consistent and intuitive
 
-|                  |     |
-|------------------|-----|
-| Question 9 Score |     |
+|                  |      |
+| ---------------- | ---- |
+| Question 9 Score | 5    |
 
-|                      |     |
-|----------------------|-----|
-| Section 2 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 2 Mean Score | 4.25 |
 
 ### Section 3 – Aesthetics
 
@@ -361,9 +363,9 @@ scheme and stylistic consistency.
     5. Professional, simple, clear, orderly, logically organised,
         device display optimised. Every design component has a purpose
 
-|                   |     |
-|-------------------|-----|
-| Question 10 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 10 Score | 4    |
 
 11. How high is the quality/resolution of graphics used for
     buttons/icons/menus/content?
@@ -379,9 +381,9 @@ scheme and stylistic consistency.
     5. Very high quality/resolution graphics and visual design –
         proportionate, stylistically consistent
 
-|                   |     |
-|-------------------|-----|
-| Question 11 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 11 Score | 3    |
 
 12. How good does the app look?
 
@@ -395,13 +397,13 @@ scheme and stylistic consistency.
     5. As above, plus very attractive, memorable, stands out; use of
          colour enhances app features/menus
 
-|                   |     |
-|-------------------|-----|
-| Question 12 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 12 Score | 4    |
 
-|                      |     |
-|----------------------|-----|
-| Section 3 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 3 Mean Score | 3.67 |
 
 ### Section 4 – Information
 
@@ -419,37 +421,37 @@ as text, feedback and the sources used.
          components/functions
     5. Highly accurate description of the app components/functions
 
-|                   |     |
-|-------------------|-----|
-| Question 13 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 13 Score | 5    |
 
 14. Does app have specific, measurable and achievable goals (specified
     in app store description or within the app itself)? \[Leave blank if
     app does not list goals or app is irrelevant to research goal.\]
 
-1. App has no chance of achieving its stated goals
-2. Description lists some goals, but app has very little chance of
-   achieving them
-3. OK. App has clear goals which may be achievable
-4. App has clearly specified goals, which are measurable and achievable
-5. App has specific and measurable goals, which are highly likely to be
-   achieved
+    1. App has no chance of achieving its stated goals
+    2. Description lists some goals, but app has very little chance of
+       achieving them
+    3. OK. App has clear goals which may be achievable
+    4. App has clearly specified goals, which are measurable and achievable
+    5. App has specific and measurable goals, which are highly likely to be
+       achieved
 
-|                   |     |
-|-------------------|-----|
-| Question 14 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 14 Score | N/A  |
 
 15. Is app content correct, well written, and relevant to the goal/topic
     of the app?
     1. Irrelevant/inappropriate/incoherent/incorrect
     2. Poor, barely relevant/appropriate/coherent/may be incorrect
-    3. Moderately relveant/appropaite/coherent/and appears correct
-    4. Relevant/appropiate/coherent/correct
+    3. Moderately relevant/appropriate/coherent/and appears correct
+    4. Relevant/appropriate/coherent/correct
     5. Highly relevant, appropriate, coherent, and correct
 
-|                   |     |
-|-------------------|-----|
-| Question 15 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 15 Score | 4    |
 
 16. Is the extent coverage within the scope of the app; and
     comprehensive but concise?
@@ -463,9 +465,9 @@ as text, feedback and the sources used.
     5. Comprehensive and concise; contains links to more information
          and resources
 
-|                   |     |
-|-------------------|-----|
-| Question 16 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 16 Score | 5    |
 
 17.  Is visual explanation of concepts – through
     charts/graphs/images/videos etc. - clear, logic and correct?
@@ -476,9 +478,9 @@ as text, feedback and the sources used.
     4. Mostly clear/logic/correct with negligible issues
     5. Perfectly clear/logical/correct
 
-|                   |     |
-|-------------------|-----|
-| Question 17 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 17 Score | 4    |
 
 18.  Does the app come from a legitimate source?
 
@@ -492,9 +494,9 @@ as text, feedback and the sources used.
     5. Developed using nationally competitive government or research
          funding
 
-|                   |     |
-|-------------------|-----|
-| Question 18 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 18 Score | 4    |
 
 19. Has the app been trialled/tested? \[N/A if not tested\]
 
@@ -511,13 +513,14 @@ as text, feedback and the sources used.
     5. App has been trialled and outcome tested in 3 or more high
          quality RCTs indicating positive results
 
-|                   |     |
-|-------------------|-----|
-| Question 19 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 19 Score | 3    |
 
-|                        |     |
-|------------------------|-----|
-| Section 4 Mean Score\* |     |
+|                        |      |
+| ---------------------- | ---- |
+| Section 4 Mean Score\* | 4.1  |
+|                        |      |
 
 \*exclude N/A questions from the mean score calculation
 
@@ -536,9 +539,9 @@ design.
     4. 
     5. Definitely
 
-|                   |     |
-|-------------------|-----|
-| Question 20 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 20 Score | 4    |
 
 21. How many times do you think you would use this app in the next 12
     months if it was relevant to you?
@@ -549,9 +552,9 @@ design.
     4. 10-50
     5. \>50
 
-|                   |     |
-|-------------------|-----|
-| Question 21 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 21 Score | 3    |
 
 22.  Would you pay for this app?
 
@@ -561,9 +564,9 @@ design.
     4. 
     5. Definitely
 
-|                   |     |
-|-------------------|-----|
-| Question 22 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 22 Score | 2    |
 
 23. What is your overall star rating of the app?
 
@@ -573,13 +576,14 @@ design.
     4. Above average
     5. One of the best apps I’ve used
 
-|                   |     |
-|-------------------|-----|
-| Question 23 Score |     |
+|                   |      |
+| ----------------- | ---- |
+| Question 23 Score | 3    |
 
-|                      |     |
-|----------------------|-----|
-| Section 5 Mean Score |     |
+|                      |      |
+| -------------------- | ---- |
+| Section 5 Mean Score | 3    |
+|                      |      |
 
 ### Scoring
 
@@ -588,6 +592,6 @@ overall mean to 2 decimal places. Any N/A answers must be removed from
 individual section scores in order to not negatively affect the final
 scoring. Section 5 can be seen as a subjective opinion on the app.
 
-|            |     |
-|------------|-----|
-| MARS Score |     |
+|            |      |
+| ---------- | ---- |
+| MARS Score | 3.86 |

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/theme.dart';
 
 import 'firebase_options.dart';
-import 'views/login/loginView.dart';
+import 'package:team_31_health_app/views/login/loginView.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
