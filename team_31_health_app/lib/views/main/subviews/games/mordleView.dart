@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MordleView extends StatefulWidget {
@@ -94,6 +95,8 @@ class _MordleViewState extends State<MordleView> {
     );
   }
 
+  /// This method shows a dialog with the [showDialog] function. 
+  /// The associated hint from the [wordHints] is shown.
   void _showHint() {
     final hint = wordHints[targetWord[0] + targetWord.substring(1).toLowerCase()]!;
     showDialog(
