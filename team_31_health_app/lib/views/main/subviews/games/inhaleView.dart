@@ -227,7 +227,7 @@ class _InhaleSessionState extends State<InhaleSession> {
       appBar: AppBar(
           title: Text(
         widget.exercise.name,
-        style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onSurface),
+        style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onPrimary),
       )),
       body: Center(
           child: phase == 'DONE'
@@ -244,11 +244,21 @@ class _InhaleSessionState extends State<InhaleSession> {
                           startTimer();
                         });
                       },
-                      child: Text("Start Again", style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onSurface)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      child: const Text('Start Again'),
                     ),
                     ElevatedButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Text("Back to Menu", style: TextStyle(fontSize: 30, color: Theme.of(context).colorScheme.onSurface)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      child: const Text('Back to Menu'),
                     ),
                   ],
                 )

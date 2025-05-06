@@ -82,68 +82,68 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
 
   void _showInfoPopup(String option) {
     String infoText;
-    
-    switch(option) {
+
+    switch (option) {
       case 'Give':
         infoText = 'Research suggests that acts of giving and kindness can help improve your mental wellbeing by:\n\n'
-                  '• creating positive feelings and a sense of reward\n'
-                  '• giving you a feeling of purpose and self-worth\n'
-                  '• helping you connect with other people\n\n'
-                  'It could be small acts of kindness towards other people, or larger ones like volunteering in your local community.\n\n'
-                  'Some examples of the things you could try include:\n\n'
-                  '• saying thank you to someone for something they have done for you\n'
-                  '• asking friends, family or colleagues how they are and really listening to their answer\n'
-                  '• spending time with friends or relatives who need support or company\n'
-                  '• offering to help someone you know with DIY or a work project\n'
-                  '• volunteering in your community, such as helping at a school, hospital or care home';
+            '• creating positive feelings and a sense of reward\n'
+            '• giving you a feeling of purpose and self-worth\n'
+            '• helping you connect with other people\n\n'
+            'It could be small acts of kindness towards other people, or larger ones like volunteering in your local community.\n\n'
+            'Some examples of the things you could try include:\n\n'
+            '• saying thank you to someone for something they have done for you\n'
+            '• asking friends, family or colleagues how they are and really listening to their answer\n'
+            '• spending time with friends or relatives who need support or company\n'
+            '• offering to help someone you know with DIY or a work project\n'
+            '• volunteering in your community, such as helping at a school, hospital or care home';
         break;
       case 'Take Notice':
         infoText = 'Paying more attention to the present moment can improve your mental wellbeing. This includes your thoughts and feelings, your body and the world around you.\n\n'
-                  'Some people call this awareness "mindfulness". Mindfulness can help you enjoy life more and understand yourself better. It can positively change the way you feel about life and how you approach challenges.';
+            'Some people call this awareness "mindfulness". Mindfulness can help you enjoy life more and understand yourself better. It can positively change the way you feel about life and how you approach challenges.';
         break;
       case 'Keep Learning':
         infoText = 'Research shows that learning new skills can also improve your mental wellbeing by:\n\n'
-                  '• boosting self-confidence and raising self-esteem\n'
-                  '• helping you to build a sense of purpose\n'
-                  '• helping you to connect with others\n\n'
-                  'Even if you feel like you do not have enough time, or you may not need to learn new things, there are lots of different ways to bring learning into your life.\n\n'
-                  'Some of the things you could try include:\n\n'
-                  '• try learning to cook something new\n'
-                  '• try taking on a new responsibility at work\n'
-                  '• work on a DIY project\n'
-                  '• consider signing up for a course at a local college\n'
-                  '• try new hobbies that challenge you\n\n'
-                  'Don\'t feel you have to learn new qualifications or sit exams if this does not interest you. It\'s best to find activities you enjoy and make them a part of your life';
+            '• boosting self-confidence and raising self-esteem\n'
+            '• helping you to build a sense of purpose\n'
+            '• helping you to connect with others\n\n'
+            'Even if you feel like you do not have enough time, or you may not need to learn new things, there are lots of different ways to bring learning into your life.\n\n'
+            'Some of the things you could try include:\n\n'
+            '• try learning to cook something new\n'
+            '• try taking on a new responsibility at work\n'
+            '• work on a DIY project\n'
+            '• consider signing up for a course at a local college\n'
+            '• try new hobbies that challenge you\n\n'
+            'Don\'t feel you have to learn new qualifications or sit exams if this does not interest you. It\'s best to find activities you enjoy and make them a part of your life';
         break;
       case 'Be Active':
         infoText = 'Being active is not only great for your physical health and fitness. Evidence also shows it can also improve your mental wellbeing by:\n\n'
-                  '• raising your self-esteem\n'
-                  '• helping you to set goals or challenges and achieve them\n'
-                  '• causing chemical changes in your brain which can help to positively change your mood\n\n'
-                  'Some things you can do:\n\n'
-                  '• try running and aerobic exercises to help get you moving and improve your fitness\n'
-                  '• try strength and flexibility exercises to increase muscle strength, improve balance and reduce joint pain\n\n'
-                  'Don\'t feel you have to spend hours in a gym. It\'s best to find activities you enjoy and make them a part of your life';
+            '• raising your self-esteem\n'
+            '• helping you to set goals or challenges and achieve them\n'
+            '• causing chemical changes in your brain which can help to positively change your mood\n\n'
+            'Some things you can do:\n\n'
+            '• try running and aerobic exercises to help get you moving and improve your fitness\n'
+            '• try strength and flexibility exercises to increase muscle strength, improve balance and reduce joint pain\n\n'
+            'Don\'t feel you have to spend hours in a gym. It\'s best to find activities you enjoy and make them a part of your life';
         break;
       case 'Connect':
         infoText = 'Good relationships are important for your mental wellbeing. They can:\n\n'
-                  '• help you to build a sense of belonging and self-worth\n'
-                  '• give you an opportunity to share positive experiences\n'
-                  '• provide emotional support and allow you to support others\n\n'
-                  'There are lots of things you could try to help build stronger and closer relationships:\n\n'
-                  '• take time each day to be with your family\n'
-                  '• arrange a day out with friends you have not seen for a while\n'
-                  '• try switching off the TV to talk or play a game with your children, friends or family\n'
-                  '• have lunch with a colleague\n'
-                  '• visit a friend or family member who needs support or company\n'
-                  '• volunteer at a local school, hospital or community group\n'
-                  '• make the most of technology to stay in touch with friends and family\n\n'
-                  'Don\'t rely on technology or social media alone to build relationships. It\'s easy to get into the habit of only ever texting, messaging or emailing people';
+            '• help you to build a sense of belonging and self-worth\n'
+            '• give you an opportunity to share positive experiences\n'
+            '• provide emotional support and allow you to support others\n\n'
+            'There are lots of things you could try to help build stronger and closer relationships:\n\n'
+            '• take time each day to be with your family\n'
+            '• arrange a day out with friends you have not seen for a while\n'
+            '• try switching off the TV to talk or play a game with your children, friends or family\n'
+            '• have lunch with a colleague\n'
+            '• visit a friend or family member who needs support or company\n'
+            '• volunteer at a local school, hospital or community group\n'
+            '• make the most of technology to stay in touch with friends and family\n\n'
+            'Don\'t rely on technology or social media alone to build relationships. It\'s easy to get into the habit of only ever texting, messaging or emailing people';
         break;
       default:
         infoText = '';
     }
-    
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -168,182 +168,182 @@ class _AddEditEntryPageState extends State<AddEditEntryPage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEditing ? 'Edit Entry' : 'Add New Entry'),
+        title: Text(_isEditing ? 'Edit Entry' : 'Add New Entry', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: ListView(
-            children: <Widget>[
-              TextFormField(
-                controller: _titleController,
-                style: Theme.of(context).textTheme.titleLarge,
-                decoration: const InputDecoration(
-                  
-                  labelText: 'Title',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a title';
-                  }
-                  return null;
-                },
+          child: ListView(children: <Widget>[
+            TextFormField(
+              controller: _titleController,
+              style: Theme.of(context).textTheme.titleLarge,
+              decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                border: OutlineInputBorder(),
+                hintText: "Title",
+                fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                filled: true,
               ),
-              const SizedBox(height: 16.0),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Date: ${_selectedDate.toLocal().toString().split(' ')[0]}',
-                      style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onSurface),
-                    ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a title';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16.0),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    'Date: ${_selectedDate.toLocal().toString().split(' ')[0]}',
+                    style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onSurface),
                   ),
-                  TextButton(
-                    onPressed: () => _selectDate(context),
-                    child: const Text('Select Date'),
+                ),
+                TextButton(
+                  onPressed: () => _selectDate(context),
+                  child: const Text('Select Date'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16.0),
+            Text('Select Options', style: theme.textTheme.titleLarge?.copyWith(color: theme.colorScheme.onSurface)),
+            CheckboxListTile(
+              title: Row(
+                children: [
+                  const Text('Give'),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: () => _showInfoPopup('Give'),
+                    child: const Icon(Icons.info, size: 20),
                   ),
                 ],
               ),
-              const SizedBox(height: 16.0),
-              Text('Select Options', style: theme.textTheme.titleLarge?.copyWith(color: theme.colorScheme.onSurface)),
-              CheckboxListTile(
-                title: Row(
-                  children: [
-                    const Text('Give'),
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: () => _showInfoPopup('Give'),
-                      child: const Icon(Icons.info, size: 20),
-                    ),
-                  ],
-                ),
-                value: _give,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _give = value ?? false;
-                  });
-                },
-                activeColor: theme.colorScheme.primary,
-                tileColor: theme.colorScheme.surface,
-                checkColor: theme.colorScheme.onPrimary,
-              ),
-              CheckboxListTile(
-                title: Row(
-                  children: [
-                    const Text('Take Notice'),
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: () => _showInfoPopup('Take Notice'),
-                      child: const Icon(Icons.info, size: 20),
-                    ),
-                  ],
-                ),
-                value: _takeNotice,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _takeNotice = value ?? false;
-                  });
-                },
-                activeColor: theme.colorScheme.primary,
-                tileColor: theme.colorScheme.surface,
-                checkColor: theme.colorScheme.onPrimary,
-              ),
-              CheckboxListTile(
-                title: Row(
-                  children: [
-                    const Text('Keep Learning'),
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: () => _showInfoPopup('Keep Learning'),
-                      child: const Icon(Icons.info, size: 20),
-                    ),
-                  ],
-                ),
-                value: _keepLearning,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _keepLearning = value ?? false;
-                  });
-                },
-                activeColor: theme.colorScheme.primary,
-                tileColor: theme.colorScheme.surface,
-                checkColor: theme.colorScheme.onPrimary,
-              ),
-              CheckboxListTile(
-                title: Row(
-                  children: [
-                    const Text('Be Active'),
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: () => _showInfoPopup('Be Active'),
-                      child: const Icon(Icons.info, size: 20),
-                    ),
-                  ],
-                ),
-                value: _beActive,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _beActive = value ?? false;
-                  });
-                },
-                activeColor: theme.colorScheme.primary,
-                tileColor: theme.colorScheme.surface,
-                checkColor: theme.colorScheme.onPrimary,
-              ),
-              CheckboxListTile(
-                title: Row(
-                  children: [
-                    const Text('Connect'),
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: () => _showInfoPopup('Connect'),
-                      child: const Icon(Icons.info, size: 20),
-                    ),
-                  ],
-                ),
-                value: _connect,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _connect = value ?? false;
-                  });
-                },
-                activeColor: theme.colorScheme.primary,
-                tileColor: theme.colorScheme.surface,
-                checkColor: theme.colorScheme.onPrimary,
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _descriptionController,
-                style: Theme.of(context).textTheme.bodyMedium,
-                decoration: const InputDecoration(
-                  labelText: 'Description',
-                  alignLabelWithHint: true,
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 8,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _saveEntry,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
+              value: _give,
+              onChanged: (bool? value) {
+                setState(() {
+                  _give = value ?? false;
+                });
+              },
+              activeColor: theme.colorScheme.primary,
+              tileColor: theme.colorScheme.surface,
+              checkColor: theme.colorScheme.onPrimary,
+            ),
+            CheckboxListTile(
+              title: Row(
+                children: [
+                  const Text('Take Notice'),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: () => _showInfoPopup('Take Notice'),
+                    child: const Icon(Icons.info, size: 20),
                   ),
-                ),
-                child: const Text('Save Entry'),
+                ],
               ),
-            ],
-          ),
+              value: _takeNotice,
+              onChanged: (bool? value) {
+                setState(() {
+                  _takeNotice = value ?? false;
+                });
+              },
+              activeColor: theme.colorScheme.primary,
+              tileColor: theme.colorScheme.surface,
+              checkColor: theme.colorScheme.onPrimary,
+            ),
+            CheckboxListTile(
+              title: Row(
+                children: [
+                  const Text('Keep Learning'),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: () => _showInfoPopup('Keep Learning'),
+                    child: const Icon(Icons.info, size: 20),
+                  ),
+                ],
+              ),
+              value: _keepLearning,
+              onChanged: (bool? value) {
+                setState(() {
+                  _keepLearning = value ?? false;
+                });
+              },
+              activeColor: theme.colorScheme.primary,
+              tileColor: theme.colorScheme.surface,
+              checkColor: theme.colorScheme.onPrimary,
+            ),
+            CheckboxListTile(
+              title: Row(
+                children: [
+                  const Text('Be Active'),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: () => _showInfoPopup('Be Active'),
+                    child: const Icon(Icons.info, size: 20),
+                  ),
+                ],
+              ),
+              value: _beActive,
+              onChanged: (bool? value) {
+                setState(() {
+                  _beActive = value ?? false;
+                });
+              },
+              activeColor: theme.colorScheme.primary,
+              tileColor: theme.colorScheme.surface,
+              checkColor: theme.colorScheme.onPrimary,
+            ),
+            CheckboxListTile(
+              title: Row(
+                children: [
+                  const Text('Connect'),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: () => _showInfoPopup('Connect'),
+                    child: const Icon(Icons.info, size: 20),
+                  ),
+                ],
+              ),
+              value: _connect,
+              onChanged: (bool? value) {
+                setState(() {
+                  _connect = value ?? false;
+                });
+              },
+              activeColor: theme.colorScheme.primary,
+              tileColor: theme.colorScheme.surface,
+              checkColor: theme.colorScheme.onPrimary,
+            ),
+            const SizedBox(height: 16.0),
+            TextFormField(
+              controller: _descriptionController,
+              style: Theme.of(context).textTheme.bodyMedium,
+              decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                border: OutlineInputBorder(),
+                hintText: "Description",
+                fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                filled: true,
+              ),
+              maxLines: 8,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a description';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _saveEntry,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              child: const Text('Save Entry'),
+            ),
+          ]),
         ),
       ),
     );
