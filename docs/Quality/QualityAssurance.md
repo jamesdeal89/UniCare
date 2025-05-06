@@ -12,12 +12,12 @@ We used manual tests as a way to test app functionality in a way that the user w
 
 |Test ID|Test|Inputs|Expected Outcome|Initial Test Result|2nd Test Result|3rd Test Result|
 |----|------|----------------|-------------------|---------------|---------------|---------------|
-|1.1|Login with correct details|Username: demo@nottingham.ac.uk Password: TEST1234|Taken to Chatbot homepage|Passed|||
-|1.2|Login with correct email and incorrect password|Username: demo@nottingham.ac.uk Password: TEST1234|Appropriate Error Message|Passed|||
-|1.3.1|Login with incorrect email and incorrect password|Username: demo2@nottingham.ac.uk Password: TEST1234|Appropriate Error Message|Passed|||
-|1.3.2|Login with valid email and incorrect password|Username: demo1@nottingham.ac.uk Password: TEST1234|Appropriate Error Message|Passed|||
-|1.3.3|Login with incorrect email and valid password|Username: demo2@nottingham.ac.uk Password: TEST123|Appropriate Error Message|Passed|||
-|1.4.1|Login with no email and a password|Username:  Password: TEST1234|Appropriate Error Message|Passed|||
+|1.1|Login with correct details|Username: demo@nottingham.ac.uk Password: TEST123|Taken to Chatbot homepage|Passed|||
+|1.2|Login with correct email and incorrect password|Username: demo@nottingham.ac.uk Password: TEST123|Appropriate Error Message|Passed|||
+|1.3.1|Login with incorrect email and incorrect password|Username: demo2@nottingham.ac.uk Password: TEST123|Appropriate Error Message|Passed|||
+|1.3.2|Login with valid email and incorrect password|Username: demo1@nottingham.ac.uk Password: TEST123|Appropriate Error Message|Passed|||
+|1.3.3|Login with incorrect email and valid password|Username: demo2@nottingham.ac.uk Password: TEST1234|Appropriate Error Message|Passed|||
+|1.4.1|Login with no email and a password|Username:  Password: TEST123|Appropriate Error Message|Passed|||
 |1.4.2|Login with valid email and no password|Username: demo1@nottingham.ac.uk Password: |Appropriate Error Message|Passed|||
 |1.5|Login with malicious unsanitised input, i.e. SQL injection||Input is sanitised, error message is thrown|Passed|||
 
