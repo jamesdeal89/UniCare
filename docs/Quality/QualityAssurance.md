@@ -1,3 +1,4 @@
+# Quality Assurance
 ### Introduction
 Our project at its base is a mental health app with a chatbot and mental health themed games. The objective of the app is to provide users with access to mental health services and information through a chatbot whilst also providing entertainment through games which encourage the users to learn and understand positive vocabulary.
 
