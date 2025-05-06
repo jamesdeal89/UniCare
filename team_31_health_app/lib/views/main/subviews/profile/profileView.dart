@@ -7,6 +7,10 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+/// A stateful widget that displays the profile screen, allowing users to
+/// view/modify their profile picture, nickname, and see a breakdown of
+/// their activity towards the 5 Ways to Wellbeing.
 class ProfileView extends StatefulWidget {
   ProfileView({super.key, required this.journalRepo});
   JournalRepo journalRepo;
@@ -20,7 +24,8 @@ class _ProfileViewState extends State<ProfileView> {
   final ImagePicker _picker = ImagePicker();
   String _nickname = "User";
 
-  // Method to allow teh user to select image from photo gallery
+  /// Method that allows teh user to select image from the photo gallery
+  /// of their device and save the selected image path.
   Future<void> _pickImage() async {
     final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
@@ -32,7 +37,7 @@ class _ProfileViewState extends State<ProfileView> {
     }
   }
 
-  // Method that loads profile picture and nickname of the user
+  /// Loads profile picture and nickname of the user from shared preferences
   Future<void> _loadProfileData() async {
     final prefs = await SharedPreferences.getInstance();
     final path = prefs.getString('profile_picture');
@@ -47,8 +52,8 @@ class _ProfileViewState extends State<ProfileView> {
     });
   }
 
-  // An alert box appears on the screen when the "Change Nickname" button is pressed
-  // User can then edit their nickname as they please.
+  /// An alert box appears on the screen when the "Change Nickname" button is pressed
+  /// User can then edit their nickname.
   void _changeNickname() async {
     final controller = TextEditingController(text: _nickname);
     final prefs = await SharedPreferences.getInstance();
@@ -100,7 +105,8 @@ class _ProfileViewState extends State<ProfileView> {
     _loadProfileData(); // Load the saved profile picture and nickname
   }
 
-  // Method that makes user's profile picture clickable, and shows and enlarged version of it
+  /// Pressing profile avatar displays an enlarged version of it
+  /// Checks if the user has changed the profile picture or not
   void _showEnlargedProfileImage(BuildContext context) {
     showDialog(
       context: context,
@@ -119,7 +125,8 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 
-  // Get 5 Ways to WEllbeing data from the journalRepo
+  /// Retrieves 5 Ways to WEllbeing activity data from journalRepo
+  /// via database query, returning a list of labelled data.
   Future<List<Map<String, Object>>> getActivityData() async {
     try {
       int give = await widget.journalRepo.count(0);
@@ -217,7 +224,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 onTap: () => _showEnlargedProfileImage(context), // shows enlarged image when pressed
                                 child: CircleAvatar(
                                   radius: 50,
-                                  backgroundImage: _profileImage != null ? backgroundImage = backgroundImage = FileImage(_profileImage!) : backgroundImage = AssetImage('assets/images/example_profile_picture.jpg'),
+                                  backgroundImage: _profileImage != null ? backgroundImage = FileImage(_profileImage!) : backgroundImage = AssetImage('assets/images/example_profile_picture.jpg'),
                                 ),
                               ),
                               const SizedBox(height: 12),
@@ -263,7 +270,7 @@ class _ProfileViewState extends State<ProfileView> {
         });
   }
 
-  // Method that builds and formats the the pie chart
+  /// Builds pie chart and key using activity data
   Widget _buildActivityPieChart(double total) {
     return FutureBuilder(
         future: activityData,
@@ -355,7 +362,7 @@ class _ProfileViewState extends State<ProfileView> {
         });
   }
 
-  // Button with press animation
+  /// builds a styled button with press animation, icon, label and callback
   Widget _buildActionButton(BuildContext context, String label, IconData icon, VoidCallback onPressed, {Color? color}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
