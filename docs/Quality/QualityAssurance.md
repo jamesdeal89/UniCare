@@ -4,9 +4,9 @@ Our project at its base is a mental health app with a chatbot and mental health 
 #### The importance of quality assurance
 Quality assurance is essential for a successful project. We need to be very thorough in ensuring that there are no major bugs in the app as new versions come out and that the app runs correctly across multiple use cases. We have done very extensive isolation testing to ensure that the app works as intended as we continue to add new features.
 
-The first set of testing was completed before the final implementations of the Journal and Profile screens which is why many tests fail on the first pass. They will be reran once the aforementioned screens are integrated within the app.
+The first set of testing was after integration was fully completed. The Journal screens and profile screens were updated for the second set of testing.
 #### Test Plans
-We used manual tests for the process as a way to test app functionality in a way that the user would be able to achieve.
+We used manual tests as a way to test app functionality in a way that the user would be able to achieve.
 
 #### Function: Login 
 
@@ -31,10 +31,10 @@ We used manual tests for the process as a way to test app functionality in a way
 |2.3|Press Journal icon in navigation from Chatbot|Press Journal Icon|Taken to Journal screen|Passed|||
 |2.4|Press Journal icon in navigation from Games|Press Journal Icon|Taken to Journal screen|Passed|||
 |2.5|Press Journal icon in navigation from Profile|Press Journal Icon|Taken to Journal screen|Passed|||
-|2.6|Create a journal entry|Press create journal icon and input text|Entry is displayed on jorunal screen|Failed||
-|2.7|View a previous journal entry|Press previous journal entry|Entry is displayed on screen|Failed||
-|2.8|View information on habits|Press info tab on journal tab|Habit information is displayed|Failed||
-|2.9|Delete a previous journal entry|Press previous journal entry and press delete|Old journal screen is no longer displayed|Failed||
+|2.6|Create a journal entry|Press create journal icon and input text|Entry is displayed on jorunal screen|Failed|Passed|
+|2.7|View a previous journal entry|Press previous journal entry|Entry is displayed on screen|Failed|Passed|
+|2.8|View information on habits|Press info tab on journal tab|Habit information is displayed|Failed|Passed|
+|2.9|Delete a previous journal entry|Press previous journal entry and press delete|Old journal screen is no longer displayed|Failed|Passed|
 
 #### Function: Help Page 
 
@@ -105,7 +105,6 @@ TRIGGER WARNING: The contents of this table may be distressing for some readers.
 |6.3|Press Profile icon in navigation from Chatbot|Press Profile Icon|Taken to Profile screen|Passed|||
 |6.4|Press Profile icon in navigation from Games|Press Profile Icon|Taken to Profile screen|Passed|||
 |6.5|Press Profile icon in navigation from Profile|Press Profile Icon|Remain on Profile screen|Passed|||
-|6.6|Update password|Put in valid password and press confirm|Confirmation of updated password|Failed|||
-|6.7|Update profile picture|Upload profile picture|Confirmation of updated password and new picture is displayed|Failed|||
-|6.8|Habit pi chart is updating|Add habits in journalling|Pi chart updates live|Passed|||
+|6.6|Update profile picture|Upload profile picture|Confirmation of updated password and new picture is displayed|Failed|Passed||
+|6.7|Habit pi chart updates with jorunal entries|Add habits in journalling|Pi chart updates live|Passed|||
 
