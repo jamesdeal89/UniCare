@@ -13,7 +13,12 @@ class _GamesViewState extends State<GamesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Games')),
+      appBar: AppBar(
+        title: Text('Games', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
+        centerTitle: false,
+        titleSpacing: 18,
+        toolbarHeight: 108,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

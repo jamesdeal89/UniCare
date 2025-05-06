@@ -99,13 +99,18 @@ class _MordleViewState extends State<MordleView> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text("Hint"),
+        title: Text("Hint", style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary)),
         content: Text(hint),
         actions: [
-          TextButton(
+          ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Close"),
-          )
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            child: const Text('Close'),
+          ),
         ],
       ),
     );
@@ -297,16 +302,21 @@ class _MordleViewState extends State<MordleView> {
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            title: const Text("You got it!"),
+            title: Text("You got it!", style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary)),
             content: const Text("Well done 🎉"),
             actions: [
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   _resetGame();
                 },
-                child: const Text("OK"),
-              )
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                child: const Text('Replay'),
+              ),
             ],
           ),
         );
@@ -314,16 +324,21 @@ class _MordleViewState extends State<MordleView> {
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            title: const Text("Game Over"),
+            title: Text("Game Over", style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary)),
             content: Text("The word was: $target"),
             actions: [
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   _resetGame();
                 },
-                child: const Text("OK"),
-              )
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                child: const Text('Replay'),
+              ),
             ],
           ),
         );

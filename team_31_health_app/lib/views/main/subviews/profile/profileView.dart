@@ -18,7 +18,7 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   File? _profileImage;
   final ImagePicker _picker = ImagePicker();
-  String _nickname = "John"; // By default, set to "John"
+  String _nickname = "User";
 
   // Method to allow teh user to select image from photo gallery
   Future<void> _pickImage() async {
@@ -311,7 +311,13 @@ class _ProfileViewState extends State<ProfileView> {
                   children: snapshot.data!.asMap().entries.map((entry) {
                     final data = entry.value;
                     final value = data['value'] as double;
-                    final percentage = ((value / total) * 100).toStringAsFixed(1); // Calculate percentage to 1 d.p.
+                    String percentage = ((value / total) * 100).toStringAsFixed(1); // Calculate percentage to 1 d.p.
+
+                    // Error correct in case of no journal entries
+                    if (percentage == "NaN") {
+                      percentage = '0';
+                    }
+
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Row(

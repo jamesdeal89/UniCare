@@ -14,56 +14,23 @@ class MainView extends StatefulWidget {
 
 class _MainView extends State<MainView> {
   final User? currentUser = FirebaseAuth.instance.currentUser;
+
   /// This command
   Future<Database> initDB() async {
     String key = ((currentUser?.uid) != null) ? currentUser!.uid : "";
     final database = await openDatabase(
       join(await getDatabasesPath(), "care_app$key.db"),
-      
       onCreate: (db, version) async {
         await db.execute('CREATE TABLE chat(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, user INTEGER)');
         List<ChatMsg> messages = <ChatMsg>[
-          ChatMsg(true, "Oldest"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Yeah"),
-          ChatMsg(true, "Hello"),
-          ChatMsg(false, "World"),
-          ChatMsg(true, "Newest"),
+          ChatMsg(false, "Welcome! Feel free to talk about your day! I'm here to help! :)"),
         ];
         for (var i = 0; i < messages.length; i++) {
-          await db.insert('chat', messages[i].toMap());
           await db.insert('chat', messages[i].toMap());
         }
         await db.execute('CREATE TABLE journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, give INTEGER, takeNotice INTEGER, keepLearning INTEGER, beActive INTEGER, connect INTEGER)');
         List<JournalEntry> journalEntries = <JournalEntry>[
-          JournalEntry(title: "Titledsadfsaf", date: DateTime.now(), description: "Description", give: true, takeNotice: true, keepLearning: true, beActive: true, connect: true),
-          JournalEntry(title: "Titledasfasfd", date: DateTime.now(), description: "Description2", give: true, takeNotice: false, keepLearning: true, beActive: true, connect: true),
-          JournalEntry(title: "Titlasccccccccccae", date: DateTime.now(), description: "Description3", give: true, takeNotice: true, keepLearning: false, beActive: true, connect: true),
-          JournalEntry(title: "Ticcccccccccatle", date: DateTime.now(), description: "Description4", give: true, takeNotice: true, keepLearning: true, beActive: false, connect: true),
-          JournalEntry(title: "Titlcccccccae", date: DateTime.now(), description: "Description5", give: true, takeNotice: true, keepLearning: true, beActive: true, connect: false),
-          JournalEntry(title: "Titaaaaaaaaaaale", date: DateTime.now(), description: "Description6", give: true, takeNotice: true, keepLearning: true, beActive: true, connect: true),
-          JournalEntry(title: "Titldasdadwqwdwqdsasdsadawqe", date: DateTime.now(), description: "Description7", give: false, takeNotice: true, keepLearning: true, beActive: true, connect: true),
+          JournalEntry(title: "Downloaded UniCare", date: DateTime.now(), description: "Welcome to UniCare, the #1 way for University of Nottingham students to take care of their mental wellbeing!", give: false, takeNotice: false, keepLearning: false, beActive: false, connect: false),
         ];
         for (var i = 0; i < journalEntries.length; i++) {
           await db.insert('journal_entries', journalEntries[i].toMap());
@@ -73,8 +40,6 @@ class _MainView extends State<MainView> {
     );
     return database;
   }
-
-  
 
   @override
   void initState() {
@@ -98,10 +63,8 @@ class _MainView extends State<MainView> {
                     },
                     icon: Icon(Icons.error));
               } else {
-                
                 return MainPage(database: snapshot.data!);
-              } 
+              }
             }));
   }
 }
-
