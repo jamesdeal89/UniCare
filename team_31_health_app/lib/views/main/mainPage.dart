@@ -5,9 +5,7 @@ import 'package:team_31_health_app/data/database/journalRepo.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/chatView.dart';
 import 'package:team_31_health_app/views/main/subviews/games/gamesView.dart';
 import 'package:team_31_health_app/views/main/subviews/helpView.dart';
-import 'package:team_31_health_app/views/main/subviews/journalView.dart';
-import 'package:team_31_health_app/views/main/subviews/games/mordleView.dart';
-import 'package:team_31_health_app/views/main/subviews/games/inhaleView.dart';
+import 'package:team_31_health_app/views/main/subviews/journal/journalView.dart';
 import 'package:team_31_health_app/views/main/subviews/profile/profileView.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,23 +16,24 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 4;
+  int _selectedIndex = 2;
   late Database database;
+  late ChatRepo chatRepo;
+  late JournalRepo journalRepo;
 
   late List<Widget> _widgetOptions;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     database = widget.database;
+    chatRepo = ChatRepo(database: database);
+    journalRepo = JournalRepo(database: database);
     _widgetOptions = <Widget>[
-      const JournalView(),
+      JournalView(journalRepo: journalRepo),
       const HelpView(),
-      ChatView(chatRepo: ChatRepo(database: database)),
+      ChatView(chatRepo: chatRepo),
       const GamesView(),
-      ProfileView(journalRepo: JournalRepo(database: database)),
-      const MordleView(),
-      const InhaleView(),
+      ProfileView(journalRepo: journalRepo),
     ];
   }
 

@@ -1,0 +1,2 @@
+class BotMsgException implements Exception {
+}

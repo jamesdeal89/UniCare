@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/chatRepo.dart';
 import 'package:team_31_health_app/data/database_fields/chatMsg.dart';
+import 'package:team_31_health_app/data/result.dart';
+import 'package:team_31_health_app/views/main/subviews/chat/components/botMsgError.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/chatbubble.dart';
 import 'package:team_31_health_app/views/main/subviews/chat/components/typingbubble.dart';
 
@@ -28,9 +32,31 @@ class _ChatView extends State<ChatView>{
     notificationObserverState?.addListener(_listener);
   }
 
+  late Future<Result<ChatMsg>> replyMessage;
+
+  Future<void> _refreshMessages() async {
+    // re-trigger bot to load several messages - (kinda forceful work-around, sorry)
+    if (msgTextEditingController.text.isEmpty) {
+      msgTextEditingController.text = " ";
+      msgTextEditingController.text = "";
+    } else {
+      msgTextEditingController.text += " ";
+      msgTextEditingController.text =
+          msgTextEditingController.text.trim();
+    }
+
+    if (formKey.currentState != null) {
+      formKey.currentState!.validate();
+    }
+    setState(() {});
+  }
+  late Future<List<ChatMsg>> chatMessages;
   @override
   void initState() {
     super.initState();
+    chatMessages = getMessages();
+    
+    replyMessage = reply();
   }
 
   Future<List<ChatMsg>> getMessages() async {
@@ -51,15 +77,31 @@ class _ChatView extends State<ChatView>{
     }
     
   }
-  Future<ChatMsg> reply() async {
+
+  Future<void> deleteChat() async {
     try {
-      // return await Future.delayed(Duration(seconds: 10), () {
-      //         return ChatMsg(false, "test");
-      //       });
-      // PROD: enable for BOT USE.
-      return (await widget.chatRepo.reply());
-    } catch (_) {
+      return (await widget.chatRepo.clear());
+    } catch (e) {
       rethrow;
+    }
+  }
+  Future<Result<ChatMsg>> reply() async {
+    
+    try {
+      
+      // return await Future.delayed(Duration(seconds: 4), () async {
+      //         return await sendMessage(ChatMsg(false, "test"));
+      //       });
+        
+      // PROD: enable for BOT USE.
+      ChatMsg msg = await widget.chatRepo.reply();
+      setState(() {
+        _refreshMessages();
+        chatMessages = getMessages();
+      });
+      return Result.ok(msg);
+    } on Exception catch (e) {
+      return Result.error(e);
     }
   }
 
@@ -94,9 +136,21 @@ class _ChatView extends State<ChatView>{
   void Function()? submitMsg;
   @override
   Widget build(BuildContext context) {
+    
     return FutureBuilder(
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState != ConnectionState.done) {
+                return Text("Loading");
+          } else if (snapshot.hasError || !snapshot.hasData) {
+                return IconButton(
+                    onPressed: () {
+                      setState(() {
+                        chatMessages = getMessages();
+                        // initDB();
+                      });
+                    },
+                    icon: Icon(Icons.error));
+          } else {
             List<ChatMsg> messages = snapshot.data!;
             return Scaffold(
               body: Column(
@@ -122,9 +176,19 @@ class _ChatView extends State<ChatView>{
                                 color: Theme.of(context).colorScheme.primary,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Icon(
-                                Icons.refresh,
-                                color: Theme.of(context).colorScheme.onPrimary,
+                              child: IconButton(
+                                onPressed: () async {
+                                  await deleteChat();
+                                  setState(() {
+                                    this.chatMessages = getMessages();
+
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.refresh,
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                )
+                                
                               ),
                             ),
                           ],
@@ -141,11 +205,16 @@ class _ChatView extends State<ChatView>{
                                   backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
                                   child: Icon(Icons.arrow_downward_rounded, color: Theme.of(context).iconTheme.color),
                                   onPressed: () {
+                                    setState(() {
+                                      replyMessage = reply();
+                                      
+                                    });
                                     chatScrollController.animateTo(chatScrollController.position.minScrollExtent, duration: Duration(milliseconds: 100), curve: Curves.bounceInOut);
                                   })
                               : null,
                           body: Container(
                               padding: EdgeInsets.all(10),
+                              
                               child: ListView.builder(
                                   reverse: true,
                                   controller: chatScrollController,
@@ -153,20 +222,40 @@ class _ChatView extends State<ChatView>{
                                   itemBuilder: (context, idx) {
 
                                     if(idx == 0){
-                                      return FutureBuilder(future: reply(), builder: (context, snapshot) {
-                                        if(snapshot.hasData){
-                                          return ChatBubble(message: snapshot.data!.msg, user: false);
-                                        } else if (snapshot.hasError){
-                                          return IconButton(icon: Icon(Icons.refresh), onPressed: () {setState(() {});});
-                                        } else {
+                                      return FutureBuilder(future: replyMessage, builder: (context, snapshot) {
+                                        print(snapshot);
+                                        print(snapshot.error);
+                                        
+                                        if (snapshot.connectionState != ConnectionState.done) {
                                           return TypingBubble();
+                                        } else if(snapshot.hasData) {
+                                          final result = snapshot.data;
+                                          switch (result) {
+                                            case Ok<ChatMsg>():
+                                              ChatMsg message = result.value;
+                                              return ChatBubble(message: message.msg, user: false);
+                                              
+                                            case Error<BotMsgException>():
+                                              return Container();
+                                            case Error<Exception>():
+                                              return IconButton(icon: Icon(Icons.refresh), onPressed: () {
+                                                setState(() {
+                                                  
+                                                  replyMessage = reply();
+                                                });
+                                              });
+                                            default:
+                                              return Container();
+                                          }
+                                        } else {
+                                          return Container();
                                         }
-                                        }); 
+                                      }); 
+                                    } else {
+                                      int index = idx-1;
+
+                                      return ChatBubble(message: messages[index].msg, user: messages[index].user);
                                     }
-                                    int index = idx - 1;
-
-                                    return ChatBubble(message: messages[index].msg, user: messages[index].user);
-
                                   })))),
                   
 
@@ -216,16 +305,14 @@ class _ChatView extends State<ChatView>{
                                                           String text = msgTextEditingController.text;
                                                           msgTextEditingController.clear();
                                                           try {
-                                                            await sendMessage(ChatMsg(true, text)); 
+                                                            print("called");
+                                                            await sendMessage(ChatMsg(true, text));
+                                                            setState(() {
+                                                              reply();
+                                                            });
                                                           } catch (_) {
                                                             return;
                                                           }
-                                                          
-
-                                                          //TODO: Typing bubble while bot responds.
-                                                          setState(() {
-
-                                                          });
                                                         } else {
                                                           return;
                                                         }
@@ -243,21 +330,8 @@ class _ChatView extends State<ChatView>{
                 ],
               ),
             );
-          } else if (snapshot.hasError) {
-            return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                child: TextButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
-                  child: Text("Retry"),
-                ),
-              )
-            ]);
-          } else {
-            return Container();
           }
         },
-        future: getMessages());
+        future: chatMessages);
   }
 }

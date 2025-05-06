@@ -26,7 +26,6 @@ class _TypingBubbleState extends State<TypingBubble> with SingleTickerProviderSt
     animationController.dispose(); // Dispose the controller
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
