@@ -8,6 +8,22 @@ nlu:
 
 - intent: crisis
   examples: |
+    - Im going to commit suicide
+    - I feel like I can't go on anymore.
+    - I want to end my life.
+    - I don't see a way out of this pain.
+    - I'm thinking about hurting myself.
+    - I wish I could just disappear.
+    - Life is not worth living.
+    - I feel hopeless and trapped.
+    - I can't take this anymore.
+    - I have thoughts of suicide.
+    - I feel like I'm a burden to everyone.
+    - I just want to give up.
+    - Nothing seems to matter anymore.
+    - I don't want to live like this.
+    - I feel so alone and desperate.
+    - I think about dying a lot.
     - I want to self harm
     - I'm thinking about killing myself
     - I'm worthless
@@ -42,7 +58,7 @@ nlu:
     - Can you explain the [journalling](feature) area
     - Can you explain the [murdle](feature) game
     - Please explain the benefit of the [games](feature)
-    - how does [murdle](feature) work?
+    - how does [mordle](feature) work?
     - Explain the [journaling](feature) section
     - why would I want to do [journalling](feature)
     - Can you describe how the [games](feature) work
@@ -53,6 +69,12 @@ nlu:
     - tell me about [journalling](feature)
     - Explain how [journalling](feature) helps
     - Explain how keeping a [dairy](feature) helps
+    - tell me about [inhail](feature)
+    - explain the benefits of the [breathing](feature) exercises
+    - what is the [breathing](feature) exercises section for
+    - what's [inhale](feature) about
+    - explain [inhail](feature)
+  
 
 - intent: provide_url
   examples: |
@@ -128,11 +150,10 @@ nlu:
 
 - intent: greet
   examples: |
-    - Hi
-    - Hello
-    - Hey there
-    - Good morning
-    - Good afternoon
+    - hello
+    - hey there
+    - good morning
+    - good afternoon
     - hi
     - howdy
     - gday
@@ -151,9 +172,12 @@ nlu:
   examples: |
     - I'm feeling [happy](emotion)
     - I am [sad](emotion)
+    - Im [sad](emotion)
     - I feel [anxious](emotion)
+    - Im [anxious](emotion)
     - I'm [depressed](emotion)
     - I'm [angry](emotion)
+    - I feel [overwhelmed](emotion)
     - I'm [excited](emotion)
     - I'm [frustrated](emotion)
     - I'm feeling [great](emotion)

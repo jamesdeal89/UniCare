@@ -307,15 +307,17 @@ def containsTrigger(id,url):
             content = BeautifulSoup(response.text, "html.parser")
             text = content.getText()
             triggers = getTriggers(id)
-            for trigger in triggers: 
-                if trigger.lower() in text.lower():
-                    return True
+            if triggers:
+                for trigger in triggers: 
+                    if trigger.lower() in text.lower():
+                        return True
             # also check multi-media alt text as an additional check
             for img in content.find_all("img"):
                 alt = img.get("alt","")
-                for trigger in triggers:
-                    if trigger.lower() in alt.lower():
-                        return True
+                if triggers:
+                    for trigger in triggers:
+                        if trigger.lower() in alt.lower():
+                            return True
             return False
 
         except requests.RequestException:
@@ -424,7 +426,7 @@ class Action_Explain(Action):
                 dispatcher.utter_message("The 'Games' section allows you to engage with mentally stimulating activites.")
                 dispatcher.utter_message("Keeping your brain active by trying to solve puzzles is shown to benefit your mental health.")
                 dispatcher.utter_message("See this article from the University of Oxford: https://www.ox.ac.uk/news/2020-11-16-groundbreaking-new-study-says-time-spent-playing-video-games-can-be-good-your-well")
-                dispatcher.utter_message("The 'Murdle' game is based around guessing a short word within a given number of attempts.")
+                dispatcher.utter_message("The 'Mordle' game is based around guessing a short word within a given number of attempts.")
                 dispatcher.utter_message("After each guess, it will show you which letters you guessed are in the target word in yellow, and which letters are both in the word and in the correct position in green.")
                 dispatcher.utter_message("Remember! the word's meaning will always be related to something positive in this version of the game.")
             elif feature.lower() in ["journal","journalling","journaling","diary"]:
@@ -432,6 +434,10 @@ class Action_Explain(Action):
                 dispatcher.utter_message("However, the amount you write or the frequency is entirely up to you! Journalling should be a fun part of your routine so it's okay to do it less frequently if you can't find the time.")
                 dispatcher.utter_message("There is research to suggest it can help your mental health as you reflect on your day.")
                 dispatcher.utter_message("See this article from the National Library of Medicine for more information on the benefits: https://pmc.ncbi.nlm.nih.gov/articles/PMC6305886/")
+            elif feature.lower() in ["exercises","inhail", "inhale","breathing"]:
+                dispatcher.utter_message("The 'Inhail' section allows you to practice breathing exercises.")
+                dispatcher.utter_message("Regulating and taking note of how you breath can be a good way to ground yourself and feel more relaxed.")
+                dispatcher.utter_message("See this article from the National Library of Medicine which supports the benefits of breathing exercises: https://pmc.ncbi.nlm.nih.gov/articles/PMC6137615/")
 
             else:
                 dispatcher.utter_message("I'm not sure what feature you're refering to. Perhaps try phrasing it as 'games' or 'journalling' for example.")

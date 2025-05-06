@@ -20,7 +20,7 @@ pipeline:
 - name: CountVectorsFeaturizer
 - name: DIETClassifier
   # prevent clashes with the Regex for url entities
-  entities: ["emotion", "trigger"]
+  entities: ["emotion","tigger"]
   epochs: 80
 - name: EntitySynonymMapper
 - name: FallbackClassifier
