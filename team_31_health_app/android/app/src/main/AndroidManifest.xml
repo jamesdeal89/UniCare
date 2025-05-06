@@ -2,9 +2,9 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
-        android:label="team_31_health_app"
+        android:label="UniCare"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:extractNativeLibs="true"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">

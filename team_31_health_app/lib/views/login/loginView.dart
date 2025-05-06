@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:team_31_health_app/views/main/mainView.dart';
 import 'package:team_31_health_app/views/login/privacyView.dart';
 import 'package:team_31_health_app/data/theme.dart';
-import 'package:markdown_widget/markdown_widget.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key

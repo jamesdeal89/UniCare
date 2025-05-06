@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:fl_chart/fl_chart.dart'; // Add fl_chart to your pubspec.yaml
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/journalRepo.dart';
