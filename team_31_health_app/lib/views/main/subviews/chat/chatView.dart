@@ -59,6 +59,7 @@ class _ChatView extends State<ChatView> {
     replyMessage = reply();
   }
 
+  /// This method returns a list of [ChatMsg] objects from the database.
   Future<List<ChatMsg>> getMessages() async {
     try {
       return (await widget.chatRepo.get()).reversed.toList();
@@ -67,6 +68,7 @@ class _ChatView extends State<ChatView> {
     }
   }
 
+  /// This method sends a [ChatMsg] object to the database.
   Future<ChatMsg> sendMessage(ChatMsg message) async {
     try {
       return (await widget.chatRepo.insert(message));
@@ -75,6 +77,7 @@ class _ChatView extends State<ChatView> {
     }
   }
 
+  /// This method invokes the clear command in the database managing [ChatRepo].
   Future<void> deleteChat() async {
     try {
       return (await widget.chatRepo.clear());
@@ -83,6 +86,7 @@ class _ChatView extends State<ChatView> {
     }
   }
 
+  /// This method returns a [Result] of [ChatMsg] object from the [ChatRepo].
   Future<Result<ChatMsg>> reply() async {
     try {
       // return await Future.delayed(Duration(seconds: 4), () async {
