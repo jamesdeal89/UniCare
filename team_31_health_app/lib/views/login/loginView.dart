@@ -114,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Text("Login"),
                 ))),
-            Padding(
+            /* Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
                 child: Center(
                     child: ElevatedButton(
@@ -130,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Text("Demo Mode"),
                 ))),
-
+            */
             // priv policy
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
