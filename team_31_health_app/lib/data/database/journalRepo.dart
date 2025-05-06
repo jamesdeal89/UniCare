@@ -17,7 +17,6 @@ class JournalRepo extends DatabaseService<JournalEntry> {
   static const String columnBeActive = 'beActive';
   static const String columnConnect = 'connect';
 
-
   @override
   Future<JournalEntry> insert(JournalEntry data) async {
     running = true;
@@ -57,7 +56,9 @@ class JournalRepo extends DatabaseService<JournalEntry> {
         tableName,
         data.toMap(),
         where: 'id = ?',
-        whereArgs: [data.id],
+        whereArgs: [
+          data.id
+        ],
       );
       running = false;
       return data;
@@ -73,7 +74,9 @@ class JournalRepo extends DatabaseService<JournalEntry> {
       await database.delete(
         tableName,
         where: 'id = ?',
-        whereArgs: [id],
+        whereArgs: [
+          id
+        ],
       );
       running = false;
     } on Exception catch (_) {
@@ -82,7 +85,7 @@ class JournalRepo extends DatabaseService<JournalEntry> {
     }
   }
 
-  Future<int> count(int id) async{
+  Future<int> count(int id) async {
     String queryCol = "";
     switch (id) {
       case 0:
@@ -103,15 +106,13 @@ class JournalRepo extends DatabaseService<JournalEntry> {
       default:
     }
     try {
-      List<Map<String,Object?>> results = await database.rawQuery('SELECT SUM($queryCol) AS Result FROM $tableName');
+      List<Map<String, Object?>> results = await database.rawQuery('SELECT SUM($queryCol) AS Result FROM $tableName');
       print(results[0]);
       final result = int.tryParse(results[0]["Result"].toString());
       if (result == null) {
         throw FormatException();
       }
       return result;
-        
-      
     } catch (_) {
       rethrow;
     }
