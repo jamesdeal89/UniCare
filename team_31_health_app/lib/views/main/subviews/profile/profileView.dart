@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:fl_chart/fl_chart.dart'; // Add fl_chart to your pubspec.yaml
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:team_31_health_app/data/database/journalRepo.dart';
 import 'dart:io';
@@ -32,6 +32,7 @@ class _ProfileViewState extends State<ProfileView> {
     }
   }
 
+  // Method that loads profile picture and nickname of the user
   Future<void> _loadProfileData() async {
     final prefs = await SharedPreferences.getInstance();
     final path = prefs.getString('profile_picture');
@@ -47,6 +48,7 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   // An alert box appears on the screen when the "Change Nickname" button is pressed
+  // User can then edit their nickname as they please.
   void _changeNickname() async {
     final controller = TextEditingController(text: _nickname);
     final prefs = await SharedPreferences.getInstance();
@@ -98,6 +100,7 @@ class _ProfileViewState extends State<ProfileView> {
     _loadProfileData(); // Load the saved profile picture and nickname
   }
 
+  // Method that makes user's profile picture clickable, and shows and enlarged version of it
   void _showEnlargedProfileImage(BuildContext context) {
     showDialog(
       context: context,
@@ -260,6 +263,7 @@ class _ProfileViewState extends State<ProfileView> {
         });
   }
 
+  // Method that builds and formats the the pie chart
   Widget _buildActivityPieChart(double total) {
     return FutureBuilder(
         future: activityData,
