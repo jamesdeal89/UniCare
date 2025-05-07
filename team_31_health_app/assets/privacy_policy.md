@@ -7,7 +7,7 @@ information.
 
 ### Email
 
-psyss21@nottingham.ac.uk
+placeholder@nottingham.ac.uk
 
 ## What information we collect, use, and why
 
