@@ -1,4 +1,4 @@
-## Team 31 Health App customer privacy notice
+## UniCare customer privacy notice
 
 This privacy notice tells you what to expect us to do with your personal
 information.
@@ -83,8 +83,7 @@ We'll retain your personal information only as long as we need in order to provi
 
 ### Others we share personal information with
 
-- Other relevant third parties:
-- - Email addresses and password hashed will be stored using Google Cloud's Firebase service and is subject to their terms of service which can be found at https://cloud.google.com/terms/. \"Google\" has the meaning given at https://cloud.google.com/terms/google-entity.
+- Email addresses and password hashed will be stored using Google Cloud's Firebase service and is subject to their terms of service which can be found at https://cloud.google.com/terms/. \"Google\" has the meaning given at https://cloud.google.com/terms/google-entity.
 
 ## Duty of confidentiality
 
