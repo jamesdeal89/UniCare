@@ -1,4 +1,4 @@
-# Team 31 - Bac-In Recovery Chatbot
+# Team 31 - UniCare
 ## COMP2002, Group Project - Team 31
 
 Our project is based on BAC-IN's brief to create a Recovery Chatbot in order to give people struggling with addiction an AI assistant they can talk to if they don't want to immediately seek proffessional human help; idea being that someone may feel more comfortable to make the 'first step' towards recovery via an inanimate chatbot.
