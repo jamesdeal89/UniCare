@@ -3,9 +3,9 @@
 
 Our project is based on BAC-IN's brief to create a Recovery Chatbot in order to give people struggling with addiction an AI assistant they can talk to if they don't want to immediately seek proffessional human help; idea being that someone may feel more comfortable to make the 'first step' towards recovery via an inanimate chatbot.
 
-During early devlopment, we faced issues in communications with BAC-IN and later learned our project co-ordinator on their end was sadly made redundant. This affected our development of the project severely
+During early development, we faced issues in communications with BAC-IN and later learned our industry supervisor was sadly made redundant. This affected our initial development of the project.
 
-Nonetheless we worked closely with our academic supervisor to see if we could continue with BAC-IN in some capacity, or contine 'in-house' with the medical department. We overall came to the decision that an inhouse project leaning more towards catering for student's wellbeing would be ideal. We decided on UniCare - an app designed to target welfare while maintaining the original chatbot function.
+Nonetheless we worked closely with our academic supervisor to see if we could continue with BAC-IN in some capacity, or contine 'in-house' with the medical department. We ended up coming to the decision that an in-house project that leant more towards catering for student's wellbeing would be ideal. We decided on **UniCare** - an iOS and Android app designed to target welfare while maintaining the original chatbot function.
 
 
 ## Project Contributors
