@@ -1,0 +1,35 @@
+version: "3.1"
+recipe: default.v1
+
+language: en
+
+pipeline:
+# help recognise urls with regex
+- name: RegexEntityExtractor
+  # run first to extract urls
+  priority: 1
+  entities: ["url"]
+  patterns:
+  - pattern: '(https?://\S+|www\.\S+)'
+    name: "url"
+    case_sensitive: false
+    use_word_boundaries: true
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer
+- name: DIETClassifier
+  # prevent clashes with the Regex for url entities
+  entities: ["emotion","tigger"]
+  epochs: 80
+- name: EntitySynonymMapper
+- name: FallbackClassifier
+  threshold: 0.3
+
+policies:
+- name: MemoizationPolicy
+- name: TEDPolicy
+  max_history: 5
+  epochs: 80
+  assistant_id: 20250225-150340-visible-latitude
+assistant_id: 20250427-121359-strong-ion

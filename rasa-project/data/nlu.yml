@@ -1,0 +1,229 @@
+version: "3.1"
+nlu:
+- regex: url
+  examples: |
+    - '(https?://\S+|www\.\S+)' 
+    - '(www\.[^\s]+)'    
+    - '([^\s]+\.(com|org|net|uk)[^\s]*)'  
+
+- intent: crisis
+  examples: |
+    - Im going to commit suicide
+    - I feel like I can't go on anymore.
+    - I want to end my life.
+    - I don't see a way out of this pain.
+    - I'm thinking about hurting myself.
+    - I wish I could just disappear.
+    - Life is not worth living.
+    - I feel hopeless and trapped.
+    - I can't take this anymore.
+    - I have thoughts of suicide.
+    - I feel like I'm a burden to everyone.
+    - I just want to give up.
+    - Nothing seems to matter anymore.
+    - I don't want to live like this.
+    - I feel so alone and desperate.
+    - I think about dying a lot.
+    - I want to self harm
+    - I'm thinking about killing myself
+    - I'm worthless
+    - Nobody would notice if I disappeared
+    - I want to sh
+    - I'm going to cut myself
+    - I hate myself
+    - I'm ashamed of myself
+
+- intent: ask_prompt
+  examples: |
+    - Can you give me a journalling prompt
+    - Can you give me a writing prompt
+    - writing prompt
+    - journalling prompt
+    - Can you help we start my journal entry
+    - Can you help me write my diary entry
+    - Can you help me write my journal log
+    - Im not sure where to start with my journal
+    - Suggest something for my diary
+    - help me brainstorm a journal topic
+    - im stuck on what to journal about
+    - need a creative writing prompt
+    - I need a prompt for self reflection
+    - what could I write about today
+    - I need inspiration for my diary
+    - I need inspiration for my journal
+
+- intent: ask_explain
+  examples: |
+    - Can you explain the [games](feature) section
+    - Can you explain the [journalling](feature) area
+    - Can you explain the [murdle](feature) game
+    - Please explain the benefit of the [games](feature)
+    - how does [mordle](feature) work?
+    - Explain the [journaling](feature) section
+    - why would I want to do [journalling](feature)
+    - Can you describe how the [games](feature) work
+    - can you explain how the [games](feature) work
+    - can you clarify what the [journalling](feature) section is for?
+    - what's special about [murdle](feature)
+    - tell me about the [games](feature)
+    - tell me about [journalling](feature)
+    - Explain how [journalling](feature) helps
+    - Explain how keeping a [dairy](feature) helps
+    - tell me about [inhail](feature)
+    - explain the benefits of the [breathing](feature) exercises
+    - what is the [breathing](feature) exercises section for
+    - what's [inhale](feature) about
+    - explain [inhail](feature)
+  
+
+- intent: provide_url
+  examples: |
+    - Please check this url [https://www.gov.uk/divorce](url)
+    - Please check this url [https://www.google.com](url)
+    - [https://nottingham.ac.uk](url)
+    - [https://google.com](url)
+    - Can you check [https://google.com](url) for my triggers?
+    - Can you check [https://google.com](url)?
+    - Can you check [https://google.com](url)?
+    - Does [https://www.meandmymind.nhs.uk/getting-help/mental-health-websites](url) contain any of my triggers?
+    - [https://rasa.com](url)
+    - Look at this: [http://example.org](url)
+    - The site is [https://new-url.dev](url)
+
+- intent: report_trigger
+  examples: |
+    - I am sensitive to the triggering word [pineapple](trigger)
+    - I am sensitive to the triggering word [dog](trigger)
+    - I am triggered by [abuse](trigger)
+    - I am triggered by [cats](trigger)
+    - I am triggered by [dogs](trigger)
+    - I am triggered by [elephants](trigger)
+    - I react badly when [school](trigger) is mentioned
+    - I react badly when [work](trigger) is mentioned 
+    - I react badly when [parents](trigger) are mentioned 
+    - I feel uncomfortable when [suicide](trigger) is mentioned
+    - I am sensitive to the triggering word [abuse](trigger)
+    - I get anxious when [failure](trigger) is brought up
+    - I react badly when [death](trigger) is mentioned
+    - I feel uneasy when [violence](trigger) is discussed
+    - I am triggered by [stressful situations](trigger)
+    - I feel uncomfortable when [mental health](trigger) is mentioned
+    - I have a hard time when [loss](trigger) is talked about
+    - I feel sensitive about [bullying](trigger)
+    - I don't like it when [arguments](trigger) are brought up
+    - I feel triggered by [conflict](trigger)
+    - I feel uneasy when [rejection](trigger) is mentioned
+    - I feel uncomfortable when [trauma](trigger) is discussed
+    - I am sensitive to the word [cancer](trigger)
+    - I feel anxious when [divorce](trigger) is mentioned
+    - I react negatively to [failure](trigger)
+    - I feel triggered by [panic attacks](trigger)
+    - I feel uncomfortable when [addiction](trigger) is discussed
+    - I am sensitive to the topic of [self-harm](trigger)
+    - I feel uneasy when [mental illness](trigger) is mentioned
+
+- intent: affirm
+  examples: |
+    - yes
+    - absolutely
+    - sure
+    - go ahead
+    - yes please
+    - yes thanks
+    - please do
+    - certainly
+    - yep
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - no thanks
+    - please don't
+    - certainly not
+    - please do not
+    - I don't want that
+    - do not
+    - don't do that 
+    - cancel
+    - stop
+
+- intent: greet
+  examples: |
+    - hello
+    - hey there
+    - good morning
+    - good afternoon
+    - hi
+    - howdy
+    - gday
+    - nice to see you
+    - long time no see
+    - whassup bot
+    - hey bot
+    - hi bot
+    - hi how are you
+    - hello how are you
+    - hows it going
+    - sup
+    - salutations
+
+- intent: express_emotion
+  examples: |
+    - I'm feeling [happy](emotion)
+    - I am [sad](emotion)
+    - Im [sad](emotion)
+    - I feel [anxious](emotion)
+    - Im [anxious](emotion)
+    - I'm [depressed](emotion)
+    - I'm [angry](emotion)
+    - I feel [overwhelmed](emotion)
+    - I'm [excited](emotion)
+    - I'm [frustrated](emotion)
+    - I'm feeling [great](emotion)
+    - I'm feeling [blue](emotion)
+    - I'm [nervous](emotion)
+    - I'm [content](emotion)
+    - I'm feeling [hopeless](emotion)
+    - I'm [ecstatic](emotion)
+    - I'm feeling [overwhelmed](emotion)
+    - I'm feeling overwhelmed with everything going on (emotion)
+    - I feel so overwhelmed right now (emotion)
+    - Lately, I've been feeling overwhelmed (emotion)
+
+- intent: seek_advice
+  examples: |
+    - Can you give me some advice?
+    - What should I do?
+    - How can I handle this?
+    - What do you think?
+    - How should I fix this?
+    - How can I do better?
+    - What can I do?
+
+- intent: request_help
+  examples: |
+    - I need help
+    - Can you help me?
+    - I'm stuck
+    - I don't know what to do
+    - Is there anything I can do?
+
+- intent: thanks
+  examples: |
+    - thanks
+    - I appreciate the help
+    - thanks for helping
+    - thanks for the help
+    - thank you
+    - that's useful, thanks
+    - thanks for the help bot
+    - thanks bot
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - See you later
+    - Goodbye
+    - Take care
+

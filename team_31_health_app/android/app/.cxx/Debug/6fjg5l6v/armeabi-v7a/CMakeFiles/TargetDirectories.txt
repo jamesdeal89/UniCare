@@ -1,0 +1,2 @@
+C:/Users/rohit/Documents/Year2/GRP/team31_project/team_31_health_app/android/app/.cxx/Debug/6fjg5l6v/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/rohit/Documents/Year2/GRP/team31_project/team_31_health_app/android/app/.cxx/Debug/6fjg5l6v/armeabi-v7a/CMakeFiles/rebuild_cache.dir

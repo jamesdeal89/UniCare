@@ -1,0 +1,2 @@
+/home/user/CS/team31_project/team_31_health_app/android/app/.cxx/Debug/4v6b83k3/x86_64/CMakeFiles/edit_cache.dir
+/home/user/CS/team31_project/team_31_health_app/android/app/.cxx/Debug/4v6b83k3/x86_64/CMakeFiles/rebuild_cache.dir

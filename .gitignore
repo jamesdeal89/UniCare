@@ -1,0 +1,44 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Rasa specific files
+*.db
+*.sqlite
+*.log
+*.tar.gz
+*.zip
+
+# Model files
+models/
+*.tar.gz
+
+# Configuration files
+config.yml
+credentials.yml
+endpoints.yml
+domain.yml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other temporary files
+*.tmp
+*.bak
+
+.rasa/
