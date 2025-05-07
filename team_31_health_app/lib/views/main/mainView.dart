@@ -15,7 +15,8 @@ class MainView extends StatefulWidget {
 class _MainView extends State<MainView> {
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
-  /// This command
+  /// This command initialises the Database with queries. Use lists of [DataModel] 
+  /// objects to fill their respective tables.
   Future<Database> initDB() async {
     String key = ((currentUser?.uid) != null) ? currentUser!.uid : "";
     final database = await openDatabase(
