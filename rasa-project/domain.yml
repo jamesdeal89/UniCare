@@ -1,0 +1,98 @@
+version: '3.1'
+intents:
+  - greet
+  - thanks
+  - express_emotion
+  - seek_advice
+  - request_help
+  - report_trigger
+  - provide_url
+  - affirm
+  - ask_explain
+  - crisis
+  - ask_prompt
+  - deny
+  - goodbye
+
+entities:
+  - feature
+  - emotion
+  - trigger
+  - url
+
+slots:
+  emotion:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: emotion
+        intent: express_emotion
+  trigger:
+    type: list
+    mappings:
+      - type: from_entity
+        entity: trigger
+        intent: report_trigger
+  url:
+    type: list
+    mappings:
+      - type: from_entity
+        entity: url
+        intent: provide_url
+  feature:
+    type: list
+    mappings:
+      - type: from_entity
+        entity: feature
+        intent: ask_explain
+
+
+actions:
+  - utter_greet
+  - utter_ask_how_feeling
+  - action_check
+  - action_ask_check
+  - action_journal
+  - utter_deny_trigger
+  - utter_deny_check
+  - action_advice
+  - action_resources
+  - action_crisis
+  - action_explain
+  - utter_ask_trigger
+  - action_save_trigger
+  - utter_goodbye
+  - utter_disclosure
+  - utter_welcome
+
+responses:
+  utter_welcome:
+  - text: "You're very welcome. I'm always here to help."
+
+  utter_greet:
+  - text: "Hello! How can I help?"
+
+  utter_ask_how_feeling:
+  - text: "How are you feeling today?"
+
+  utter_goodbye:
+  - text: "Goodbye! Take care."
+
+  utter_disclosure:
+  - text: "Remember, I'm not a substitute for professional help. If you need immediate assistance, please contact a mental health professional or hotline."
+
+  utter_ask_trigger:
+  - text: "Would you like me to remember that the phrase or word you mentioned is sensitive for you?"
+
+  utter_deny_trigger:
+  - text: "Understood, I will not store that trigger word. I apologise."
+
+  utter_deny_check:
+  - text: "Understood. I won't check that website. I apologise if I misunderstood."
+
+  utter_default:
+  - text: "I'm not sure I understand. Can you please rephrase that?"
+
+session_config:
+  session_expiration_time: 60  # in minutes
+  carry_over_slots_to_new_session: true

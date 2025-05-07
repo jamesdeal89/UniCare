@@ -1,0 +1,169 @@
+version: "3.1"
+
+stories:
+
+- story: ask for a journalling prompt, provide journalling prompt
+  steps:
+  - intent: ask_prompt
+  - action: action_journal
+
+- story: ask for explanation, provide answer but different 2
+  steps:
+  - intent: ask_explain
+  - slot_was_set:
+            - feature: "journal"  
+  - action: action_explain
+
+- story: ask for explanation, provide answer but different feature set
+  steps:
+  - intent: ask_explain
+  - slot_was_set:
+            - feature: "journalling"  
+  - action: action_explain
+
+- story: ask for explanation, provide explanation
+  steps:
+  - intent: ask_explain
+  - slot_was_set:
+            - feature: "games"  
+  - action: action_explain
+
+- story: crisis detected
+  steps:
+  - intent: crisis
+  - action: action_crisis
+
+- story: hello, feelings, provide trigger, ask to check, affirm
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: action_resources
+  - action: utter_disclosure
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: affirm
+  - action: action_save_trigger
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
+  - action: action_ask_check
+  - intent: affirm
+  - action: action_check
+
+- story: provide url, no saved triggers, provides new trigger, perform check
+  steps:
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
+  - action: action_ask_check
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: affirm
+  - action: action_save_trigger
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.google.com/"  
+  - action: action_ask_check
+  - intent: affirm
+  - action: action_check
+
+- story: provide url and check
+  steps:
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.example.com/"  
+  - action: action_ask_check
+  - intent: affirm
+  - action: action_check
+
+- story: provide url and deny
+  steps:
+  - intent: provide_url 
+  - slot_was_set:
+            - url: "https://www.rasa.co.uk/"  
+  - action: action_ask_check
+  - intent: deny
+  - action: utter_deny_check
+
+- story: mention and save trigger
+  steps: 
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: affirm
+  - action: action_save_trigger
+  - slot_was_set:
+            - trigger: "apple"  
+            # this is an example of how the bot should behave, so we give a trigger of 'apple' as an example,
+            # during training, the bot should learn that any example trigger word could be set here.
+
+- story: mention and save trigger
+  steps: 
+  - intent: report_trigger
+  - action: utter_ask_trigger
+  - intent: deny
+  - action: utter_deny_trigger
+
+- story: immediate emotion
+  steps:
+  - intent: express_emotion
+  - action: action_advice
+  - action: action_resources
+  - action: utter_disclosure
+   
+- story: greet example
+  steps:
+
+- story: happy path step
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: action_resources
+  - action: utter_disclosure
+
+- story: seek advice without emotion
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_how_feeling
+  - intent: seek_advice
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: action_resources
+  - action: utter_disclosure
+
+- story: direct request help
+  steps:
+  - intent: request_help
+  - action: utter_ask_how_feeling
+  - intent: express_emotion
+  - action: action_advice
+  - action: action_resources
+  - action: utter_disclosure
+
+- story: thanks bot
+  steps:
+  - intent: thanks
+  - action: utter_welcome
+
+- story: goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: default
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
