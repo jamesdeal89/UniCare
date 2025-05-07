@@ -5,6 +5,10 @@ Our project is based on BAC-IN's brief to create a Recovery Chatbot in order to 
 
 Recently, we faced issues in communications with BAC-IN and later learned our project co-ordinator on their end was sadly made redundant. This affected our development of the project severely; nonetheless we are working closely with our academic supervisor to continue with BAC-IN in some capacity, or contine 'in-house' with the medical department.
 
+## Releases
+
+Please find the latest production version in the [Releases](https://projects.cs.nott.ac.uk/comp2002/2024-2025/team31_project/-/releases) GitLab tab.
+
 ## Project Contributors
 
 - Leo Jang - Team Leader
