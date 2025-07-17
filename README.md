@@ -10,7 +10,7 @@ Nonetheless we worked closely with our academic supervisor to see if we could co
 
 ## Releases
 
-Please find the latest production version in the [Releases](https://projects.cs.nott.ac.uk/comp2002/2024-2025/team31_project/-/releases) GitLab tab.
+Please find the latest production version in the Releases GitHub tab.
 
 ## Project Contributors
 
